@@ -10,27 +10,50 @@ public class CommandParser {
 
         String command = words[0];
 
+        Room currentRoom = rooms.get(player.getCurrentRoomId());
+
         switch (command) {
             case "go":
                 if (words.length < 2) {
                     System.out.println("Go where?");
-                } else {
-                    String direction = words[1];
-                    Room currentRoom = rooms.get(player.getCurrentRoomId());
-                    String nextRoomId = currentRoom.getExits().get(direction);
-                    if (nextRoomId != null) {
-                        player.setCurrentRoomId(nextRoomId);
-                        System.out.println("You move " + direction + ".");
-                        currentRoom = rooms.get(player.getCurrentRoomId());
-                        System.out.println(currentRoom.getLongDescription());
+                    break;
+                }
 
+                String direction = words[1];
+                String nextRoomId = currentRoom.getExits().get(direction);
+
+                if (nextRoomId == null) {
+                    System.out.println("You can't go that way.");
+                    break;
+                }
+
+                if (nextRoomId.equals("")){ //generate new room
+                    String entranceDir = "";
+                    if (direction.equals("north")) {
+                        entranceDir = "south";
+                    } else if (direction.equals("south")) {
+                        entranceDir = "north";
+                    } else if (direction.equals("east")) {
+                        entranceDir = "west";
+                    } else if (direction.equals("west")) {
+                        entranceDir = "east";
                     } else {
                         System.out.println("You can't go that way.");
+                        break;
                     }
+                    Room newRoom = new Room(player.getCurrentRoomId(), entranceDir);
+                    player.setCurrentRoomId(newRoom.getId());
+                    rooms.put(newRoom.getId(), newRoom);
+                }else{
+                    player.setCurrentRoomId(nextRoomId);
                 }
+
+                System.out.println("You move " + direction + ".");
+                currentRoom = rooms.get(player.getCurrentRoomId());
+                System.out.println(currentRoom.getLongDescription());
                 break;
             case "look":
-                Room currentRoom = rooms.get(player.getCurrentRoomId());
+                
                 System.out.println(currentRoom.getLongDescription());
                 break;
             case "inventory":
