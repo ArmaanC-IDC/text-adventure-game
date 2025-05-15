@@ -1,64 +1,71 @@
+// File: Mob.java
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Mob {
-    private int hp;
-    private int armor;
-    private int speed;
-    private ArrayList<Attack> attacks;
+    protected String name;
+    protected int hp;
+    protected int maxHp;
+    protected int armor;
+    protected int speed;
+    protected ArrayList<Attack> attacks;
+    protected Set<String> statusEffects = new HashSet<>();
 
-    public Mob(int hp, int armor, int speed, ArrayList<Attack> attacks) {
-        this.hp = hp;
+    public Mob(String name, int hp, int armor, int speed, ArrayList<Attack> attacks) {
+        this.name = name;
+        this.hp = this.maxHp = hp;
         this.armor = armor;
         this.speed = speed;
         this.attacks = attacks;
     }
 
-    // Getters
-    public int getHp() {
-        return hp;
+    public void takeDamage(int rawDamage) {
+        int damage = rawDamage * (100 - armor) / 100;
+        hp -= damage;
+        System.out.println(name + " takes " + damage + " damage!");
     }
 
-    public int getArmor() {
-        return armor;
+    public void heal(int amount) {
+        hp = Math.min(maxHp, hp + amount);
+        System.out.println(name + " heals " + amount + " HP!");
     }
 
-    public int getSpeed() {
-        return speed;
+    public boolean isAlive() {
+        return hp > 0;
     }
 
-    public ArrayList<Attack> getAttacks() {
-        return attacks;
+    public void performAttack(Player player) {
+        if (statusEffects.contains("stunned")) {
+            System.out.println(name + " is stunned and loses their turn!");
+            statusEffects.remove("stunned");
+            return;
+        }
+        Attack attack = attacks.get((int)(Math.random() * attacks.size()));
+        System.out.println(name + " uses " + attack.getName() + "!");
+        attack.execute(this, player);
     }
 
-    // Setters
-    public void setHp(int hp) {
-        this.hp = hp;
+    public void processEffects() {
+        if (statusEffects.contains("poisoned")) {
+            System.out.println(name + " suffers poison damage!");
+            takeDamage(3);
+        }
+    }
+
+    public void addEffect(String effect) {
+        statusEffects.add(effect);
     }
 
     public void setArmor(int armor) {
         this.armor = armor;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public int getHp() {
+        return hp;
     }
 
-    // Methods
-    public void takeDamage(int damage) {
-        int actualDamage = damage * (100 - armor) / 100;
-        this.hp -= actualDamage;
-        System.out.println("Mob takes " + actualDamage + " damage!");
-    }
-
-    public boolean isAlive() {
-        return this.hp > 0;
-    }
-
-    public void performAttack(Mob target) {
-        if (attacks.isEmpty()) return;
-
-        Attack attack = attacks.get((int) (Math.random() * attacks.size()));
-        System.out.println("Mob uses " + attack.getName() + "!");
-        attack.execute(this, target);
+    public String getName() {
+        return name;
     }
 }
