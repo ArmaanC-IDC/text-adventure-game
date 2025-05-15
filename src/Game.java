@@ -43,8 +43,22 @@ public class Game {
         int roomCount = 0;
         rooms = new HashMap<String, Room>();
         Map<String, Integer> numEachRoom = new HashMap<String, Integer>();
+        // numEachRoom.put("startingRoom", 1);
+        // numEachRoom.put("knightBossRoom", 1);
+        // numEachRoom.put("skeletonBossRoom", 1);
+        // numEachRoom.put("minotaurBossRoom", 1);
+        // numEachRoom.put("mobRoom", 8);
+        // numEachRoom.put("trapRoom", 4);
+        // numEachRoom.put("treasureRoom", 3);
+        // numEachRoom.put("corridor", 6);   
         numEachRoom.put("startingRoom", 1);
-        numEachRoom.put("corridor", 24);
+        numEachRoom.put("knightBossRoom", 1);
+        numEachRoom.put("skeletonBossRoom", 1);
+        numEachRoom.put("minotaurBossRoom", 1);
+        numEachRoom.put("mobRoom", 8);
+        numEachRoom.put("trapRoom", 10);
+        numEachRoom.put("treasureRoom", 3);
+        numEachRoom.put("corridor", 0);   
 
         for (int row = 0; row < roomGrid.length; row++) {
             for (int col = 0; col < roomGrid[0].length; col++) {
@@ -60,6 +74,10 @@ public class Game {
                 numEachRoom.put(randomKey, numEachRoom.get(randomKey) - 1);
                 rooms.put(room.getId(), room);
                 roomCount++;
+
+                if (randomKey.equals("startingRoom")){
+                    currentRoom = new int[]{row, col};
+                }
             }
         }
     }

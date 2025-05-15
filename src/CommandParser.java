@@ -17,7 +17,7 @@ public class CommandParser {
                 String dir = tokens[1];
                 if (room.getExits().containsKey(dir)) {
                     game.setCurrentRoom(room.getExits().get(dir));
-                    return game.getCurrentRoom().getLongDescription();
+                    return game.getCurrentRoom().onPlayerEnter() + "\n" + game.getCurrentRoom().getLongDescription();
                 } else {
                     return "You can't go that way.";
                 }

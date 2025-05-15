@@ -22,7 +22,7 @@ public class Player {
 
 
     //equipment and inventory
-    private Map<EquipmentSlot, Item> equippedItems;
+    // private Map<EquipmentSlot, Item> equippedItems;
     private List<Item> inventory;
 
     public Player() {
