@@ -9,15 +9,7 @@ public class Item {
         this.description = description;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 }
