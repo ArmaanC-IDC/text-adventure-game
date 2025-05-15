@@ -30,6 +30,14 @@ public class Game {
         return roomGrid[currentRoom[0]][currentRoom[1]];
     }
 
+    public int[] getPlayerCoords(){
+        return currentRoom;
+    }
+
+    public Room[][] getRoomGrid(){
+        return roomGrid;
+    }
+
     public void setCurrentRoom(String roomCoords) {
         String[] strArray = roomCoords.split(",");
         int[] intArray = new int[strArray.length];
@@ -43,22 +51,14 @@ public class Game {
         int roomCount = 0;
         rooms = new HashMap<String, Room>();
         Map<String, Integer> numEachRoom = new HashMap<String, Integer>();
-        // numEachRoom.put("startingRoom", 1);
-        // numEachRoom.put("knightBossRoom", 1);
-        // numEachRoom.put("skeletonBossRoom", 1);
-        // numEachRoom.put("minotaurBossRoom", 1);
-        // numEachRoom.put("mobRoom", 8);
-        // numEachRoom.put("trapRoom", 4);
-        // numEachRoom.put("treasureRoom", 3);
-        // numEachRoom.put("corridor", 6);   
         numEachRoom.put("startingRoom", 1);
         numEachRoom.put("knightBossRoom", 1);
         numEachRoom.put("skeletonBossRoom", 1);
         numEachRoom.put("minotaurBossRoom", 1);
         numEachRoom.put("mobRoom", 8);
-        numEachRoom.put("trapRoom", 10);
+        numEachRoom.put("trapRoom", 4);
         numEachRoom.put("treasureRoom", 3);
-        numEachRoom.put("corridor", 0);   
+        numEachRoom.put("corridor", 6);     
 
         for (int row = 0; row < roomGrid.length; row++) {
             for (int col = 0; col < roomGrid[0].length; col++) {

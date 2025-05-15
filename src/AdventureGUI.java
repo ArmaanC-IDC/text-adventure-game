@@ -1,5 +1,11 @@
 import javax.swing.*;
+
+import rooms.Room;
+
 import java.awt.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AdventureGUI {
     private JFrame frame;
@@ -7,6 +13,8 @@ public class AdventureGUI {
     private JTextField inputField;
     private JLabel imageLabel;
     private Game game;
+
+    private JPanel mapPanel;
 
     public AdventureGUI(Game game) {
         this.game = game;
@@ -16,7 +24,7 @@ public class AdventureGUI {
     private void buildGUI() {
         frame = new JFrame("Text Adventure Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(1000, 600); // wider to fit map
         frame.setLayout(new BorderLayout());
 
         // Image display
@@ -31,6 +39,35 @@ public class AdventureGUI {
         outputArea.setWrapStyleWord(true);
         JScrollPane scrollPane = new JScrollPane(outputArea);
         frame.add(scrollPane, BorderLayout.CENTER);
+
+        // Map panel
+        Room[][] roomGrid = game.getRoomGrid();
+        mapPanel = new JPanel(){
+            public void paintComponent(Graphics g){
+                super.paintComponent(g);
+
+                int pRow = game.getPlayerCoords()[0], pCol = game.getPlayerCoords()[1];
+
+                int cellSize = 30;
+                for (int row = 0; row < roomGrid.length; row++) {
+                    for (int col = 0; col < roomGrid[0].length; col++) {
+                        g.setColor(Color.gray);
+                        if (row==pRow && col==pCol){
+                            g.setColor(Color.red);
+                        }
+
+                        g.fillRect(col*cellSize, row*cellSize, cellSize, cellSize);
+
+                        g.setColor(Color.black);
+                        g.drawRect(col*cellSize, row*cellSize, cellSize, cellSize);
+                    }
+                }
+            }
+        };
+        mapPanel.setPreferredSize(new Dimension(150, 150));
+        frame.add(mapPanel, BorderLayout.WEST);
+
+        // mapPanel.setPreferredSize(new Dimension(180, 180));
 
         // Input field
         JPanel inputPanel = new JPanel(new BorderLayout());
@@ -49,6 +86,7 @@ public class AdventureGUI {
         updateRoomDisplay();
     }
 
+
     private void handleInput() {
         String input = inputField.getText().trim();
         inputField.setText("");
@@ -65,8 +103,9 @@ public class AdventureGUI {
 
     private void updateRoomDisplay() {
         String roomId = game.getCurrentRoom().getId();
-        ImageIcon icon = new ImageIcon("images/" + roomId + ".png");
+        ImageIcon icon = new ImageIcon("images/placeholder.png");
         Image img = icon.getImage().getScaledInstance(800, 200, Image.SCALE_SMOOTH);
         imageLabel.setIcon(new ImageIcon(img));
+        mapPanel.repaint();
     }
 }
