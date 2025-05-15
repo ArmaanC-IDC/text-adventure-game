@@ -22,6 +22,10 @@ public class Player {
         inventory.add(item);
     }
 
+    public boolean hasItem(String itemName) {
+        return inventory.stream().anyMatch(i -> i.getName().equalsIgnoreCase(itemName));
+    }
+
     public void removeItem(Item item) {
         inventory.remove(item);
     }
