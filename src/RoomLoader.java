@@ -1,4 +1,8 @@
 import com.google.gson.*;
+
+import items.Item;
+import rooms.Room;
+
 import java.io.FileReader;
 import java.util.*;
 

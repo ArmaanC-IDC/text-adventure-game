@@ -64,7 +64,7 @@ public class AdventureGUI {
     }
 
     private void updateRoomDisplay() {
-        String roomId = game.getPlayer().getCurrentRoomId();
+        String roomId = game.getCurrentRoom().getId();
         ImageIcon icon = new ImageIcon("images/" + roomId + ".png");
         Image img = icon.getImage().getScaledInstance(800, 200, Image.SCALE_SMOOTH);
         imageLabel.setIcon(new ImageIcon(img));
