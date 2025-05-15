@@ -13,10 +13,12 @@ public class Player {
     
     // Base stats
     private int strength;
-    private int dexterity;
+    private int speed;
     private int wisdom;
     private int stamina;
     private int luck;
+    private boolean isStunned;
+    private boolean isPoisoned;
 
 
     //equipment and inventory
@@ -26,17 +28,19 @@ public class Player {
     public Player() {
         // Initialize random base stats and shows them to player
         strength = (int)(Math.random()*10)+1;
-        dexterity = (int)(Math.random()*10)+1;
+        speed = (int)(Math.random()*5)+1;
         wisdom = (int)(Math.random()*10)+1;
         stamina = (int)(Math.random()*10)+1;
         luck = (int)(Math.random()*10)+1;
+        isPoisoned = false;
+        isStunned = false;
 
         showStats();
 
     }
 
     public String showStats(){
-        String stats = "Strength: " + strength + " Dexterity: " + dexterity + " Wisdom " + wisdom + " Stamina: " + stamina + " Luck: " + luck;
+        String stats = "Strength: " + strength + " Speed: " + speed + " Wisdom " + wisdom + " Stamina: " + stamina + " Luck: " + luck;
         return stats;
     }
 
