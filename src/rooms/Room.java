@@ -5,12 +5,14 @@ import java.util.Map;
 import java.util.HashMap;
 
 import items.Item;
+import mobs.Mob;
 
 public class Room {
     private String id;
     private String name;
     private String description;
     private String type;
+    private Mob mob;
     private Map<String, String> exits;  // direction -> "row,col"
     private List<Item> items;
 

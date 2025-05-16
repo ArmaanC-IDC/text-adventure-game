@@ -52,6 +52,10 @@ public class Mob {
         return hp;
     }
 
+    public int getMaxHp(){
+        return maxHp;
+    }
+
     public String getName() {
         return name;
     }

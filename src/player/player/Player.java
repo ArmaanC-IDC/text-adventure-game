@@ -21,6 +21,7 @@ public class Player {
     private int luck;
     private boolean isStunned;
     private boolean isPoisoned;
+    private boolean isWeak;
 
 
     //equipment and inventory
@@ -37,6 +38,7 @@ public class Player {
         luck = (int)(Math.random()*10)+1;
         isPoisoned = false;
         isStunned = false;
+        isWeak = false;
 
         showStats();
 
@@ -96,6 +98,10 @@ public class Player {
 
     public void stun(){
         isStunned = true;
+    }
+
+    public void weaken(){
+        isWeak = true;
     }
 
     public void poison(){
