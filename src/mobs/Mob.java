@@ -1,7 +1,10 @@
-// File: Mob.java
+package mobs;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import player.Player;
+import attack.Attack;
 
 public class Mob {
     protected String name;

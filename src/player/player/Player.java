@@ -1,9 +1,10 @@
+package player;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import static java.lang.Math.*;
 import java.util.Random;
-
 
 import items.Item;
 
@@ -15,7 +16,7 @@ public class Player {
     private int strength;
     private int speed;
     private int wisdom;
-    private int stamina;
+    private int hp;
     private int luck;
     private boolean isStunned;
     private boolean isPoisoned;
@@ -30,7 +31,7 @@ public class Player {
         strength = (int)(Math.random()*10)+1;
         speed = (int)(Math.random()*5)+1;
         wisdom = (int)(Math.random()*10)+1;
-        stamina = (int)(Math.random()*10)+1;
+        hp = (int)(Math.random()*10)+1;
         luck = (int)(Math.random()*10)+1;
         isPoisoned = false;
         isStunned = false;
@@ -40,7 +41,7 @@ public class Player {
     }
 
     public String showStats(){
-        String stats = "Strength: " + strength + " Speed: " + speed + " Wisdom " + wisdom + " Stamina: " + stamina + " Luck: " + luck;
+        String stats = "Strength: " + strength + " Speed: " + speed + " Wisdom " + wisdom + " Health: " + hp + " Luck: " + luck;
         return stats;
     }
 
@@ -85,5 +86,17 @@ public class Player {
 
     public List<Item> getInventory() {
         return inventory;
+    }
+
+    public void takeDamage(int damage){
+        hp -= damage;
+    }
+
+    public void stun(){
+        isStunned = true;
+    }
+
+    public void poison(){
+        isPoisoned = true;
     }
 }
