@@ -1,5 +1,7 @@
 import java.util.Map;
 
+import mobs.Mob;
+import player.Player;
 import rooms.Room;
 
 public class CommandParser {

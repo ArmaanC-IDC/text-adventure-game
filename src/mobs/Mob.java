@@ -1,7 +1,10 @@
-// File: Mob.java
+package mobs;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import player.Player;
+import attack.Attack;
 
 public class Mob {
     protected String name;
@@ -36,25 +39,9 @@ public class Mob {
     }
 
     public void performAttack(Player player) {
-        if (statusEffects.contains("stunned")) {
-            System.out.println(name + " is stunned and loses their turn!");
-            statusEffects.remove("stunned");
-            return;
-        }
         Attack attack = attacks.get((int)(Math.random() * attacks.size()));
         System.out.println(name + " uses " + attack.getName() + "!");
         attack.execute(this, player);
-    }
-
-    public void processEffects() {
-        if (statusEffects.contains("poisoned")) {
-            System.out.println(name + " suffers poison damage!");
-            takeDamage(3);
-        }
-    }
-
-    public void addEffect(String effect) {
-        statusEffects.add(effect);
     }
 
     public void setArmor(int armor) {
@@ -63,6 +50,10 @@ public class Mob {
 
     public int getHp() {
         return hp;
+    }
+
+    public int getMaxHp(){
+        return maxHp;
     }
 
     public String getName() {

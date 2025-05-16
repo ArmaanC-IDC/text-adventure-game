@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import item.Item;
+import mobs.Mob;
 
 import java.util.HashMap;
 
@@ -12,6 +13,7 @@ public class Room {
     private String name;
     private String description;
     private String type;
+    private Mob mob;
     private Map<String, String> exits;  // direction -> "row,col"
     private List<Item> items;
 
