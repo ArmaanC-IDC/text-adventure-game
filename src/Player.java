@@ -4,8 +4,7 @@ import java.util.Map;
 import static java.lang.Math.*;
 import java.util.Random;
 
-
-import items.Item;
+import item.Item;
 
 public class Player {
     // Position

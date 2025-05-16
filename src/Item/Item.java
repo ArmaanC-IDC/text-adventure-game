@@ -1,4 +1,4 @@
-package items;
+package item;
 
 public class Item {
     private String id;
