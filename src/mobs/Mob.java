@@ -39,25 +39,9 @@ public class Mob {
     }
 
     public void performAttack(Player player) {
-        if (statusEffects.contains("stunned")) {
-            System.out.println(name + " is stunned and loses their turn!");
-            statusEffects.remove("stunned");
-            return;
-        }
         Attack attack = attacks.get((int)(Math.random() * attacks.size()));
         System.out.println(name + " uses " + attack.getName() + "!");
         attack.execute(this, player);
-    }
-
-    public void processEffects() {
-        if (statusEffects.contains("poisoned")) {
-            System.out.println(name + " suffers poison damage!");
-            takeDamage(3);
-        }
-    }
-
-    public void addEffect(String effect) {
-        statusEffects.add(effect);
     }
 
     public void setArmor(int armor) {

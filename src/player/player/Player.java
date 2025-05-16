@@ -17,6 +17,7 @@ public class Player {
     private int speed;
     private int wisdom;
     private int hp;
+    private int maxHp;
     private int luck;
     private boolean isStunned;
     private boolean isPoisoned;
@@ -32,6 +33,7 @@ public class Player {
         speed = (int)(Math.random()*5)+1;
         wisdom = (int)(Math.random()*10)+1;
         hp = (int)(Math.random()*10)+1;
+        maxHp = hp;
         luck = (int)(Math.random()*10)+1;
         isPoisoned = false;
         isStunned = false;
@@ -98,5 +100,13 @@ public class Player {
 
     public void poison(){
         isPoisoned = true;
+    }
+
+    public int getHp(){
+        return hp;
+    }
+
+    public int getMaxHp(){
+        return maxHp;
     }
 }
