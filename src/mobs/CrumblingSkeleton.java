@@ -11,9 +11,4 @@ public class CrumblingSkeleton extends Mob {
         attacks.add(new BoneStrike());
         attacks.add(new Reassemble());
     }
-
-    public void takeDamage(int rawDamage) {
-        // Immune to critical hits assumed handled outside
-        super.takeDamage(rawDamage);
-    }
 }
