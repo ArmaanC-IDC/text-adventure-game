@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.StrokeBorder;
 
 import rooms.Room;
 
@@ -42,6 +43,15 @@ public class AdventureGUI {
 
         // Map panel
         Room[][] roomGrid = game.getRoomGrid();
+        HashMap<String, Color> roomToColor = new HashMap<String, Color>();
+        roomToColor.put("startingRoom", Color.CYAN);              
+        roomToColor.put("knightBossRoom", new Color(106, 13, 173));
+        roomToColor.put("rangerBossRoom", Color.GREEN);
+        roomToColor.put("minotaurBossRoom", new Color(204, 102, 0));
+        roomToColor.put("mobRoom", new Color(123, 63, 0));
+        roomToColor.put("trapRoom", Color.ORANGE);
+        roomToColor.put("treasureRoom", Color.YELLOW);
+        roomToColor.put("corridor", Color.GRAY);
         mapPanel = new JPanel(){
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
@@ -51,17 +61,21 @@ public class AdventureGUI {
                 int cellSize = 30;
                 for (int row = 0; row < roomGrid.length; row++) {
                     for (int col = 0; col < roomGrid[0].length; col++) {
-                        g.setColor(Color.gray);
-                        if (row==pRow && col==pCol){
-                            g.setColor(Color.red);
+                        g.setColor(Color.DARK_GRAY);
+                        if (roomGrid[row][col].getVisited()){
+                            g.setColor(roomToColor.get(roomGrid[row][col].getType()));
                         }
 
                         g.fillRect(col*cellSize, row*cellSize, cellSize, cellSize);
 
                         g.setColor(Color.black);
+                        ((Graphics2D)g).setStroke(new BasicStroke(3));
                         g.drawRect(col*cellSize, row*cellSize, cellSize, cellSize);
                     }
                 }
+                g.setColor(Color.red);
+                ((Graphics2D)g).setStroke(new BasicStroke(3));
+                g.drawRect(pCol*cellSize, pRow*cellSize, cellSize, cellSize);
             }
         };
         mapPanel.setPreferredSize(new Dimension(150, 150));
