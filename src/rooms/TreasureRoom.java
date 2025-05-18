@@ -2,7 +2,7 @@ package rooms;
 
 public class TreasureRoom extends Room{
     public TreasureRoom(int roomCount, int row, int col) {
-        super("mobRoom", roomCount, row, col);
+        super("treasureRoom", roomCount, row, col);
         this.name = getRandomFromArray(new String[]{
             "Hidden ", "Treasure ", "Glittering "
         }) + getRandomFromArray(new String[]{
