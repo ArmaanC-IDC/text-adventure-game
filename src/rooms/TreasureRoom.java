@@ -14,4 +14,10 @@ public class TreasureRoom extends Room{
             "An ornate box sits atop a pedestal. Riches or ruin may lie within."
         });
     }
+
+    public String onPlayerEnter(){
+        this.visited = true;
+        System.out.println("IMPLEMENT TREASURE ROOM");
+        return "";
+    }
 }

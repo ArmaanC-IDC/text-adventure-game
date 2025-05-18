@@ -4,6 +4,8 @@ import java.util.*;
 import item.Item;
 import player.Player;
 
+//models a room in the game. 
+
 public class Room {
     protected String id;
     protected String name;
@@ -16,6 +18,7 @@ public class Room {
 
     private static final int GRID_SIZE = 5;
 
+    //create a room of a given type. 
     public static Room createRoom(String type, int roomCount, int row, int col){
         switch (type){
             case "knightBossRoom", "minotaurBossRoom", "rangerBossRoom":
@@ -43,6 +46,7 @@ public class Room {
         }
     }
 
+    //called when creating a room directly (no child classes)
     public Room(String type, int roomCount, int row, int col, String name, String description) {
         this.type = type;
         if (type.equals("startingRoom")){
@@ -58,11 +62,7 @@ public class Room {
         initExits(row, col);
     }
 
-    //runs every player turn. update elements like mobs here.
-    public void onPlayerTurn(){
-
-    }
-
+    //child classes call this constructor and set name and desc
     public Room(String type, int roomCount, int row, int col) {
         this.type = type;
         if (type.equals("startingRoom")){
@@ -95,17 +95,20 @@ public class Room {
         }        
     }
 
+    //runs every player turn. update elements like mobs here. Do nothing for standard room
+    public void onPlayerTurn(){
+
+    }
+
+    //get a random string from a string array. used to randomize name/description
     protected static String getRandomFromArray(String[] options) {
         return options[(int)(Math.random() * options.length)];
     }
 
+    //what do do when the player enters the room
     public String onPlayerEnter(Player player) {
         this.visited = true;
         return "";
-    }
-
-    public Map<String, Boolean> getBlokedExits(){
-        return blockedExits;
     }
 
     // Getters
@@ -115,7 +118,9 @@ public class Room {
     public Map<String, String> getExits() { return exits; }
     public List<Item> getItems() { return items; }
     public boolean getVisited() { return visited ; }
+    public Map<String, Boolean> getBlockedExits(){ return blockedExits; }
 
+    //description shown upon room enter
     public String getLongDescription() {
         StringBuilder sb = new StringBuilder();
         sb.append(name).append("\n");
@@ -142,6 +147,7 @@ public class Room {
         return sb.toString();
     }
 
+    //toString method for debugging
     public String toString() {
         return name + " " + description + " " + id;
     }

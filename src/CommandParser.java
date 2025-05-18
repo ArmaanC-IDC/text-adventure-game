@@ -18,7 +18,7 @@ public class CommandParser {
                 if (tokens.length < 2) return "Go where?";
                 String dir = tokens[1];
                 if (!room.getExits().containsKey(dir)) return "You can't go that way.";
-                if (room.getBlokedExits().containsKey(dir) && room.getBlokedExits().get(dir)) return "That exit is blocked";
+                if (room.getBlockedExits().containsKey(dir) && room.getBlockedExits().get(dir)) return "That exit is blocked";
 
                 game.setCurrentRoom(room.getExits().get(dir));
                 return game.getCurrentRoom().onPlayerEnter(player) + "\n" + game.getCurrentRoom().getLongDescription();

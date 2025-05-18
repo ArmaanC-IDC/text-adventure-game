@@ -13,11 +13,15 @@ public class MobRoom extends Room {
 
     public MobRoom(int roomCount, int row, int col) {
         super("mobRoom", roomCount, row, col);
+
+        //set name to random adjective + random noun
         this.name = getRandomFromArray(new String[]{
             "Infested ", "Monster ", "Blood-Stained "
         }) + getRandomFromArray(new String[]{
             "Hall", "Nest", "Barracks"
         });
+
+        //set description to combine two phrases.
         this.description = getRandomFromArray(new String[]{
             "Growls echo from the shadows. ",
             "You sense movement. ",
@@ -30,8 +34,8 @@ public class MobRoom extends Room {
         mobs = new ArrayList<Mob>();
     }
 
-    public void 
-    onPlayerTurn(){
+    //when the player makes their turn, check for mob death and if all dead unlock exits
+    public void onPlayerTurn(){
         for (int i = mobs.size()-1; i>=0; i--) {
             if (!mobs.get(i).isAlive()){
                 mobs.remove(i);
@@ -46,6 +50,7 @@ public class MobRoom extends Room {
         }
     }
 
+    //when the player enters, block all exits and summon mobs. TODO: add real summoning logic
     public String onPlayerEnter(Player player){
         this.visited = true;
         mobs.add(new GoblinScavenger());
@@ -59,10 +64,9 @@ public class MobRoom extends Room {
     }
 
 
-    public ArrayList<Mob> getMobs() {
-        return mobs;
-    }
+    public ArrayList<Mob> getMobs() { return mobs; }
 
+    //when you enter a mob room show the list of mobs there as well as other things
     public String getLongDescription(){
         String mobsString = "Mobs: \n";
         for (Mob mob : mobs) {

@@ -25,4 +25,10 @@ public class SummonRoom extends Room {
                 this.description = "An eerie, magical place with unknown purpose.";
         }
     }
+
+    public String onPlayerEnter(){
+        this.visited = true;
+        System.out.println("IMPLEMENT THE SUMMONING ROOM");
+        return "";
+    }
 }
