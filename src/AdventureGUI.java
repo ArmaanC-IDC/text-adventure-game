@@ -121,5 +121,6 @@ public class AdventureGUI {
         Image img = icon.getImage().getScaledInstance(800, 200, Image.SCALE_SMOOTH);
         imageLabel.setIcon(new ImageIcon(img));
         mapPanel.repaint();
+        game.onPlayerTurn();
     }
 }

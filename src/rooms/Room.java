@@ -1,6 +1,5 @@
 package rooms;
 
-import java.nio.channels.IllegalChannelGroupException;
 import java.util.*;
 import item.Item;
 import player.Player;
@@ -10,7 +9,8 @@ public class Room {
     protected String name;
     protected String description;
     protected String type;
-    protected Map<String, String> exits;
+    protected Map<String, String> exits; //direction -> x, y
+    protected Map<String, Boolean> blockedExits; //direction -> bool (true/false, isblocked)
     protected List<Item> items;
     protected boolean visited;
 
@@ -40,7 +40,6 @@ public class Room {
                 return new Room(type, roomCount, row, col, "Starting Room", 
                     "You find yourself in a dimly lit stone chamber. The air is stale, and ancient dust clings to every surface. This is where your journey begins."
                 );
-
         }
     }
 
@@ -53,9 +52,15 @@ public class Room {
         }
         this.items = new ArrayList<>();
         this.exits = new HashMap<>();
+        this.blockedExits = new HashMap<String, Boolean>();
         this.name = name;
         this.description = description;
         initExits(row, col);
+    }
+
+    //runs every player turn. update elements like mobs here.
+    public void onPlayerTurn(){
+
     }
 
     public Room(String type, int roomCount, int row, int col) {
@@ -67,14 +72,27 @@ public class Room {
         }
         this.items = new ArrayList<>();
         this.exits = new HashMap<>();
+        this.blockedExits = new HashMap<String, Boolean>();
         initExits(row, col);
     }
 
-    protected void initExits(int row, int col) {
-        if (row > 0) exits.put("north", (row - 1) + "," + col);
-        if (col < GRID_SIZE - 1) exits.put("east", row + "," + (col + 1));
-        if (row < GRID_SIZE - 1) exits.put("south", (row + 1) + "," + col);
-        if (col > 0) exits.put("west", row + "," + (col - 1));
+    private void initExits(int row, int col) {
+        if (row > 0) {
+            exits.put("north", (row - 1) + "," + col);
+            blockedExits.put("north", false);
+        }
+        if (col < GRID_SIZE - 1) {
+            exits.put("east", row + "," + (col + 1));
+            blockedExits.put("east", false);
+        }
+        if (row < GRID_SIZE - 1) {
+            exits.put("south", (row + 1) + "," + col);
+            blockedExits.put("south", false);
+        }
+        if (col > 0) {
+            exits.put("west", row + "," + (col - 1));
+            blockedExits.put("west", false);
+        }        
     }
 
     protected static String getRandomFromArray(String[] options) {
@@ -83,7 +101,11 @@ public class Room {
 
     public String onPlayerEnter(Player player) {
         this.visited = true;
-        return "";  // Default behavior
+        return "";
+    }
+
+    public Map<String, Boolean> getBlokedExits(){
+        return blockedExits;
     }
 
     // Getters

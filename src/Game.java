@@ -21,6 +21,10 @@ public class Game {
         player = new Player("startingRoom");
     }
 
+    public void onPlayerTurn(){
+        this.getCurrentRoom().onPlayerTurn();
+    }
+
     public String processCommand(String input) {
         return CommandParser.parse(this, input, player, rooms, roomGrid);
     }

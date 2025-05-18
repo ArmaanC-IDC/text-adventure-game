@@ -1,9 +1,15 @@
 package rooms;
 
+import mobs.CrumblingSkeleton;
+import mobs.GoblinScavenger;
 import mobs.Mob;
+import mobs.SplitSlime;
+import player.Player;
+
+import java.util.ArrayList;
 
 public class MobRoom extends Room {
-    private Mob mob;
+    private ArrayList<Mob> mobs;
 
     public MobRoom(int roomCount, int row, int col) {
         super("mobRoom", roomCount, row, col);
@@ -21,13 +27,47 @@ public class MobRoom extends Room {
             "Clawed feet scrape stone as monsters lie in wait.",
             "The beasts that live here won't be pleased to see you."
         });
+        mobs = new ArrayList<Mob>();
     }
 
-    public Mob getMob() {
-        return mob;
+    public void 
+    onPlayerTurn(){
+        for (int i = mobs.size()-1; i>=0; i--) {
+            if (!mobs.get(i).isAlive()){
+                mobs.remove(i);
+            }
+        }
+
+        if (mobs.size()==0){
+            this.blockedExits.put("north", false);
+            this.blockedExits.put("east", false);
+            this.blockedExits.put("south", false);
+            this.blockedExits.put("west", false);
+        }
     }
 
-    public void setMob(Mob mob) {
-        this.mob = mob;
+    public String onPlayerEnter(Player player){
+        this.visited = true;
+        mobs.add(new GoblinScavenger());
+        mobs.add(new SplitSlime());
+        mobs.add(new CrumblingSkeleton());
+        this.blockedExits.put("north", true);
+        this.blockedExits.put("east", true);
+        this.blockedExits.put("south", true);
+        this.blockedExits.put("west", true);
+        return "";
+    }
+
+
+    public ArrayList<Mob> getMobs() {
+        return mobs;
+    }
+
+    public String getLongDescription(){
+        String mobsString = "Mobs: \n";
+        for (Mob mob : mobs) {
+            mobsString += "   " + mob + "\n";
+        }
+        return super.getLongDescription() + mobsString;
     }
 }
