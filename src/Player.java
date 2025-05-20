@@ -18,11 +18,11 @@ public class Player {
 
 
     //equipment and inventory
-    private Map<EquipmentSlot, Item> equippedItems;
     private List<Item> inventory;
 
+    // Initialize random base stats and shows them to player
     public Player() {
-        // Initialize random base stats and shows them to player
+        
         strength = (int)(Math.random()*10)+1;
         dexterity = (int)(Math.random()*10)+1;
         wisdom = (int)(Math.random()*10)+1;
@@ -31,8 +31,10 @@ public class Player {
 
         showStats();
 
-    }
+        this.inventory = new ArrayList<>();
 
+    }
+    //method to print out stats
     public String showStats(){
         String stats = "Strength: " + strength + " Dexterity: " + dexterity + " Wisdom " + wisdom + " Stamina: " + stamina + " Luck: " + luck;
         return stats;
@@ -57,21 +59,13 @@ public class Player {
         }
     }
 
-    public String getCurrentRoomId() {
-        return currentRoomId;
-    }
+    // Method to show weapon and armor equiped
 
-    public void setCurrentRoomId(String roomId) {
-        this.currentRoomId = roomId;
-    }
 
-    public void addItem(Item item) {
-        inventory.add(item);
-    }
+    // Method to equip weapon and armor
 
-    public boolean hasItem(String itemName) {
-        return inventory.stream().anyMatch(i -> i.getName().equalsIgnoreCase(itemName));
-    }
+    //Method to use items
+
 
     public void removeItem(Item item) {
         inventory.remove(item);
