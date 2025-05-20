@@ -53,13 +53,14 @@ public class AdventureGUI {
         roomToColor.put("trapRoom", Color.ORANGE);
         roomToColor.put("treasureRoom", Color.YELLOW);
         roomToColor.put("corridor", Color.GRAY);
+
+        int cellSize = 30;
         mapPanel = new JPanel(){
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
 
                 int pRow = game.getPlayerCoords()[0], pCol = game.getPlayerCoords()[1];
 
-                int cellSize = 30;
                 for (int row = 0; row < roomGrid.length; row++) {
                     for (int col = 0; col < roomGrid[0].length; col++) {
                         g.setColor(Color.DARK_GRAY);
@@ -79,7 +80,7 @@ public class AdventureGUI {
                 g.drawRect(pCol*cellSize, pRow*cellSize, cellSize, cellSize);
             }
         };
-        mapPanel.setPreferredSize(new Dimension(150, 150));
+        mapPanel.setPreferredSize(new Dimension(cellSize*roomGrid.length, cellSize*roomGrid[0].length));
         frame.add(mapPanel, BorderLayout.WEST);
 
         // mapPanel.setPreferredSize(new Dimension(180, 180));

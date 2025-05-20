@@ -16,7 +16,7 @@ public class Room {
     protected List<Item> items;
     protected boolean visited;
 
-    private static final int GRID_SIZE = 5;
+    private static final int GRID_SIZE = 8;
 
     //create a room of a given type. 
     public static Room createRoom(String type, int roomCount, int row, int col){

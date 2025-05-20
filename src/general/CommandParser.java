@@ -4,6 +4,7 @@ import java.util.Map;
 import mobs.Mob;
 import player.Player;
 import rooms.Room;
+import rooms.MobRoom;
 import general.Game;
 
 public class CommandParser {
@@ -35,6 +36,14 @@ public class CommandParser {
                 game.getCurrentRoom().onPlayerEnter(player);
                 Game.printText(game.getCurrentRoom().getLongDescription());
                 return true;
+            case "killall":
+                if (room instanceof MobRoom){
+                    MobRoom mobRoom = (MobRoom) game.getCurrentRoom();
+                    for (Mob mob : mobRoom.getMobs()) {
+                        mob.takeDamage(10000);
+                    }
+
+                }
             case "look":
                 Game.printText(room.getLongDescription());
                 return true;
