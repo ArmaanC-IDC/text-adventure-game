@@ -107,7 +107,7 @@ public class AdventureGUI {
         inputField.setText("");
         if (!input.isEmpty()) {
             printText("> " + input);
-            printText(game.processCommand(input));
+            game.processCommand(input);
             updateRoomDisplay();
         }
     }
@@ -122,6 +122,6 @@ public class AdventureGUI {
         Image img = icon.getImage().getScaledInstance(800, 200, Image.SCALE_SMOOTH);
         imageLabel.setIcon(new ImageIcon(img));
         mapPanel.repaint();
-        game.onPlayerTurn();
+        // game.onPlayerTurn();
     }
 }

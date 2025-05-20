@@ -47,8 +47,10 @@ public class Game {
         this.getCurrentRoom().onPlayerTurn(player);
     }
 
-    public String processCommand(String input) {
-        return CommandParser.parse(this, input, player, rooms, roomGrid);
+    public void processCommand(String input) {
+        if (CommandParser.parse(this, input, player, rooms, roomGrid)){
+            onPlayerTurn();
+        }
     }
 
     public Player getPlayer() {
