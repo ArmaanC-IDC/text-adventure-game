@@ -96,7 +96,7 @@ public class Room {
     }
 
     //runs every player turn. update elements like mobs here. Do nothing for standard room
-    public void onPlayerTurn(){
+    public void onPlayerTurn(Player player){
 
     }
 
@@ -106,9 +106,8 @@ public class Room {
     }
 
     //what do do when the player enters the room
-    public String onPlayerEnter(Player player) {
+    public void onPlayerEnter(Player player) {
         this.visited = true;
-        return "";
     }
 
     // Getters

@@ -1,3 +1,4 @@
+package general;
 import javax.swing.*;
 import javax.swing.border.StrokeBorder;
 
@@ -111,7 +112,7 @@ public class AdventureGUI {
         }
     }
 
-    private void printText(String text) {
+    public void printText(String text) {
         outputArea.append(text + "\n");
     }
 

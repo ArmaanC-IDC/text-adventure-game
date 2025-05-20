@@ -1,3 +1,4 @@
+package general;
 import java.util.Map;
 
 import mobs.Mob;
@@ -21,7 +22,8 @@ public class CommandParser {
                 if (room.getBlockedExits().containsKey(dir) && room.getBlockedExits().get(dir)) return "That exit is blocked";
 
                 game.setCurrentRoom(room.getExits().get(dir));
-                return game.getCurrentRoom().onPlayerEnter(player) + "\n" + game.getCurrentRoom().getLongDescription();
+                game.getCurrentRoom().onPlayerEnter(player);
+                return game.getCurrentRoom().getLongDescription();
             case "look":
                 return room.getLongDescription();
             default:

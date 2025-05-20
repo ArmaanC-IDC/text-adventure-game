@@ -26,9 +26,8 @@ public class SummonRoom extends Room {
         }
     }
 
-    public String onPlayerEnter(){
+    public void onPlayerEnter(){
         this.visited = true;
         System.out.println("IMPLEMENT THE SUMMONING ROOM");
-        return "";
     }
 }

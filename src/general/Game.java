@@ -1,3 +1,4 @@
+package general;
 import java.util.Map;
 
 import player.Player;
@@ -9,20 +10,41 @@ import java.util.ArrayList;
 import rooms.Room;
 
 public class Game {
+    private static Game game;
+
+    public static Game getGame() {
+        System.out.println(game);
+        return game;
+    }
+
+    public static void printText(String text){
+        game.getGui().printText(text);
+    }
+
     private Map<String, Room> rooms;
     private Player player;
     private Room[][] roomGrid = new Room[5][5];
     private int[] currentRoom = new int[2];
+    AdventureGUI gui;
 
     public Game() {
         // RoomLoader loader = new RoomLoader();
         // rooms = loader.loadRooms("rooms.json");
         initRooms();
         player = new Player("startingRoom");
+        game = this;
+    }
+
+    public void setGui(AdventureGUI gui){
+        this.gui = gui;
+    }
+
+    public AdventureGUI getGui(){
+        return gui;
     }
 
     public void onPlayerTurn(){
-        this.getCurrentRoom().onPlayerTurn();
+        this.getCurrentRoom().onPlayerTurn(player);
     }
 
     public String processCommand(String input) {
