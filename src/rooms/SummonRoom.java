@@ -10,9 +10,9 @@ public class SummonRoom extends Room {
                 this.description = "A grand hall lies silent, its banners torn and faded. A summoning altar stands in the center, waiting. Put a Ranger Pendant and a Minotaur Horn in the altar to summon the cursed Knight who guards ancient secrets.";
                 break;
 
-            case "skeletonBossRoom":
+            case "rangerBossRoom":
                 this.name = "Forest of Darkness";
-                this.description = "This chamber reeks of decay. Rows of skeletal remains line the walls. An eerie pedestal glows faintly. Put Ancient Coins on the pedestal to awaken the Hollow-Eyed Ranger.";
+                this.description = "This chamber reeks of decay. Rows of arrows line the walls. An eerie pedestal glows faintly. Put Ancient Coins on the pedestal to awaken the Hollow-Eyed Ranger.";
                 break;
 
             case "minotaurBossRoom":
@@ -21,8 +21,8 @@ public class SummonRoom extends Room {
                 break;
 
             default:
-                this.name = "Unknown Chamber";
-                this.description = "An eerie, magical place with unknown purpose.";
+                this.name = "UNIMPLEMENTED TYPE";
+                this.description = bossType;
         }
     }
 
