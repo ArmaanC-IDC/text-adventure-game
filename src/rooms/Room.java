@@ -128,7 +128,6 @@ public class Room {
 
     //description shown upon room enter
     public String getLongDescription() {
-        System.out.println(items);
         StringBuilder sb = new StringBuilder();
         sb.append(name).append("\n");
         sb.append(description).append("\n");

@@ -6,7 +6,6 @@ import rooms.Room;
 import rooms.MobRoom;
 
 public class Weapons extends Item{
-    protected String name;
     protected int baseDamage;
     protected int maxDamage;
 
@@ -48,6 +47,7 @@ public class Weapons extends Item{
 
         int damage = (int)(Math.random()*(maxDamage-baseDamage)) + baseDamage;
         room.getMobs().get(0).takeDamage(damage);
+        Game.printText("you dealt " + damage + " damage");
         return true;
     }
 }
