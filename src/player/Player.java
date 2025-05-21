@@ -1,3 +1,5 @@
+package player;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +16,12 @@ public class Player {
     private int strength;
     private int speed;
     private int wisdom;
-    private int stamina;
+    private int hp;
+    private int maxHp;
     private int luck;
     private boolean isStunned;
     private boolean isPoisoned;
+    private boolean isWeak;
 
 
     //equipment and inventory
@@ -29,17 +33,19 @@ public class Player {
         strength = (int)(Math.random()*10)+1;
         speed = (int)(Math.random()*5)+1;
         wisdom = (int)(Math.random()*10)+1;
-        stamina = (int)(Math.random()*10)+1;
+        hp = (int)(Math.random()*10)+1;
+        maxHp = hp;
         luck = (int)(Math.random()*10)+1;
         isPoisoned = false;
         isStunned = false;
+        isWeak = false;
 
         showStats();
 
     }
 
     public String showStats(){
-        String stats = "Strength: " + strength + " Speed: " + speed + " Wisdom " + wisdom + " Stamina: " + stamina + " Luck: " + luck;
+        String stats = "Strength: " + strength + " Speed: " + speed + " Wisdom " + wisdom + " Health: " + hp + " Luck: " + luck;
         return stats;
     }
 
@@ -84,5 +90,29 @@ public class Player {
 
     public List<Item> getInventory() {
         return inventory;
+    }
+
+    public void takeDamage(int damage){
+        hp -= damage;
+    }
+
+    public void stun(){
+        isStunned = true;
+    }
+
+    public void weaken(){
+        isWeak = true;
+    }
+
+    public void poison(){
+        isPoisoned = true;
+    }
+
+    public int getHp(){
+        return hp;
+    }
+
+    public int getMaxHp(){
+        return maxHp;
     }
 }
