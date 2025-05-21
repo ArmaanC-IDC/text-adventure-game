@@ -1,0 +1,17 @@
+package item;
+
+public class Item {
+    public String name;
+
+    public Item(String name) {
+        this.name = name;
+    }
+
+    public String useItem(){
+            return name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}

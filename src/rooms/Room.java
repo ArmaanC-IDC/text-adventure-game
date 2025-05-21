@@ -2,9 +2,10 @@ package rooms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
-import items.Item;
+import item.Item;
+
+import java.util.HashMap;
 
 public class Room {
     private String id;
