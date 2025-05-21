@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class MobRoom extends Room {
     private ArrayList<Mob> mobs;
+    private final int maxMobs = 4;
+    private final int minMobs = 1;
 
     public MobRoom(int roomCount, int row, int col) {
         super("mobRoom", roomCount, row, col);
@@ -55,9 +57,21 @@ public class MobRoom extends Room {
     //when the player enters, block all exits and summon mobs.
     public void onPlayerEnter(Player player){
         this.visited = true;
-        mobs.add(new GoblinScavenger());
-        mobs.add(new SplitSlime());
-        mobs.add(new CrumblingSkeleton());
+        int numMobs = (int)(Math.random()*(maxMobs - minMobs)) + minMobs;
+        for (int i = 0; i < numMobs; i++) {
+            int mob = (int)Math.random()*3;
+            switch (mob){
+                case 0:
+                    mobs.add(new CrumblingSkeleton());
+                    break;
+                case 1:
+                    mobs.add(new GoblinScavenger());
+                    break;
+                case 2:
+                    mobs.add(new SplitSlime());
+                    break;
+            }
+        }
         this.blockedExits.put("north", true);
         this.blockedExits.put("east", true);
         this.blockedExits.put("south", true);
