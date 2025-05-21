@@ -9,6 +9,13 @@ import rooms.Room;
 import java.util.ArrayList;
 
 public class SplitSlime extends Mob {
+
+    public SplitSlime(String id) {
+        super("Split Slime", 20, 5, 2, new ArrayList<>());
+        attacks.add(new AcidSplash());
+        attacks.add(new PoisonTouch());
+    }
+
     public SplitSlime() {
         super("Split Slime", 20, 5, 2, new ArrayList<>());
         attacks.add(new AcidSplash());

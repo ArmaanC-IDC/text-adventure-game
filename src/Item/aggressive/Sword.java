@@ -1,6 +1,6 @@
 package item.aggressive;
 
-public class Sword extends Weapons {
+public class Sword extends Weapon {
     public Sword() {
         super("Sword", 10, 20);
     }
