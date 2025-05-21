@@ -1,3 +1,4 @@
+package general;
 import java.util.Map;
 
 import player.Player;
@@ -5,24 +6,52 @@ import player.Player;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import rooms.Room;
 
 public class Game {
+    private static Game game;
+
+    public static Game getGame() {
+        System.out.println(game);
+        return game;
+    }
+
+    public static void printText(String text){
+        game.getGui().printText(text);
+    }
+
     private Map<String, Room> rooms;
     private Player player;
-    private Room[][] roomGrid = new Room[5][5];
+    private Room[][] roomGrid = new Room[8][8];
     private int[] currentRoom = new int[2];
+    private AdventureGUI gui;
 
     public Game() {
         // RoomLoader loader = new RoomLoader();
         // rooms = loader.loadRooms("rooms.json");
         initRooms();
         player = new Player("startingRoom");
+        game = this;
     }
 
-    public String processCommand(String input) {
-        return CommandParser.parse(this, input, player, rooms, roomGrid);
+    public void setGui(AdventureGUI gui){
+        this.gui = gui;
+    }
+
+    public AdventureGUI getGui(){
+        return gui;
+    }
+
+    public void onPlayerTurn(){
+        this.getCurrentRoom().onPlayerTurn(player);
+    }
+
+    public void processCommand(String input) {
+        if (CommandParser.parse(this, input, player, rooms, roomGrid)){
+            onPlayerTurn();
+        }
     }
 
     public Player getPlayer() {
@@ -56,23 +85,29 @@ public class Game {
         Map<String, Integer> numEachRoom = new HashMap<String, Integer>();
         numEachRoom.put("startingRoom", 1);
         numEachRoom.put("knightBossRoom", 1);
-        numEachRoom.put("skeletonBossRoom", 1);
+        numEachRoom.put("rangerBossRoom", 1);
         numEachRoom.put("minotaurBossRoom", 1);
-        numEachRoom.put("mobRoom", 8);
-        numEachRoom.put("trapRoom", 4);
-        numEachRoom.put("treasureRoom", 3);
-        numEachRoom.put("corridor", 6);     
+        numEachRoom.put("mobRoom", 28);
+        numEachRoom.put("trapRoom", 10);
+        numEachRoom.put("treasureRoom", 7);
+        numEachRoom.put("corridor", 15);
 
+        List<String> roomTypes = new ArrayList<String>();
+        for (Map.Entry<String, Integer> entry : numEachRoom.entrySet()) {
+            for (int i = 0; i < entry.getValue(); i++) {
+                roomTypes.add(entry.getKey());
+            }
+        }
+        Collections.shuffle(roomTypes);
+
+        int index = 0;
         for (int row = 0; row < roomGrid.length; row++) {
             for (int col = 0; col < roomGrid[0].length; col++) {
                 //get random key from numEachRoom that does not map to 0
-                String randomKey;
-                do {
-                    List<String> keys = new ArrayList<String>(numEachRoom.keySet());
-                    randomKey = keys.get((int) (Math.random() * keys.size()));
-                } while (numEachRoom.get(randomKey)==0);
+                String randomKey = roomTypes.get(index);
+                index++;
 
-                Room room = new Room(randomKey, roomCount, row, col);
+                Room room = Room.createRoom(randomKey, roomCount, row, col);
                 roomGrid[row][col] = room;
                 numEachRoom.put(randomKey, numEachRoom.get(randomKey) - 1);
                 rooms.put(room.getId(), room);
@@ -80,6 +115,7 @@ public class Game {
 
                 if (randomKey.equals("startingRoom")){
                     currentRoom = new int[]{row, col};
+                    room.onPlayerEnter(player);
                 }
             }
         }

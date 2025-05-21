@@ -59,4 +59,8 @@ public class Mob {
     public String getName() {
         return name;
     }
+
+    public String toString(){
+        return name + " with " + hp + " hp";
+    }
 }

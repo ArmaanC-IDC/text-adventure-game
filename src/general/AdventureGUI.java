@@ -1,4 +1,6 @@
+package general;
 import javax.swing.*;
+import javax.swing.border.StrokeBorder;
 
 import rooms.Room;
 
@@ -42,29 +44,43 @@ public class AdventureGUI {
 
         // Map panel
         Room[][] roomGrid = game.getRoomGrid();
+        HashMap<String, Color> roomToColor = new HashMap<String, Color>();
+        roomToColor.put("startingRoom", Color.CYAN);              
+        roomToColor.put("knightBossRoom", new Color(106, 13, 173));
+        roomToColor.put("rangerBossRoom", Color.GREEN);
+        roomToColor.put("minotaurBossRoom", new Color(204, 102, 0));
+        roomToColor.put("mobRoom", new Color(123, 63, 0));
+        roomToColor.put("trapRoom", Color.ORANGE);
+        roomToColor.put("treasureRoom", Color.YELLOW);
+        roomToColor.put("corridor", Color.GRAY);
+
+        int cellSize = 30;
         mapPanel = new JPanel(){
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
 
                 int pRow = game.getPlayerCoords()[0], pCol = game.getPlayerCoords()[1];
 
-                int cellSize = 30;
                 for (int row = 0; row < roomGrid.length; row++) {
                     for (int col = 0; col < roomGrid[0].length; col++) {
-                        g.setColor(Color.gray);
-                        if (row==pRow && col==pCol){
-                            g.setColor(Color.red);
+                        g.setColor(Color.DARK_GRAY);
+                        if (roomGrid[row][col].getVisited()){
+                            g.setColor(roomToColor.get(roomGrid[row][col].getType()));
                         }
 
                         g.fillRect(col*cellSize, row*cellSize, cellSize, cellSize);
 
                         g.setColor(Color.black);
+                        ((Graphics2D)g).setStroke(new BasicStroke(3));
                         g.drawRect(col*cellSize, row*cellSize, cellSize, cellSize);
                     }
                 }
+                g.setColor(Color.red);
+                ((Graphics2D)g).setStroke(new BasicStroke(3));
+                g.drawRect(pCol*cellSize, pRow*cellSize, cellSize, cellSize);
             }
         };
-        mapPanel.setPreferredSize(new Dimension(150, 150));
+        mapPanel.setPreferredSize(new Dimension(cellSize*roomGrid.length, cellSize*roomGrid[0].length));
         frame.add(mapPanel, BorderLayout.WEST);
 
         // mapPanel.setPreferredSize(new Dimension(180, 180));
@@ -92,12 +108,12 @@ public class AdventureGUI {
         inputField.setText("");
         if (!input.isEmpty()) {
             printText("> " + input);
-            printText(game.processCommand(input));
+            game.processCommand(input);
             updateRoomDisplay();
         }
     }
 
-    private void printText(String text) {
+    public void printText(String text) {
         outputArea.append(text + "\n");
     }
 
@@ -107,5 +123,6 @@ public class AdventureGUI {
         Image img = icon.getImage().getScaledInstance(800, 200, Image.SCALE_SMOOTH);
         imageLabel.setIcon(new ImageIcon(img));
         mapPanel.repaint();
+        // game.onPlayerTurn();
     }
 }
