@@ -1,7 +1,7 @@
 package attack;
 
 import mobs.Mob;
-import player.Player;
+import player.player;
 import general.Game;
 
 public class Reassemble implements Attack {
@@ -9,7 +9,7 @@ public class Reassemble implements Attack {
         return "Reassemble";
     }
 
-    public void execute(Mob attacker, Player player) {
+    public void execute(Mob attacker, player player) {
         if (attacker.getHp() < attacker.getMaxHp() / 2) {
             attacker.heal(10);
             Game.printText(attacker.getName() + " reassembles and heals!");

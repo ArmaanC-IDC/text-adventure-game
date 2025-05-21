@@ -1,7 +1,7 @@
 package attack;
 
 import mobs.Mob;
-import player.Player;
+import player.player;
 import general.Game;
 
 public class Roar implements Attack {
@@ -9,7 +9,7 @@ public class Roar implements Attack {
         return "Roar";
     }
 
-    public void execute(Mob attacker, Player player) {
+    public void execute(Mob attacker, player player) {
         player.weaken();
         Game.printText(attacker.getName() + " roars fiercely, weakening the player!");
     }

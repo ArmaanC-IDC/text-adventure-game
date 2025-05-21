@@ -1,7 +1,7 @@
 package attack;
 
 import mobs.Mob;
-import player.Player;
+import player.player;
 import general.Game;
 
 public class DirtyTrick implements Attack {
@@ -9,7 +9,7 @@ public class DirtyTrick implements Attack {
         return "Dirty Trick";
     }
 
-    public void execute(Mob attacker, Player player) {
+    public void execute(Mob attacker, player player) {
         int damage = 2 + new java.util.Random().nextInt(3); // 2-4
         if (player.getHp() < player.getMaxHp()) damage += 2; // Bonus to wounded
         player.takeDamage(damage);

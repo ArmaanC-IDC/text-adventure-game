@@ -1,7 +1,7 @@
 package mobs;
 
 import attack.ShieldBash;
-import player.Player;
+import player.player;
 import attack.DefensiveStance;
 import attack.CorruptedStrike;
 import attack.DesperateSwing;
@@ -22,7 +22,7 @@ public class CorruptedKnight extends Mob {
         attacks.add(new DesperateSwing());
     }
 
-    public void performAttack(Player player) {
+    public void performAttack(player player) {
         //Deals with 2 phase mechanic
         List<Attack> usable = new ArrayList<>();
         for (Attack a : attacks) {

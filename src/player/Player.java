@@ -6,9 +6,9 @@ import java.util.Map;
 import static java.lang.Math.*;
 import java.util.Random;
 
-import Item.Item;
+import item.Item;
 
-public class Player {
+public class Player{
 
     // Base stats
     private int strength;
@@ -44,7 +44,9 @@ public class Player {
 
     }
 
-    public ArrayList<Item> getInventory(){ return inventory; }
+    public ArrayList<Item> getInventory(){  
+        return inventory;
+    }
 
     // method to print out stats
     public String showStats() {
@@ -113,10 +115,10 @@ public class Player {
         }
 
         // Use the item (assumes Item has a use(Player player) method)
-        item.use(this);
+        item.useItem();
 
         // Optionally remove the item from inventory if it's consumable
-        if (item.isConsumable()) { // Assumes Item has an isConsumable() method
+        if (item.getType()) { // Assumes Item has an isConsumable() method
             inventory.remove(item);
             System.out.println("You used " + item.getName() + ".");
         } else {

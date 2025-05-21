@@ -37,7 +37,7 @@ public class MobRoom extends Room {
     }
 
     //when the player makes their turn, check for mob death and if all dead unlock exits
-    public void onPlayerTurn(Player player){
+    public void onPlayerTurn(player player){
         for (int i = mobs.size()-1; i>=0; i--) {
             if (!mobs.get(i).isAlive()){
                 mobs.remove(i);
@@ -55,7 +55,7 @@ public class MobRoom extends Room {
     }
 
     //when the player enters, block all exits and summon mobs.
-    public void onPlayerEnter(Player player){
+    public void onPlayerEnter(player player){
         this.visited = true;
         int numMobs = (int)(Math.random()*(maxMobs - minMobs)) + minMobs;
         for (int i = 1; i <= numMobs; i++) {

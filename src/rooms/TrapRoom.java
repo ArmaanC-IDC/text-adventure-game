@@ -25,7 +25,7 @@ public class TrapRoom extends Room {
     }
 
     //when the player enters, maybe damage players
-    public void onPlayerEnter(Player player) {
+    public void onPlayerEnter(player player) {
         this.visited = true;
         
         //if goes into if statement, damage the player

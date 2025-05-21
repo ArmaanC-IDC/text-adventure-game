@@ -76,7 +76,7 @@ public class CommandParser {
                     return false;
                 }
                 String item = tokens[1];
-                player.equipItem(Item item);
+                // player.equipItem(item);
 
             case "inventory":
                 player.showInventory();

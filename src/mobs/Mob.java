@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import attack.Attack;
-import player.Player;
+import player.player;
 import general.Game;
 
 public class Mob {
@@ -39,7 +39,7 @@ public class Mob {
         return hp > 0;
     }
 
-    public void performAttack(Player player) {
+    public void performAttack(player player) {
         Attack attack = attacks.get((int)(Math.random() * attacks.size()));
         System.out.println(name + " uses " + attack.getName() + "!");
         attack.execute(this, player);
