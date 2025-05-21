@@ -1,4 +1,4 @@
-package item.aggressive;
+package Item.aggressive;
 
 public class Sword extends Weapons {
     public Sword() {

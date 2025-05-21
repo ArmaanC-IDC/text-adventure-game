@@ -6,16 +6,13 @@ import java.util.Map;
 import static java.lang.Math.*;
 import java.util.Random;
 
-import item.Item;
+import Item.Item;
 
 public class Player {
-    // Position
-    private String currentRoomId;
 
     // Base stats
     private int strength;
     private int speed;
-    private int wisdom;
     private int hp;
     private int maxHp;
     private int luck;
@@ -33,8 +30,7 @@ public class Player {
     public Player() {
 
         strength = (int) (Math.random() * 30) + 1;
-        speed = (int) (Math.random() * 30) + 1;
-        wisdom = (int) (Math.random() * 30) + 1;
+        speed = (int) (Math.random() * 10) + 1;
         hp = (int) (Math.random() * 20) + 81;
         maxHp = hp;
         luck = (int) (Math.random() * 10) + 1;
@@ -50,7 +46,7 @@ public class Player {
 
     // method to print out stats
     public String showStats() {
-        String stats = "Strength: " + strength + " Speed: " + speed + " Wisdom " + wisdom + " Health: " + hp + " Luck: "
+        String stats = "Strength: " + strength + " Speed: " + speed + " Health: " + hp + " Luck: "
                 + luck;
         return stats;
     }
