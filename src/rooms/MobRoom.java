@@ -9,7 +9,7 @@ import player.Player;
 import java.util.ArrayList;
 
 public class MobRoom extends Room {
-    private ArrayList<Mob> mobs;
+    private static ArrayList<Mob> mobs;
     private final int maxMobs = 4;
     private final int minMobs = 1;
 
@@ -78,7 +78,7 @@ public class MobRoom extends Room {
         this.blockedExits.put("west", true);
     }
 
-    public ArrayList<Mob> getMobs() { return mobs; }
+    public static ArrayList<Mob> getMobs() { return mobs; }
 
     //when you enter a mob room show the list of mobs there as well as other things
     public String getLongDescription(){

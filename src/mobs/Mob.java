@@ -5,6 +5,7 @@ import java.util.Set;
 
 import attack.Attack;
 import player.Player;
+import general.Game;
 
 public class Mob {
     protected String name;

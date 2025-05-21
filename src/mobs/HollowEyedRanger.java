@@ -3,6 +3,7 @@ package mobs;
 import attack.PreciseShot;
 import attack.BindingArrow;
 import attack.Necromancy;
+import general.Game;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class HollowEyedRanger extends Mob {
 
     public void takeDamage(int rawDamage) {
         if (Math.random() < 0.25) {
-            System.out.println(name + " dodges the attack!");
+            Game.printText(name + " dodges the attack!");
             return;
         }
         super.takeDamage(rawDamage);
