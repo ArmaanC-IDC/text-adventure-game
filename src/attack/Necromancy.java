@@ -4,6 +4,7 @@ import mobs.CrumblingSkeleton;
 import mobs.Mob;
 import player.player;
 import rooms.MobRoom;
+import rooms.Room;
 import general.Game;
 
 public class Necromancy implements Attack {
@@ -13,6 +14,9 @@ public class Necromancy implements Attack {
 
     public void execute(Mob attacker, player player) {
         Game.printText(attacker.getName() + " summons a skeleton ally!");
-        MobRoom.getMobs().add(new CrumblingSkeleton());
+        Room currentRoom = Game.getGame().getCurrentRoom();
+        if (currentRoom instanceof MobRoom) {
+            ((MobRoom) currentRoom).getMobs().add(new CrumblingSkeleton());
+        }
     }
 }

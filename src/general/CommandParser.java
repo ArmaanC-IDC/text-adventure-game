@@ -41,7 +41,8 @@ public class CommandParser {
                 String target = tokens[1];
                 for (Item item : game.getCurrentRoom().getItems()) {
                     if (item.getName().equals(target)){
-                        item.useItem();
+                        player.getInventory().add(item);
+                        Game.printText("taken");
                         return true;
                     }
                 }
