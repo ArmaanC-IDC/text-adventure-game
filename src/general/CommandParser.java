@@ -6,6 +6,7 @@ import player.Player;
 import rooms.Room;
 import rooms.MobRoom;
 import general.Game;
+import item.Item;
 
 public class CommandParser {
     public static boolean parse(Game game, String input, Player player, Map<String, Room> rooms, Room[][] roomGrid) {
@@ -36,6 +37,26 @@ public class CommandParser {
                 game.getCurrentRoom().onPlayerEnter(player);
                 Game.printText(game.getCurrentRoom().getLongDescription());
                 return true;
+            case "take":
+                String target = tokens[1];
+                for (Item item : game.getCurrentRoom().getItems()) {
+                    if (item.getName().equals(target)){
+                        item.useItem();
+                        return true;
+                    }
+                }
+                Game.printText("There is no \"" + target + "\" in the room.");
+                return false;
+            case "use":
+                String targetItem = tokens[1];
+                for (Item item : player.getInventory()) {
+                    if (item.getName().equals(targetItem)){
+                        item.useItem();
+                        return true;
+                    }
+                }
+                Game.printText("You do not have a \"" + targetItem + "\".");
+                return false;
             case "killall":
                 if (room instanceof MobRoom){
                     MobRoom mobRoom = (MobRoom) game.getCurrentRoom();

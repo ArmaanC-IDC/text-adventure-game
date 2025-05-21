@@ -2,6 +2,7 @@ package attack;
 
 import mobs.Mob;
 import player.Player;
+import general.Game;
 
 public class ShieldBash implements Attack {
     public String getName() {
@@ -12,6 +13,6 @@ public class ShieldBash implements Attack {
         int damage = 8 + new java.util.Random().nextInt(3); // 8-10
         player.takeDamage(damage);
         player.stun();
-        System.out.println(attacker.getName() + " bashes the player for " + damage + " damage and stuns!");
+        Game.printText(attacker.getName() + " bashes the player for " + damage + " damage and stuns!");
     }
 }

@@ -1,7 +1,10 @@
 package attack;
 
+import mobs.CrumblingSkeleton;
 import mobs.Mob;
 import player.Player;
+import rooms.MobRoom;
+import general.Game;
 
 public class Necromancy implements Attack {
     public String getName() {
@@ -9,7 +12,7 @@ public class Necromancy implements Attack {
     }
 
     public void execute(Mob attacker, Player player) {
-        System.out.println(attacker.getName() + " summons a skeleton ally!");
-        // ADD MOB SUMMON LOGIC
+        Game.printText(attacker.getName() + " summons a skeleton ally!");
+        MobRoom.getMobs().add(new CrumblingSkeleton());
     }
 }

@@ -2,6 +2,7 @@ package attack;
 
 import mobs.Mob;
 import player.Player;
+import general.Game;
 
 public class HornCharge implements Attack {
     public String getName() {
@@ -12,6 +13,6 @@ public class HornCharge implements Attack {
         int base = 15 + new java.util.Random().nextInt(6); // 15-20
         if (attacker.getHp() <= 30) base += 5;
         player.takeDamage(base);
-        System.out.println(attacker.getName() + " charges with horns for " + base + " damage!");
+        Game.printText(attacker.getName() + " charges with horns for " + base + " damage!");
     }
 }
