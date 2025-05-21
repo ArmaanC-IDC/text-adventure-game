@@ -1,10 +1,11 @@
 package rooms;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-import java.util.*;
 import item.Item;
-import player.Player;
 
-//models a room in the game. 
+import java.util.HashMap;
 
 public class Room {
     protected String id;

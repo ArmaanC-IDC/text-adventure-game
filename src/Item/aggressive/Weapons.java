@@ -1,6 +1,8 @@
-package item.aggressive;
+package Item.aggressive;
 
-public class Weapons{
+import item.Item;
+
+public class Weapons extends Item{
     protected String name;
     protected int baseDamage;
     protected int maxDamage;
@@ -8,7 +10,7 @@ public class Weapons{
     protected int damageReceived;
 
     public Weapons(String name, int baseDamage, int maxDamage) {
-        this.name = name;
+        super(name);
         this.baseDamage = baseDamage;
         this.maxDamage = maxDamage;
         goldenApple = false;
@@ -26,5 +28,10 @@ public class Weapons{
 
     public int getMaxDamage(){
         return maxDamage;        
+    }
+
+    // will return weapon when asked for type in player class
+    public String getType() {
+        return "weapon";
     }
 }
