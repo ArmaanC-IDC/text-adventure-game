@@ -44,6 +44,9 @@ public class Player{
 
     }
 
+    public int getStrength() { return strength; }
+    public void setStrength(int newStrength){ strength = newStrength; }
+
     public ArrayList<Item> getInventory(){  
         return inventory;
     }
@@ -125,6 +128,10 @@ public class Player{
             System.out.println("You used " + item.getName() + ". It is not consumed.");
         }
         return true;
+    }
+
+    public void setHp(int newHp){
+        hp = newHp;
     }
 
     public void takeDamage(int damage) {
