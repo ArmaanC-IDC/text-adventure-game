@@ -2,8 +2,11 @@ package mobs;
 
 import attack.AcidSplash;
 import attack.PoisonTouch;
-import general.Game;
 import rooms.MobRoom;
+import rooms.Room;
+import mobs.Mob;
+import player.Player;
+import general.Game;
 
 import java.util.ArrayList;
 
@@ -17,8 +20,11 @@ public class SplitSlime extends Mob {
     public void takeDamage(int rawDamage) {
         super.takeDamage(rawDamage);
         if (this.isAlive() && this.getHp() <= 5) {
-            Game.printText(name + " splits into two smaller slimes!");
-            MobRoom.getMobs().add(new SplitSlime());
+            Room currentRoom = Game.getGame().getCurrentRoom();
+            if (currentRoom instanceof MobRoom) {
+                ((MobRoom) currentRoom).getMobs().add(new CrumblingSkeleton());
+                Game.printText(name + " splits into two smaller slimes!");
+            }
         }
     }
 }

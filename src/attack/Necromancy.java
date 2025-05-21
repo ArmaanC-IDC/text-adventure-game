@@ -13,10 +13,10 @@ public class Necromancy implements Attack {
     }
 
     public void execute(Mob attacker, Player player) {
-        Game.printText(attacker.getName() + " summons a skeleton ally!");
         Room currentRoom = Game.getGame().getCurrentRoom();
         if (currentRoom instanceof MobRoom) {
             ((MobRoom) currentRoom).getMobs().add(new CrumblingSkeleton());
+            Game.printText(attacker.getName() + " summons a skeleton ally!");
         }
     }
 }
