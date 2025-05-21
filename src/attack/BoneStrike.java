@@ -1,7 +1,7 @@
 package attack;
 
 import mobs.Mob;
-import player.player;
+import player.Player;
 import general.Game;
 
 public class BoneStrike implements Attack {
@@ -9,7 +9,7 @@ public class BoneStrike implements Attack {
         return "Bone Strike";
     }
 
-    public void execute(Mob attacker, player player) {
+    public void execute(Mob attacker, Player player) {
         int damage = 6 + new java.util.Random().nextInt(3); // 6-8
         player.takeDamage(damage);
         Game.printText(attacker.getName() + " strikes with bone for " + damage + " damage!");

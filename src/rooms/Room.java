@@ -59,7 +59,6 @@ public class Room {
         }
         this.items = new ArrayList<>();
         this.items.add(new Sword());
-        System.out.println(items);
         this.exits = new HashMap<>();
         this.blockedExits = new HashMap<String, Boolean>();
         this.name = name;
@@ -77,7 +76,6 @@ public class Room {
         }
         this.items = new ArrayList<>();
         this.items.add(new Sword());
-        System.out.println(items);
         this.exits = new HashMap<>();
         this.blockedExits = new HashMap<String, Boolean>();
         initExits(row, col);

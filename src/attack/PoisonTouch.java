@@ -1,7 +1,7 @@
 package attack;
 
 import mobs.Mob;
-import player.player;
+import player.Player;
 import general.Game;
 
 public class PoisonTouch implements Attack {
@@ -9,7 +9,7 @@ public class PoisonTouch implements Attack {
         return "Poison Touch";
     }
 
-    public void execute(Mob attacker, player player) {
+    public void execute(Mob attacker, Player player) {
         int damage = 2;
         player.takeDamage(damage);
         player.poison();

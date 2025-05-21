@@ -1,7 +1,7 @@
 package attack;
 
 import mobs.Mob;
-import player.player;
+import player.Player;
 import general.Game;
 
 public class PreciseShot implements Attack {
@@ -9,7 +9,7 @@ public class PreciseShot implements Attack {
         return "Precise Shot";
     }
 
-    public void execute(Mob attacker, player player) {
+    public void execute(Mob attacker, Player player) {
         int damage = 10 + new java.util.Random().nextInt(3); // 10-12
         player.takeDamage(damage);
         Game.printText(attacker.getName() + " lands a precise shot for " + damage + " damage!");

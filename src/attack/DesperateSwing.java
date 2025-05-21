@@ -1,7 +1,7 @@
 package attack;
 
 import mobs.Mob;
-import player.player;
+import player.Player;
 import general.Game;
 
 public class DesperateSwing implements Attack {
@@ -9,7 +9,7 @@ public class DesperateSwing implements Attack {
         return "Desperate Swing";
     }
 
-    public void execute(Mob attacker, player player) {
+    public void execute(Mob attacker, Player player) {
         int damage = 20 + new java.util.Random().nextInt(6); // 20-25
         player.takeDamage(damage);
         attacker.setArmor(20);

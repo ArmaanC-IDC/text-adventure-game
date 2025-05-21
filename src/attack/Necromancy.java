@@ -2,7 +2,7 @@ package attack;
 
 import mobs.CrumblingSkeleton;
 import mobs.Mob;
-import player.player;
+import player.Player;
 import rooms.MobRoom;
 import rooms.Room;
 import general.Game;
@@ -12,7 +12,7 @@ public class Necromancy implements Attack {
         return "Necromancy";
     }
 
-    public void execute(Mob attacker, player player) {
+    public void execute(Mob attacker, Player player) {
         Game.printText(attacker.getName() + " summons a skeleton ally!");
         Room currentRoom = Game.getGame().getCurrentRoom();
         if (currentRoom instanceof MobRoom) {

@@ -2,14 +2,14 @@ package attack;
 
 import general.Game;
 import mobs.Mob;
-import player.player;
+import player.Player;
 
 public class BindingArrow implements Attack {
     public String getName() {
         return "Binding Arrow";
     }
 
-    public void execute(Mob attacker, player player) {
+    public void execute(Mob attacker, Player player) {
         int damage = 6 + new java.util.Random().nextInt(3); // 6-8
         player.takeDamage(damage);
         player.stun();

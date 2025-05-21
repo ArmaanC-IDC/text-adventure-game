@@ -1,7 +1,7 @@
 package attack;
 
 import mobs.Mob;
-import player.player;
+import player.Player;
 import general.Game;
 
 public class CorruptedStrike implements Attack {
@@ -9,7 +9,7 @@ public class CorruptedStrike implements Attack {
         return "Corrupted Strike";
     }
 
-    public void execute(Mob attacker, player player) {
+    public void execute(Mob attacker, Player player) {
         int damage = 12 + new java.util.Random().nextInt(4); // 12-15
         player.takeDamage(damage);
         player.poison();
