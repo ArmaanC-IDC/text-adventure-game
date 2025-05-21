@@ -58,7 +58,7 @@ public class MobRoom extends Room {
     public void onPlayerEnter(Player player){
         this.visited = true;
         int numMobs = (int)(Math.random()*(maxMobs - minMobs)) + minMobs;
-        for (int i = 0; i < numMobs; i++) {
+        for (int i = 1; i <= numMobs; i++) {
             int mob = (int)Math.random()*3;
             switch (mob){
                 case 0:
