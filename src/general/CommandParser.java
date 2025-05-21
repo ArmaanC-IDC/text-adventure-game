@@ -69,6 +69,27 @@ public class CommandParser {
             case "look":
                 Game.printText(room.getLongDescription());
                 return true;
+
+            case "equip":
+                if (tokens.length < 5) {
+                    Game.printText("Equip what from inventory?");
+                    player.showInventory();
+                    return false;
+                }
+                String item = tokens[1];
+                // player.equipItem(item);
+
+            case "inventory":
+                player.showInventory();
+            //show inventory
+            case "show":
+                String inventory = tokens[1];
+                player.showInventory();
+            
+            
+                    
+
+
             default:
                 Game.printText("Unknown command.");
                 return false;

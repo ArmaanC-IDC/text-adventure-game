@@ -11,6 +11,10 @@ public class Item {
             return true;
     }
 
+    public String getType(){
+        return "";
+    }
+
     public String getName() {
         return name;
     }
