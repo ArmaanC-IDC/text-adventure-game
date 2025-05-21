@@ -23,7 +23,7 @@ public class Game {
     }
 
     private Map<String, Room> rooms;
-    private Player player;
+    private static Player player;
     private Room[][] roomGrid = new Room[8][8];
     private int[] currentRoom = new int[2];
     private AdventureGUI gui;
@@ -54,7 +54,7 @@ public class Game {
         }
     }
 
-    public Player getPlayer() {
+    public static Player getPlayer() {
         return player;
     }
 

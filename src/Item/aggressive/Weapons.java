@@ -1,4 +1,4 @@
-package Item.aggressive;
+package item.aggressive;
 
 import item.Item;
 

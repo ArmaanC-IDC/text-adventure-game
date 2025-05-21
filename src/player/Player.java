@@ -6,12 +6,12 @@ import java.util.Map;
 import static java.lang.Math.*;
 import java.util.Random;
 
-import Item.Item;
+import item.Item;
 
 public class Player {
     // Position
     private String currentRoomId;
-
+    
     // Base stats
     private int strength;
     private int speed;
@@ -23,36 +23,35 @@ public class Player {
     private boolean isPoisoned;
     private boolean isWeak;
 
-    // equipment and inventory
+
+    //equipment and inventory
     // private Map<EquipmentSlot, Item> equippedItems;
-    private ArrayList<Item> inventory;
-    private Item equippedWeapon;
-    private Item equippedArmor;
+    private List<Item> inventory;
 
-    // Initialize random base stats and shows them to player
     public Player() {
-
-        strength = (int) (Math.random() * 30) + 1;
-        speed = (int) (Math.random() * 30) + 1;
-        wisdom = (int) (Math.random() * 30) + 1;
-        hp = (int) (Math.random() * 20) + 81;
+        // Initialize random base stats and shows them to player
+        strength = (int)(Math.random()*10)+1;
+        speed = (int)(Math.random()*5)+1;
+        wisdom = (int)(Math.random()*10)+1;
+        hp = (int)(Math.random()*10)+1;
         maxHp = hp;
-        luck = (int) (Math.random() * 10) + 1;
+        luck = (int)(Math.random()*10)+1;
         isPoisoned = false;
         isStunned = false;
         isWeak = false;
 
         showStats();
 
-        this.inventory = new ArrayList<>();
-
     }
 
-    // method to print out stats
-    public String showStats() {
-        String stats = "Strength: " + strength + " Speed: " + speed + " Wisdom " + wisdom + " Health: " + hp + " Luck: "
-                + luck;
+    public String showStats(){
+        String stats = "Strength: " + strength + " Speed: " + speed + " Wisdom " + wisdom + " Health: " + hp + " Luck: " + luck;
         return stats;
+    }
+
+    public Player(String startingRoomId) {
+        this.currentRoomId = startingRoomId;
+        this.inventory = new ArrayList<>();
     }
 
     // Method to display all items in inventory
@@ -64,90 +63,64 @@ public class Player {
             for (int i = 0; i < inventory.size(); i++) {
                 Item item = inventory.get(i);
                 System.out.println((i + 1) + ". " + item.getName());
-
+                
             }
         }
     }
 
-    // Method to equip weapon and armor
-    public boolean equipItem(Item item) {
-        String type = item.getType(); // e.g., "weapon" or "armor"
-        if (!inventory.contains(item)) {
-            System.out.println("You don't have that item in your inventory.");
-            return false;
-        }
-        if (type.equals("weapon")) {
-            equippedWeapon = item;
-            System.out.println("You equipped the weapon: " + item.getName());
-            return true;
-        } else if (type.equals("armor")) {
-            equippedArmor = item;
-            System.out.println("You equipped the armor: " + item.getName());
-            return true;
-        } else {
-            System.out.println("You can't equip that item.");
-            return false;
-        }
+    public String getCurrentRoomId() {
+        return currentRoomId;
     }
 
-    // Method to show weapon and armor equiped
-    public void showEquipped() {
-        System.out.print("Equipped Weapon: ");
-        if (equippedWeapon != null) {
-            System.out.println(equippedWeapon.getName());
-        } else {
-            System.out.println("None");
-        }
+    // public void setCurrentRoomId(String roomId) {
+    //     this.currentRoomId = roomId;
+    // }
 
-        System.out.print("Equipped Armor: ");
-        if (equippedArmor != null) {
-            System.out.println(equippedArmor.getName());
-        } else {
-            System.out.println("None");
-        }
+    public void addItem(Item item) {
+        inventory.add(item);
     }
 
-    // Method to use items
-    public boolean useItem(Item item) {
-        if (!inventory.contains(item)) {
-            System.out.println("You don't have that item in your inventory.");
-            return false;
-        }
-
-        // Use the item (assumes Item has a use(Player player) method)
-        item.use(this);
-
-        // Optionally remove the item from inventory if it's consumable
-        if (item.isConsumable()) { // Assumes Item has an isConsumable() method
-            inventory.remove(item);
-            System.out.println("You used " + item.getName() + ".");
-        } else {
-            System.out.println("You used " + item.getName() + ". It is not consumed.");
-        }
-        return true;
+    public boolean hasItem(String itemName) {
+        return inventory.stream().anyMatch(i -> i.getName().equalsIgnoreCase(itemName));
     }
 
-    public void takeDamage(int damage) {
+    public void removeItem(Item item) {
+        inventory.remove(item);
+    }
+
+    public List<Item> getInventory() {
+        return inventory;
+    }
+
+    public void takeDamage(int damage){
         hp -= damage;
     }
 
-    public void stun() {
+    public void stun(){
         isStunned = true;
     }
 
-    public void weaken() {
+    public void weaken(){
         isWeak = true;
     }
 
-    public void poison() {
+    public void poison(){
         isPoisoned = true;
     }
 
-    public int getHp() {
+    public void poisonHeal(){
+        isPoisoned = false;
+    }
+
+    public int getHp(){
         return hp;
     }
 
-    public int getMaxHp() {
+    public int getMaxHp(){
         return maxHp;
+    }
+
+    public void setHp(int newHp){
+        hp = newHp;
     }
 }

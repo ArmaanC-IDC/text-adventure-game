@@ -3,15 +3,16 @@ import general.Game;
 import item.Item;
 import player.Player;
 
-public class HealPotion extends Item{
-    public HealPotion(){ 
-        super("HealPotion");
-    }
+public class PoisonHeal extends Item{
+    public PoisonHeal(){
+        super("PoisonHeal");
+    }   
 
     public boolean useItem(){
         Player p = Game.getPlayer();
-        p.setHp(p.getMaxHp());
+        p.poisonHeal();
         return true;
-    }
 
+
+    }
 }

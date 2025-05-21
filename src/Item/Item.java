@@ -1,4 +1,4 @@
-package Item;
+package item;
 
 public class Item {
     public String name;
@@ -7,8 +7,8 @@ public class Item {
         this.name = name;
     }
 
-    public String useItem(){
-            return name;
+    public boolean useItem(){
+            return true;
     }
 
     public String getName() {
