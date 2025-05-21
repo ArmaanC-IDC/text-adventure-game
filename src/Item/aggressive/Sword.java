@@ -1,4 +1,4 @@
-package Item.aggressive;
+package item.aggressive;
 
 public class Sword extends Weapons {
     public Sword() {
@@ -7,10 +7,6 @@ public class Sword extends Weapons {
 
     public int damageDealt() {
         int damage = baseDamage + (int) (Math.random() * (maxDamage - baseDamage + 1));
-        if (goldenApple) {
-            damage += 5;
-        }
-
         return damage;
     }
 }

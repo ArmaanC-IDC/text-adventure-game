@@ -48,6 +48,8 @@ public class Player {
 
     }
 
+    public ArrayList<Item> getInventory(){ return inventory; }
+
     // method to print out stats
     public String showStats() {
         String stats = "Strength: " + strength + " Speed: " + speed + " Wisdom " + wisdom + " Health: " + hp + " Luck: "

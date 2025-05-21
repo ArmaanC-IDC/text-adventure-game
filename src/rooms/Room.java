@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import item.Item;
+import player.Player;
+import item.aggressive.*;
 
 import java.util.HashMap;
 
@@ -56,6 +58,8 @@ public class Room {
             this.id = Integer.toString(roomCount);
         }
         this.items = new ArrayList<>();
+        this.items.add(new Sword());
+        System.out.println(items);
         this.exits = new HashMap<>();
         this.blockedExits = new HashMap<String, Boolean>();
         this.name = name;
@@ -72,6 +76,8 @@ public class Room {
             this.id = Integer.toString(roomCount);
         }
         this.items = new ArrayList<>();
+        this.items.add(new Sword());
+        System.out.println(items);
         this.exits = new HashMap<>();
         this.blockedExits = new HashMap<String, Boolean>();
         initExits(row, col);
@@ -122,6 +128,7 @@ public class Room {
 
     //description shown upon room enter
     public String getLongDescription() {
+        System.out.println(items);
         StringBuilder sb = new StringBuilder();
         sb.append(name).append("\n");
         sb.append(description).append("\n");

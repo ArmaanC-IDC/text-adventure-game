@@ -32,7 +32,7 @@ public class Game {
         // RoomLoader loader = new RoomLoader();
         // rooms = loader.loadRooms("rooms.json");
         initRooms();
-        player = new Player("startingRoom");
+        player = new Player();
         game = this;
     }
 
