@@ -1,7 +1,7 @@
 package mobs;
 
-import player.Player;
 import attack.ShieldBash;
+import player.Player;
 import attack.DefensiveStance;
 import attack.CorruptedStrike;
 import attack.DesperateSwing;
