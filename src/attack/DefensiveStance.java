@@ -2,6 +2,7 @@ package attack;
 
 import mobs.Mob;
 import player.Player;
+import general.Game;
 
 public class DefensiveStance implements Attack {
     public String getName() {
@@ -10,6 +11,6 @@ public class DefensiveStance implements Attack {
 
     public void execute(Mob attacker, Player player) {
         attacker.setArmor(60);
-        System.out.println(attacker.getName() + " takes a defensive stance! Armor raised to 60% for 2 turns.");
+        Game.printText(attacker.getName() + " takes a defensive stance! Armor raised to 60% for 2 turns.");
     }
 }

@@ -6,6 +6,7 @@ import attack.DefensiveStance;
 import attack.CorruptedStrike;
 import attack.DesperateSwing;
 import attack.Attack;
+import general.Game;
 
 import java.util.*;
 
@@ -38,7 +39,7 @@ public class CorruptedKnight extends Mob {
         if (chosen.getName().equals(lastAttackName)) {
             repeatCount++;
             if (repeatCount >= 2) {
-                System.out.println(name + "'s repeated attack is less effective!");
+                Game.printText(name + "'s repeated attack is less effective!");
                 // Apply penalty to damage or effect if needed
             }
         } else {

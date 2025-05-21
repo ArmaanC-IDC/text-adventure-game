@@ -2,6 +2,7 @@ package attack;
 
 import mobs.Mob;
 import player.Player;
+import general.Game;
 
 public class Reassemble implements Attack {
     public String getName() {
@@ -11,9 +12,9 @@ public class Reassemble implements Attack {
     public void execute(Mob attacker, Player player) {
         if (attacker.getHp() < attacker.getMaxHp() / 2) {
             attacker.heal(10);
-            System.out.println(attacker.getName() + " reassembles and heals!");
+            Game.printText(attacker.getName() + " reassembles and heals!");
         } else {
-            System.out.println(attacker.getName() + " tried to reasseble but was too healthy...");
+            Game.printText(attacker.getName() + " tried to reasseble but was too healthy...");
         }
     }
 }
