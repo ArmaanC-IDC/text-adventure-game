@@ -1,14 +1,14 @@
 package Item;
 
 public class Item {
-    private String id;
-    private String name;
-    private String description;
+    public String name;
 
-    public Item(String id, String name, String description) {
-        this.id = id;
+    public Item(String name) {
         this.name = name;
-        this.description = description;
+    }
+
+    public String useItem(){
+            return name;
     }
 
     public String getName() {

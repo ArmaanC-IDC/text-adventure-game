@@ -1,3 +1,4 @@
+package general;
 import javax.swing.*;
 import javax.swing.border.StrokeBorder;
 
@@ -52,13 +53,14 @@ public class AdventureGUI {
         roomToColor.put("trapRoom", Color.ORANGE);
         roomToColor.put("treasureRoom", Color.YELLOW);
         roomToColor.put("corridor", Color.GRAY);
+
+        int cellSize = 30;
         mapPanel = new JPanel(){
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
 
                 int pRow = game.getPlayerCoords()[0], pCol = game.getPlayerCoords()[1];
 
-                int cellSize = 30;
                 for (int row = 0; row < roomGrid.length; row++) {
                     for (int col = 0; col < roomGrid[0].length; col++) {
                         g.setColor(Color.DARK_GRAY);
@@ -78,7 +80,7 @@ public class AdventureGUI {
                 g.drawRect(pCol*cellSize, pRow*cellSize, cellSize, cellSize);
             }
         };
-        mapPanel.setPreferredSize(new Dimension(150, 150));
+        mapPanel.setPreferredSize(new Dimension(cellSize*roomGrid.length, cellSize*roomGrid[0].length));
         frame.add(mapPanel, BorderLayout.WEST);
 
         // mapPanel.setPreferredSize(new Dimension(180, 180));
@@ -106,12 +108,12 @@ public class AdventureGUI {
         inputField.setText("");
         if (!input.isEmpty()) {
             printText("> " + input);
-            printText(game.processCommand(input));
+            game.processCommand(input);
             updateRoomDisplay();
         }
     }
 
-    private void printText(String text) {
+    public void printText(String text) {
         outputArea.append(text + "\n");
     }
 
@@ -121,6 +123,6 @@ public class AdventureGUI {
         Image img = icon.getImage().getScaledInstance(800, 200, Image.SCALE_SMOOTH);
         imageLabel.setIcon(new ImageIcon(img));
         mapPanel.repaint();
-        game.onPlayerTurn();
+        // game.onPlayerTurn();
     }
 }

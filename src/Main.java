@@ -1,6 +1,11 @@
+
+
+import general.AdventureGUI;
+import general.Game;
+
 public class Main {
     public static void main(String[] args) {
         Game game = new Game();
-        new AdventureGUI(game);
+        game.setGui(new AdventureGUI(game));
     }
 }

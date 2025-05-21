@@ -1,10 +1,11 @@
 package rooms;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-import java.util.*;
 import item.Item;
-import player.Player;
 
-//models a room in the game. 
+import java.util.HashMap;
 
 public class Room {
     protected String id;
@@ -16,7 +17,7 @@ public class Room {
     protected List<Item> items;
     protected boolean visited;
 
-    private static final int GRID_SIZE = 5;
+    private static final int GRID_SIZE = 8;
 
     //create a room of a given type. 
     public static Room createRoom(String type, int roomCount, int row, int col){
@@ -96,7 +97,7 @@ public class Room {
     }
 
     //runs every player turn. update elements like mobs here. Do nothing for standard room
-    public void onPlayerTurn(){
+    public void onPlayerTurn(Player player){
 
     }
 
@@ -106,9 +107,8 @@ public class Room {
     }
 
     //what do do when the player enters the room
-    public String onPlayerEnter(Player player) {
+    public void onPlayerEnter(Player player) {
         this.visited = true;
-        return "";
     }
 
     // Getters

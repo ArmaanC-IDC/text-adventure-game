@@ -1,6 +1,7 @@
 package rooms;
 
 import player.Player;
+import general.Game;
 
 public class TrapRoom extends Room {
     private static final int TRAP_ROOM_CHANCE = 90;
@@ -24,7 +25,7 @@ public class TrapRoom extends Room {
     }
 
     //when the player enters, maybe damage players
-    public String onPlayerEnter(Player player) {
+    public void onPlayerEnter(Player player) {
         this.visited = true;
         
         //if goes into if statement, damage the player
@@ -32,19 +33,19 @@ public class TrapRoom extends Room {
             //calculate damage
             int damage = (int)(Math.random() * (TRAP_ROOM_DAMAGE_MAX - TRAP_ROOM_DAMAGE_MIN)) + TRAP_ROOM_DAMAGE_MIN;
             player.takeDamage(damage);
-            return getRandomFromArray(new String[]{
+            Game.printText(getRandomFromArray(new String[]{
                 "A blade flies out from the walls and hits you dealing " + damage + " damage.",
                 "A pressure plate clicks. Darts shoot from hidden holes, piercing you for " + damage + " damage.",
                 "You feel the floor sink slightly. Flames erupt beneath your feet, burning and dealing " + damage + " damage.",
                 "A stone above you shifts. A spiked log swings down, slamming into you dealing " + damage + " damage.",
-            });
+            }));
         } else { //trap misses player
-            return getRandomFromArray(new String[]{
+            Game.printText(getRandomFromArray(new String[]{
                 "A blade flies out from the walls and narrowly misses.",
                 "A pressure plate clicks. Darts shoot from hidden holes and barely miss.",
                 "You feel the floor sink slightly. Flames erupt beneath your feet but you jump back in time.",
                 "A stone above you shifts. A spiked log swings down narrowly missing you.",
-            }) + " Next time you may not be so lucky.";
+            }) + " Next time you may not be so lucky.");
         }
     }
 }

@@ -35,11 +35,13 @@ public class MobRoom extends Room {
     }
 
     //when the player makes their turn, check for mob death and if all dead unlock exits
-    public void onPlayerTurn(){
+    public void onPlayerTurn(Player player){
         for (int i = mobs.size()-1; i>=0; i--) {
             if (!mobs.get(i).isAlive()){
                 mobs.remove(i);
+                continue;
             }
+            mobs.get(i).performAttack(player);
         }
 
         if (mobs.size()==0){
@@ -50,8 +52,8 @@ public class MobRoom extends Room {
         }
     }
 
-    //when the player enters, block all exits and summon mobs. TODO: add real summoning logic
-    public String onPlayerEnter(Player player){
+    //when the player enters, block all exits and summon mobs.
+    public void onPlayerEnter(Player player){
         this.visited = true;
         mobs.add(new GoblinScavenger());
         mobs.add(new SplitSlime());
@@ -60,9 +62,7 @@ public class MobRoom extends Room {
         this.blockedExits.put("east", true);
         this.blockedExits.put("south", true);
         this.blockedExits.put("west", true);
-        return "";
     }
-
 
     public ArrayList<Mob> getMobs() { return mobs; }
 
