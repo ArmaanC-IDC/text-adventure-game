@@ -3,7 +3,6 @@ package mobs;
 import attack.HornCharge;
 import attack.GroundSmash;
 import attack.Roar;
-import general.Game;
 
 import java.util.ArrayList;
 

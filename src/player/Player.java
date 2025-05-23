@@ -182,4 +182,16 @@ public class Player {
     public int getMaxHp() {
         return maxHp;
     }
+
+    public void stun(){
+        isStunned = true;
+    }
+
+    public void poison(){
+        isPoisoned = true;
+    }
+
+    public void weaken(){
+        isWeak = true;
+    }
 }

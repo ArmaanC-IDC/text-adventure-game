@@ -1,7 +1,5 @@
 package mobs;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Random;
 
 import attack.Attack;
@@ -9,6 +7,7 @@ import player.Player;
 import general.Game;
 import item.Item;
 import item.ItemPool;
+import item.Passive.BagOfCoins;
 
 public class Mob {
     protected String name;
@@ -42,15 +41,19 @@ public class Mob {
 
     protected void onDeath() {
         Game.printText(name + " has been defeated!");
-        
+
         if (random.nextDouble() < dropChance) {
             Item droppedItem = ItemPool.getRandomItem();
             if (droppedItem != null) {
                 Game.getGame().getPlayer().getInventory().add(droppedItem);
                 Game.printText("The " + name + " dropped: " + droppedItem.getName() + "!");
             }
+            BagOfCoins.addCoins(1);
+            Game.printText("1 coins have been added to your Bag of Coins.");
         } else {
             Game.printText("The " + name + " didn't drop anything.");
+            BagOfCoins.addCoins(2);
+            Game.printText("2 coins have been added to your Bag of Coins.");
         }
     }
 

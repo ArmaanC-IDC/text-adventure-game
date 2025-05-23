@@ -4,8 +4,6 @@ import attack.AcidSplash;
 import attack.PoisonTouch;
 import rooms.MobRoom;
 import rooms.Room;
-import mobs.Mob;
-import player.Player;
 import general.Game;
 
 import java.util.ArrayList;
