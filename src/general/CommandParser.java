@@ -70,7 +70,6 @@ public class CommandParser {
                             Game.printText("Your inventory is to full.");
                             return false;
                         }
-                        System.out.println("adding");
                         player.getInventory().add(item);
                         toRemove.add(item);
                         taken = true;
@@ -119,8 +118,9 @@ public class CommandParser {
                     for (Mob mob : mobRoom.getMobs()) {
                         mob.takeDamage(10000);
                     }
-
+                    return true;
                 }
+                return false;
             case "look": //display long description
                 Game.printText(room.getLongDescription());
                 return false;

@@ -14,7 +14,6 @@ public class Game {
     private static Game game;
 
     public static Game getGame() {
-        System.out.println(game);
         return game;
     }
 
@@ -29,8 +28,6 @@ public class Game {
     private AdventureGUI gui;
 
     public Game() {
-        // RoomLoader loader = new RoomLoader();
-        // rooms = loader.loadRooms("rooms.json");
         initRooms();
         player = new Player();
         game = this;

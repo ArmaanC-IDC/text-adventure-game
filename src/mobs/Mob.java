@@ -8,6 +8,7 @@ import general.Game;
 import item.Item;
 import item.ItemPool;
 import item.Passive.BagOfCoins;
+import item.Passive.Coins;
 
 public class Mob {
     protected String name;
@@ -42,18 +43,18 @@ public class Mob {
     protected void onDeath() {
         Game.printText(name + " has been defeated!");
 
-        if (random.nextDouble() < dropChance) {
+        if (Math.random() < dropChance) {
             Item droppedItem = ItemPool.getRandomItem();
             if (droppedItem != null) {
                 Game.getGame().getPlayer().getInventory().add(droppedItem);
                 Game.printText("The " + name + " dropped: " + droppedItem.getName() + "!");
+                Game.printText("");
             }
-            BagOfCoins.addCoins(1);
-            Game.printText("1 coins have been added to your Bag of Coins.");
+            Game.getGame().getCurrentRoom().getItems().add(new Coins());
         } else {
             Game.printText("The " + name + " didn't drop anything.");
-            BagOfCoins.addCoins(2);
-            Game.printText("2 coins have been added to your Bag of Coins.");
+            Game.printText("");
+            Game.getGame().getCurrentRoom().getItems().add(new Coins());
         }
     }
 

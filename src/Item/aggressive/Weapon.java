@@ -23,8 +23,6 @@ public class Weapon extends Item{
                 return new Weapon("Sythe", 5, 50);
             case "trident":
                 return new Weapon("Trident", 20, 25);
-            case "gamblerspistol":
-                return new Weapon("GamblersPistol", -100, 100);
             default:
                 return new Weapon("UNIMPLEMENTED: " + type, 0, 0);
         }

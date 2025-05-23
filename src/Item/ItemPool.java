@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import item.Passive.HealthPotion;
+import item.aggressive.*;
+import item.Passive.*;
 
 // Global item pool that all mobs share
 public class ItemPool {
@@ -13,6 +14,14 @@ public class ItemPool {
     
     static {
         addItem(new HealthPotion());
+        addItem(new StrengthPotion());
+        addItem(Weapon.createWeapon("dagger"));
+        addItem(Weapon.createWeapon("sword"));
+        addItem(Weapon.createWeapon("axe"));
+        addItem(Weapon.createWeapon("hammer"));
+        addItem(Weapon.createWeapon("sythe"));
+        addItem(Weapon.createWeapon("trident"));
+
         // ADD REST OF ITEMS HERE
     }
     
