@@ -27,12 +27,12 @@ public class Mob {
     public void takeDamage(int rawDamage) {
         int damage = rawDamage * (100 - armor) / 100;
         hp -= damage;
-        System.out.println(name + " takes " + damage + " damage!");
+        Game.printText(name + " takes " + damage + " damage!");
     }
 
     public void heal(int amount) {
         hp = Math.min(maxHp, hp + amount);
-        System.out.println(name + " heals " + amount + " HP!");
+        Game.printText(name + " heals " + amount + " HP!");
     }
 
     public boolean isAlive() {
@@ -41,7 +41,7 @@ public class Mob {
 
     public void performAttack(Player player) {
         Attack attack = attacks.get((int)(Math.random() * attacks.size()));
-        System.out.println(name + " uses " + attack.getName() + "!");
+        // Game.printText(name + " uses " + attack.getName() + "!");
         attack.execute(this, player);
     }
 

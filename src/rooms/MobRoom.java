@@ -59,16 +59,16 @@ public class MobRoom extends Room {
         this.visited = true;
         int numMobs = (int)(Math.random()*(maxMobs - minMobs)) + minMobs;
         for (int i = 1; i <= numMobs; i++) {
-            int mob = (int)Math.random()*3;
+            int mob = (int)(Math.random()*3);
             switch (mob){
                 case 0:
-                    mobs.add(new CrumblingSkeleton());
+                    mobs.add(new CrumblingSkeleton("" + i));
                     break;
                 case 1:
-                    mobs.add(new GoblinScavenger());
+                    mobs.add(new GoblinScavenger("" + i));
                     break;
                 case 2:
-                    mobs.add(new SplitSlime());
+                    mobs.add(new SplitSlime("" + i));
                     break;
             }
         }

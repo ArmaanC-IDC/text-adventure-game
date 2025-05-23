@@ -52,13 +52,13 @@ public class Room {
     //called when creating a room directly (no child classes)
     public Room(String type, int roomCount, int row, int col, String name, String description) {
         this.type = type;
+        this.items = new ArrayList<>();
         if (type.equals("startingRoom")){
             this.id = type;
+            this.items.add(Weapon.createWeapon("dagger"));
         }else{
             this.id = Integer.toString(roomCount);
         }
-        this.items = new ArrayList<>();
-        this.items.add(new Sword());
         this.exits = new HashMap<>();
         this.blockedExits = new HashMap<String, Boolean>();
         this.name = name;
@@ -69,13 +69,8 @@ public class Room {
     //child classes call this constructor and set name and desc
     public Room(String type, int roomCount, int row, int col) {
         this.type = type;
-        if (type.equals("startingRoom")){
-            this.id = type;
-        }else{
-            this.id = Integer.toString(roomCount);
-        }
         this.items = new ArrayList<>();
-        this.items.add(new Sword());
+        this.id = Integer.toString(roomCount);
         this.exits = new HashMap<>();
         this.blockedExits = new HashMap<String, Boolean>();
         initExits(row, col);

@@ -44,6 +44,9 @@ public class Player{
 
     }
 
+    public int getStrength() { return strength; }
+    public void setStrength(int newStrength){ strength = newStrength; }
+
     public ArrayList<Item> getInventory(){  
         return inventory;
     }
@@ -107,7 +110,29 @@ public class Player{
         }
     }
 
-    //useItem is handled in commandParser
+    // Method to use items
+    public boolean useItem(Item item) {
+        if (!inventory.contains(item)) {
+            System.out.println("You don't have that item in your inventory.");
+            return false;
+        }
+
+        // Use the item
+        item.useItem();
+
+        // Optionally remove the item from inventory if it's consumable
+        if (item.getType().equals("consumable")) { // Assumes Item has an isConsumable() method.
+            inventory.remove(item);
+            System.out.println("You used " + item.getName() + ".");
+        } else {
+            System.out.println("You used " + item.getName() + ". It is not consumed.");
+        }
+        return true;
+    }
+
+    public void setHp(int newHp){
+        hp = newHp;
+    }
 
     public void takeDamage(int damage) {
         hp -= damage;

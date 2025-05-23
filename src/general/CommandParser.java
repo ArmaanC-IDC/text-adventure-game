@@ -11,7 +11,7 @@ import item.Item;
 public class CommandParser {
     public static boolean parse(Game game, String input, Player player, Map<String, Room> rooms, Room[][] roomGrid) {
 
-        String[] tokens = input.trim().split(" ");
+        String[] tokens = input.toLowerCase().trim().split(" ");
         if (tokens.length == 0) Game.printText("Enter a command.");
 
         String cmd = tokens[0].toLowerCase();
@@ -40,7 +40,11 @@ public class CommandParser {
             case "take":
                 String target = tokens[1];
                 for (Item item : game.getCurrentRoom().getItems()) {
-                    if (item.getName().equals(target)){
+                    if (item.getName().equalsIgnoreCase(target)){
+                        if (!item.getTakeable()){
+                            Game.printText("That item is not takeable");
+                            return false;
+                        }
                         player.getInventory().add(item);
                         Game.printText("taken");
                         return true;
@@ -51,9 +55,8 @@ public class CommandParser {
             case "use":
                 String targetItem = tokens[1];
                 for (Item item : player.getInventory()) {
-                    if (item.getName().equals(targetItem)){
-                        item.useItem();
-                        return true;
+                    if (item.getName().equalsIgnoreCase(targetItem)){
+                        return item.useItem();
                     }
                 }
                 Game.printText("You do not have a \"" + targetItem + "\".");
@@ -68,7 +71,7 @@ public class CommandParser {
                 }
             case "look":
                 Game.printText(room.getLongDescription());
-                return true;
+                return false;
 
             case "equip":
                 if (tokens.length < 5) {

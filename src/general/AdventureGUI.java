@@ -107,6 +107,7 @@ public class AdventureGUI {
         String input = inputField.getText().trim();
         inputField.setText("");
         if (!input.isEmpty()) {
+            printText("");
             printText("> " + input);
             game.processCommand(input);
             updateRoomDisplay();
@@ -115,6 +116,7 @@ public class AdventureGUI {
 
     public void printText(String text) {
         outputArea.append(text + "\n");
+        outputArea.setCaretPosition(outputArea.getDocument().getLength());
     }
 
     private void updateRoomDisplay() {

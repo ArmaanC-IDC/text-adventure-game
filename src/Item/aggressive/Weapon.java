@@ -5,20 +5,35 @@ import general.Game;
 import rooms.Room;
 import rooms.MobRoom;
 
-public class Weapons extends Item{
+public class Weapon extends Item{
     protected int baseDamage;
     protected int maxDamage;
 
-    public Weapons(String name, int baseDamage, int maxDamage) {
-        super(name);
+    public static Weapon createWeapon(String type){
+        switch (type.toLowerCase()) {
+            case "dagger":
+                return new Weapon("Dagger", 5, 10);
+            case "sword":
+                return new Weapon("Sword", 8, 15);
+            case "axe":
+                return new Weapon("Axe", 12, 20);
+            case "hammer":
+                return new Weapon("Hammer", 16, 25);
+            default:
+                return new Weapon("UNIMPLEMENTED: " + type, 0, 0);
+        }
+    }
+
+    public Weapon(String name, int baseDamage, int maxDamage) {
+        super(name, 1);
         this.baseDamage = baseDamage;
         this.maxDamage = maxDamage;
     }
 
 
-    public String getName() {
-        return name;
-    }
+    // public String getName() {
+    //     return name;
+    // }
 
     public int getBaseDamage() {
         return baseDamage;
@@ -47,7 +62,6 @@ public class Weapons extends Item{
 
         int damage = (int)(Math.random()*(maxDamage-baseDamage)) + baseDamage;
         room.getMobs().get(0).takeDamage(damage);
-        Game.printText("you dealt " + damage + " damage");
         return true;
     }
 }

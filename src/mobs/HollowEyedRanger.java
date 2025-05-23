@@ -8,7 +8,7 @@ import general.Game;
 import java.util.ArrayList;
 
 public class HollowEyedRanger extends Mob {
-    public HollowEyedRanger() {
+    public HollowEyedRanger(String id) {
         super("Hollow-Eyed Ranger", 90, 15, 4, new ArrayList<>());
         attacks.add(new PreciseShot());
         attacks.add(new BindingArrow());

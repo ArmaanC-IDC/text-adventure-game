@@ -45,6 +45,7 @@ public class Game {
     }
 
     public void onPlayerTurn(){
+        Game.printText("");
         this.getCurrentRoom().onPlayerTurn(player);
     }
 
