@@ -22,4 +22,8 @@ public class Item {
     public String toString(){
         return name;
     }
+
+    public Item copy() {
+        return new Item(this.name);
+    }
 }
