@@ -1,14 +1,10 @@
 package player;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import static java.lang.Math.*;
-import java.util.Random;
-
+import general.Game;
 import item.Item;
 
-public class Player{
+public class Player {
 
     // Base stats
     private int strength;
@@ -16,6 +12,7 @@ public class Player{
     private int hp;
     private int maxHp;
     private int luck;
+    private int weight;
     private boolean isStunned;
     private boolean isPoisoned;
     private boolean isWeak;
@@ -44,10 +41,15 @@ public class Player{
 
     }
 
-    public int getStrength() { return strength; }
-    public void setStrength(int newStrength){ strength = newStrength; }
+    public int getStrength() {
+        return strength;
+    }
 
-    public ArrayList<Item> getInventory(){  
+    public void setStrength(int newStrength) {
+        strength = newStrength;
+    }
+
+    public ArrayList<Item> getInventory() {
         return inventory;
     }
 
@@ -73,25 +75,25 @@ public class Player{
     }
 
     // Method to equip weapon and armor
-    public boolean equipItem(Item item) {
-        String type = item.getType(); // e.g., "weapon" or "armor"
-        if (!inventory.contains(item)) {
-            System.out.println("You don't have that item in your inventory.");
-            return false;
-        }
-        if (type.equals("weapon")) {
-            equippedWeapon = item;
-            System.out.println("You equipped the weapon: " + item.getName());
-            return true;
-        } else if (type.equals("armor")) {
-            equippedArmor = item;
-            System.out.println("You equipped the armor: " + item.getName());
-            return true;
-        } else {
-            System.out.println("You can't equip that item.");
-            return false;
-        }
-    }
+    // public boolean equipItem(Item item) {
+    //     String type = item.getType(); // e.g., "weapon" or "armor"
+    //     if (!inventory.contains(item)) {
+    //         System.out.println("You don't have that item in your inventory.");
+    //         return false;
+    //     }
+    //     if (type.equals("weapon")) {
+    //         equippedWeapon = item;
+    //         System.out.println("You equipped the weapon: " + item.getName());
+    //         return true;
+    //     } else if (type.equals("armor")) {
+    //         equippedArmor = item;
+    //         System.out.println("You equipped the armor: " + item.getName());
+    //         return true;
+    //     } else {
+    //         System.out.println("You can't equip that item.");
+    //         return false;
+    //     }
+    // }
 
     // Method to show weapon and armor equiped
     public void showEquipped() {
@@ -120,7 +122,7 @@ public class Player{
         // Use the item
         item.useItem();
 
-        // Optionally remove the item from inventory if it's consumable
+        // remove the item from inventory if it's consumable
         if (item.getType().equals("consumable")) { // Assumes Item has an isConsumable() method.
             inventory.remove(item);
             System.out.println("You used " + item.getName() + ".");
@@ -130,7 +132,29 @@ public class Player{
         return true;
     }
 
-    public void setHp(int newHp){
+    //returns weight of inv currently
+    public int invWeight() {
+        for (int i = 0; i < inventory.size(); i++) {
+                Item item = inventory.get(i);
+                weight += item.getWeight();  
+        }
+        return weight;
+    }
+
+
+    //removes item from inventory
+    //need to add dropping it the room your in.
+    public void removeItem(Item item){
+        if (!inventory.contains(item)) {
+            Game.printText("You don't have that item in your inventory.");
+        }
+        else {
+            inventory.remove(item);
+            Game.printText(item.getName() + "was dropped.");
+        }
+    }
+
+    public void setHp(int newHp) {
         hp = newHp;
     }
 
@@ -138,16 +162,17 @@ public class Player{
         hp -= damage;
     }
 
-    public void stun() {
+    //when player is stunned this method is used to set stun to true
+    public void isStun() {
         isStunned = true;
     }
 
-    public void weaken() {
-        isWeak = true;
+    public void isWeaken() {
+        isWeak = false;
     }
 
-    public void poison() {
-        isPoisoned = true;
+    public void isPoisoned() {
+        isPoisoned = false;
     }
 
     public int getHp() {
