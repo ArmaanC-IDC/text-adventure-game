@@ -7,7 +7,7 @@ import general.Game;
 import java.util.ArrayList;
 
 public class CrumblingSkeleton extends Mob {
-    public CrumblingSkeleton(String id) {
+    public CrumblingSkeleton() {
         super("Crumbling Skeleton", 30, 25, 3, new ArrayList<>());
         attacks.add(new BoneStrike());
         attacks.add(new Reassemble());
