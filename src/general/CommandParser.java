@@ -85,6 +85,18 @@ public class CommandParser {
                 }
                 Game.printText("There are no \"" + targets + "\"s in the room.");
                 return false;
+            case "drop":
+                String itemToDrop = tokens[1];
+                for (Item item : player.getInventory()) {
+                    if (item.getName().equalsIgnoreCase(itemToDrop)){
+                        player.getInventory().remove(item);
+                        game.getCurrentRoom().getItems().add(item);
+                        Game.printText("dropped");
+                        return true;
+                    }
+                }
+                Game.printText("You do not have a \"" + itemToDrop + "\".");
+                return false;
             case "use": //use [item]
                 String targetItem = tokens[1];
                 for (Item item : player.getInventory()) {
@@ -120,7 +132,7 @@ public class CommandParser {
                 player.showInventory();
                 return false;
             
-            case "help":
+            case "help": //show list of all commands
                 Game.printText("Game Commands");
                 Game.printText("________________________________________");
                 Game.printText("go north, go south, go east, go west");
@@ -130,7 +142,7 @@ public class CommandParser {
                 Game.printText("use(item from your inventory)");
                 Game.printText("look");
                 Game.printText("________________________________________");
-                    return false;
+                return false;
             default:
                 Game.printText("Unknown command.");
                 return false;
