@@ -80,12 +80,13 @@ public class SummonRoom extends Room {
                     }
                 }
 
+                int coinsNeeded = RoomsLoader.getSummonRoomConfig("neededCoins");
                 //if player has enough (currently 8), summon boss
-                if (numCoins>=8){
-                    //remove 8 coins
+                if (numCoins>=coinsNeeded){
+                    //remove coinsNeeded coins
                     int numRemoved = 0;
                     for (int i = inventory.size()-1; i <= 0; i++) {
-                        if (inventory.get(i).getName().equals("ancient coins") && numRemoved<8){
+                        if (inventory.get(i).getName().equals("ancient coins") && numRemoved<coinsNeeded){
                             inventory.remove(i);
                         }
                     }
@@ -97,7 +98,7 @@ public class SummonRoom extends Room {
                     }
                     return true;
                 }else{
-                    Game.printText("You need 8 coins to do this");
+                    Game.printText("You need " + coinsNeeded + " coins to do this");
                     Game.printText("You have " + numCoins + " coins");
                     return false;
                 }

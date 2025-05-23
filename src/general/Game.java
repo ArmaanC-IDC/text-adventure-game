@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import rooms.Room;
+import rooms.RoomsLoader;
 
 public class Game {
     private static Game game;
@@ -23,14 +24,38 @@ public class Game {
 
     private Map<String, Room> rooms;
     private Player player;
-    private Room[][] roomGrid = new Room[8][8];
+    private Room[][] roomGrid;
     private int[] currentRoom = new int[2];
     private AdventureGUI gui;
+    private Map<String, Integer> numEachRoom = new HashMap<String, Integer>();
 
     public Game() {
-        initRooms();
         player = new Player();
         game = this;
+        int gridSize = RoomsLoader.getRoomConfig("gridSize");
+
+        int totalRooms = 4; //starting and three boss rooms.
+        numEachRoom.put("startingRoom", 1);
+        numEachRoom.put("knightBossRoom", 1);
+        numEachRoom.put("rangerBossRoom", 1);
+        numEachRoom.put("minotaurBossRoom", 1);
+
+        numEachRoom.put("mobRoom", RoomsLoader.getRoomConfig("numMobRooms"));
+        numEachRoom.put("trapRoom", RoomsLoader.getRoomConfig("numTrapRooms"));
+        numEachRoom.put("treasureRoom", RoomsLoader.getRoomConfig("numTreasureRooms"));
+        numEachRoom.put("corridor", RoomsLoader.getRoomConfig("numCorridors"));
+
+        totalRooms += RoomsLoader.getRoomConfig("numMobRooms");
+        totalRooms += RoomsLoader.getRoomConfig("numTrapRooms");
+        totalRooms += RoomsLoader.getRoomConfig("numTreasureRooms");
+        totalRooms += RoomsLoader.getRoomConfig("numCorridors");
+
+        if (gridSize*gridSize != totalRooms){
+            System.out.println("Must have exactly gridSize^2 rooms, including the starting room and the three boss rooms");
+        }
+
+        roomGrid = new Room[gridSize][gridSize];
+        initRooms();
     }
 
     public void setGui(AdventureGUI gui){
@@ -79,16 +104,7 @@ public class Game {
 
     private void initRooms(){
         int roomCount = 0;
-        rooms = new HashMap<String, Room>();
-        Map<String, Integer> numEachRoom = new HashMap<String, Integer>();
-        numEachRoom.put("startingRoom", 1);
-        numEachRoom.put("knightBossRoom", 1);
-        numEachRoom.put("rangerBossRoom", 1);
-        numEachRoom.put("minotaurBossRoom", 1);
-        numEachRoom.put("mobRoom", 28);
-        numEachRoom.put("trapRoom", 10);
-        numEachRoom.put("treasureRoom", 7);
-        numEachRoom.put("corridor", 15);
+        rooms = new HashMap<String, Room>();        
 
         List<String> roomTypes = new ArrayList<String>();
         for (Map.Entry<String, Integer> entry : numEachRoom.entrySet()) {

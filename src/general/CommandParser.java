@@ -34,8 +34,12 @@ public class CommandParser {
             case "s": //go south
                 return go("south", tokens, game, player, room);
             case "w": // go west
-                go ("west", tokens, game, player, room);
+                return go ("west", tokens, game, player, room);
             case "take": //take [item]
+                if (tokens.length < 2) {
+                    Game.printText("Take what?");
+                    return false;
+                }
                 String target = tokens[1];
                 for (Item item : game.getCurrentRoom().getItems()) {
                     if (item.getName().equalsIgnoreCase(target)){
@@ -56,6 +60,10 @@ public class CommandParser {
                 Game.printText("There is no \"" + target + "\" in the room.");
                 return false;
             case "takeall": //takeall [item]
+                if (tokens.length < 2) {
+                    Game.printText("Take what?");
+                    return false;
+                }
                 String targets = tokens[1];
                 boolean taken = false;
                 ArrayList<Item> toRemove = new ArrayList<Item>();
@@ -85,6 +93,10 @@ public class CommandParser {
                 Game.printText("There are no \"" + targets + "\"s in the room.");
                 return false;
             case "drop":
+                if (tokens.length < 2) {
+                    Game.printText("Drop what?");
+                    return false;
+                }
                 String itemToDrop = tokens[1];
                 for (Item item : player.getInventory()) {
                     if (item.getName().equalsIgnoreCase(itemToDrop)){
@@ -97,6 +109,10 @@ public class CommandParser {
                 Game.printText("You do not have a \"" + itemToDrop + "\".");
                 return false;
             case "use": //use [item]
+                if (tokens.length < 2) {
+                    Game.printText("Use what?");
+                    return false;
+                }
                 String targetItem = tokens[1];
                 for (Item item : player.getInventory()) {
                     if (item.getName().equalsIgnoreCase(targetItem)){

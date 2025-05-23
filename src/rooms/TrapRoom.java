@@ -4,9 +4,9 @@ import player.Player;
 import general.Game;
 
 public class TrapRoom extends Room {
-    private static final int TRAP_ROOM_CHANCE = 90;
-    private static final int TRAP_ROOM_DAMAGE_MIN = 5;
-    private static final int TRAP_ROOM_DAMAGE_MAX = 10;
+    private final int TRAP_ROOM_CHANCE;
+    private final int TRAP_ROOM_DAMAGE_MIN;
+    private final int TRAP_ROOM_DAMAGE_MAX;
 
     public TrapRoom(int roomCount, int row, int col) {
         super("trapRoom", roomCount, row, col);
@@ -22,6 +22,10 @@ public class TrapRoom extends Room {
             "The air here is too quiet. Something isn't right.",
             "You spot grooves in the floor; this corridor may be rigged with mechanisms."
         });
+
+        TRAP_ROOM_CHANCE = RoomsLoader.getTrapRoomConfig("successChance");
+        TRAP_ROOM_DAMAGE_MAX = RoomsLoader.getTrapRoomConfig("maxDamage");
+        TRAP_ROOM_DAMAGE_MIN = RoomsLoader.getTrapRoomConfig("minDamage");
     }
 
     //when the player enters, maybe damage players

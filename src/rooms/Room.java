@@ -20,7 +20,7 @@ public class Room {
     protected List<Item> items;
     protected boolean visited;
 
-    private static final int GRID_SIZE = 8;
+    private final int GRID_SIZE;
 
     //create a room of a given type. 
     public static Room createRoom(String type, int roomCount, int row, int col){
@@ -67,6 +67,7 @@ public class Room {
         this.blockedExits = new HashMap<String, Boolean>();
         this.name = name;
         this.description = description;
+        GRID_SIZE = RoomsLoader.getRoomConfig("gridSize");
         initExits(row, col);
     }
 
@@ -77,6 +78,7 @@ public class Room {
         this.id = Integer.toString(roomCount);
         this.exits = new HashMap<>();
         this.blockedExits = new HashMap<String, Boolean>();
+        GRID_SIZE = RoomsLoader.getRoomConfig("gridSize");
         initExits(row, col);
     }
 
