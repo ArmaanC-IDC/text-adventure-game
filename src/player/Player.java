@@ -188,4 +188,5 @@ public class Player {
     public int getMaxHp() {
         return maxHp;
     }
+
 }
