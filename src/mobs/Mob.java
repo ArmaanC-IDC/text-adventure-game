@@ -2,10 +2,13 @@ package mobs;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Random;
 
 import attack.Attack;
 import player.Player;
 import general.Game;
+import item.Item;
+import item.ItemPool;
 
 public class Mob {
     protected String name;
@@ -14,10 +17,12 @@ public class Mob {
     protected int armor;
     protected int speed;
     protected ArrayList<Attack> attacks;
-    protected Set<String> statusEffects = new HashSet<>();
+    protected double dropChance;
+    protected static Random random = new Random();
 
     public Mob(String name, int hp, int armor, int speed, ArrayList<Attack> attacks) {
         this.name = name;
+        this.dropChance = 0.3;
         this.hp = this.maxHp = hp;
         this.armor = armor;
         this.speed = speed;
@@ -28,6 +33,25 @@ public class Mob {
         int damage = rawDamage * (100 - armor) / 100;
         hp -= damage;
         Game.printText(name + " takes " + damage + " damage!");
+        
+        if (hp <= 0) {
+            hp = 0;
+            onDeath();
+        }
+    }
+
+    protected void onDeath() {
+        Game.printText(name + " has been defeated!");
+        
+        if (random.nextDouble() < dropChance) {
+            Item droppedItem = ItemPool.getRandomItem();
+            if (droppedItem != null) {
+                Game.getGame().getPlayer().getInventory().add(droppedItem);
+                Game.printText("The " + name + " dropped: " + droppedItem.getName() + "!");
+            }
+        } else {
+            Game.printText("The " + name + " didn't drop anything.");
+        }
     }
 
     public void heal(int amount) {
@@ -53,7 +77,7 @@ public class Mob {
         return hp;
     }
 
-    public int getMaxHp(){
+    public int getMaxHp() {
         return maxHp;
     }
 
@@ -61,7 +85,7 @@ public class Mob {
         return name;
     }
 
-    public String toString(){
+    public String toString() {
         return name + " with " + hp + " hp";
     }
 }

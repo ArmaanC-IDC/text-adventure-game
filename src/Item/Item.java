@@ -42,6 +42,6 @@ public class Item {
     }
 
     public Item copy() {
-        return new Item(this.name);
+        return new Item(this.name, this.weight);
     }
 }
