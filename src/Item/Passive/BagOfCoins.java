@@ -2,17 +2,29 @@ package item.Passive;
 import item.Item;
 
 public class BagOfCoins extends Item{
-    private int amt;
+    private int amt = 0;
+    private static BagOfCoins bagOfCoins;
     public BagOfCoins(){
         super("Bag of Coins", 10);
-        int amt = 0;
+        amt = 0;
     }
 
-    public void addCoins(int num){
-        amt += num;
+    public static void addCoins(int num){
+        if (bagOfCoins==null){
+            bagOfCoins = new BagOfCoins();
+        }
+        bagOfCoins.addCoins2(num);
     }
 
-    public int getCoins(){
+    public static int getCoins(){
+        return bagOfCoins.getCoins2();
+    }
+
+    public int getCoins2(){
         return amt;
+    }
+
+    public void addCoins2(int num){
+
     }
 }

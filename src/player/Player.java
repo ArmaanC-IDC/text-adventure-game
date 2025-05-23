@@ -190,7 +190,6 @@ public class Player {
         return maxHp;
     }
 
-<<<<<<< HEAD
     public void stun(){
         isStunned = true;
     }
@@ -202,6 +201,4 @@ public class Player {
     public void weaken(){
         isWeak = true;
     }
-=======
->>>>>>> a0b1a01ce2bb24814a74563869c11a870a97a18e
 }
