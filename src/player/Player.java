@@ -75,25 +75,25 @@ public class Player {
     }
 
     // Method to equip weapon and armor
-    public boolean equipItem(Item item) {
-        String type = item.getType(); // e.g., "weapon" or "armor"
-        if (!inventory.contains(item)) {
-            System.out.println("You don't have that item in your inventory.");
-            return false;
-        }
-        if (type.equals("weapon")) {
-            equippedWeapon = item;
-            System.out.println("You equipped the weapon: " + item.getName());
-            return true;
-        } else if (type.equals("armor")) {
-            equippedArmor = item;
-            System.out.println("You equipped the armor: " + item.getName());
-            return true;
-        } else {
-            System.out.println("You can't equip that item.");
-            return false;
-        }
-    }
+    // public boolean equipItem(Item item) {
+    //     String type = item.getType(); // e.g., "weapon" or "armor"
+    //     if (!inventory.contains(item)) {
+    //         System.out.println("You don't have that item in your inventory.");
+    //         return false;
+    //     }
+    //     if (type.equals("weapon")) {
+    //         equippedWeapon = item;
+    //         System.out.println("You equipped the weapon: " + item.getName());
+    //         return true;
+    //     } else if (type.equals("armor")) {
+    //         equippedArmor = item;
+    //         System.out.println("You equipped the armor: " + item.getName());
+    //         return true;
+    //     } else {
+    //         System.out.println("You can't equip that item.");
+    //         return false;
+    //     }
+    // }
 
     // Method to show weapon and armor equiped
     public void showEquipped() {
@@ -122,7 +122,7 @@ public class Player {
         // Use the item
         item.useItem();
 
-        // Optionally remove the item from inventory if it's consumable
+        // remove the item from inventory if it's consumable
         if (item.getType().equals("consumable")) { // Assumes Item has an isConsumable() method.
             inventory.remove(item);
             System.out.println("You used " + item.getName() + ".");
@@ -143,6 +143,7 @@ public class Player {
 
 
     //removes item from inventory
+    //need to add dropping it the room your in.
     public void removeItem(Item item){
         if (!inventory.contains(item)) {
             Game.printText("You don't have that item in your inventory.");
