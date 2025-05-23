@@ -99,10 +99,17 @@ public class CommandParser {
                 player.showInventory();
                 return false;
             
-            
-                    
-
-
+            case "help":
+                Game.printText("Game Commands");
+                Game.printText("________________________________________");
+                Game.printText("go north, go south, go east, go west");
+                Game.printText("n, s, e, w");
+                Game.printText("take(print item here)");
+                Game.printText("inventory");
+                Game.printText("use(item from your inventory)");
+                Game.printText("look");
+                Game.printText("________________________________________");
+                    return false;
             default:
                 Game.printText("Unknown command.");
                 return false;
