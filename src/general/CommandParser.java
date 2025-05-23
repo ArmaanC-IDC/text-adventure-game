@@ -19,83 +19,17 @@ public class CommandParser {
 
         switch (cmd) {
             case "go": //go [direction]
-                if (tokens.length < 2) {
-                    Game.printText("Go where?");
-                    return false;
-                }
                 String dir = tokens[1];
-                if (!room.getExits().containsKey(dir)) {
-                    Game.printText("You can't go that way.");
-                    return false;
-                }
-                // if (room.getBlockedExits().containsKey(dir) && room.getBlockedExits().get(dir)) {
-                //     Game.printText("That exit is blocked");
-                //     return false;
-                // }
-
-                game.setCurrentRoom(room.getExits().get(dir));
-                game.getCurrentRoom().onPlayerEnter(player);
-                Game.printText(game.getCurrentRoom().getLongDescription());
-                return true;
+                return go(dir, tokens, game, player, room);
             case "n": //go north
-                if (!room.getExits().containsKey("north")) {
-                    Game.printText("You can't go that way.");
-                    return false;
-                }
-                // if (room.getBlockedExits().containsKey("north") && room.getBlockedExits().get("north")) {
-                //     Game.printText("That exit is blocked");
-                //     return false;
-                // }
-
-                game.setCurrentRoom(room.getExits().get("north"));
-                game.getCurrentRoom().onPlayerEnter(player);
-                Game.printText(game.getCurrentRoom().getLongDescription());
-                return true;
+                return go("north", tokens, game, player, room);
             case "e": //go east
-                if (!room.getExits().containsKey("east")) {
-                    Game.printText("You can't go that way.");
-                    return false;
-                }
-                // if (room.getBlockedExits().containsKey("east") && room.getBlockedExits().get("east")) {
-                //     Game.printText("That exit is blocked");
-                //     return false;
-                // }
-
-                game.setCurrentRoom(room.getExits().get("east"));
-                game.getCurrentRoom().onPlayerEnter(player);
-                Game.printText(game.getCurrentRoom().getLongDescription());
-                return true;
+                return go("east", tokens, game, player, room);
 
             case "s": //go south
-                if (!room.getExits().containsKey("south")) {
-                    Game.printText("You can't go that way.");
-                    return false;
-                }
-                // if (room.getBlockedExits().containsKey("south") && room.getBlockedExits().get("south")) {
-                //     Game.printText("That exit is blocked");
-                //     return false;
-                // }
-
-                game.setCurrentRoom(room.getExits().get("south"));
-                game.getCurrentRoom().onPlayerEnter(player);
-                Game.printText(game.getCurrentRoom().getLongDescription());
-                return true;
-
+                return go("south", tokens, game, player, room);
             case "w": // go west
-                if (!room.getExits().containsKey("west")) {
-                    Game.printText("You can't go that way.");
-                    return false;
-                }
-                // if (room.getBlockedExits().containsKey("west") && room.getBlockedExits().get("west")) {
-                //     Game.printText("That exit is blocked");
-                //     return false;
-                // }
-
-                game.setCurrentRoom(room.getExits().get("west"));
-                game.getCurrentRoom().onPlayerEnter(player);
-                Game.printText(game.getCurrentRoom().getLongDescription());
-                return true;
-
+                go ("west", tokens, game, player, room);
             case "take": //take [item]
                 String target = tokens[1];
                 for (Item item : game.getCurrentRoom().getItems()) {
@@ -173,5 +107,25 @@ public class CommandParser {
                 Game.printText("Unknown command.");
                 return false;
         }
+    }
+
+    public static boolean go(String dir, String[] tokens, Game game, Player player, Room room){
+        if (tokens.length < 2) {
+            Game.printText("Go where?");
+            return false;
+        }
+        if (!room.getExits().containsKey(dir)) {
+            Game.printText("You can't go that way.");
+            return false;
+        }
+        if (room.getBlockedExits().containsKey(dir) && room.getBlockedExits().get(dir)) {
+            Game.printText("That exit is blocked");
+            return false;
+        }
+
+        game.setCurrentRoom(room.getExits().get(dir));
+        game.getCurrentRoom().onPlayerEnter(player);
+        Game.printText(game.getCurrentRoom().getLongDescription());
+        return true;
     }
 }
