@@ -16,6 +16,7 @@ public class Player {
     private boolean isStunned;
     private boolean isPoisoned;
     private boolean isWeak;
+    private int maxWeight = 50;
 
     // equipment and inventory
     // private Map<EquipmentSlot, Item> equippedItems;
@@ -43,6 +44,10 @@ public class Player {
 
     public int getStrength() {
         return strength;
+    }
+
+    public int getMaxWeight() {
+        return maxWeight;
     }
 
     public void setStrength(int newStrength) {
@@ -138,6 +143,7 @@ public class Player {
                 Item item = inventory.get(i);
                 weight += item.getWeight();  
         }
+        System.out.println("invWeight: " + weight);
         return weight;
     }
 

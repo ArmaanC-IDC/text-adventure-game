@@ -25,7 +25,7 @@ public class Weapon extends Item{
     }
 
     public Weapon(String name, int baseDamage, int maxDamage) {
-        super(name, 1);
+        super(name, 20);
         this.baseDamage = baseDamage;
         this.maxDamage = maxDamage;
     }

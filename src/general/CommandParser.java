@@ -6,6 +6,7 @@ import player.Player;
 import rooms.*;
 import general.Game;
 import item.Item;
+import java.util.ArrayList;
 
 public class CommandParser {
     //returns true/false weather it counts as a turn. Ex: look does not count as a move. failed commands do not count as moves
@@ -38,7 +39,12 @@ public class CommandParser {
                             Game.printText("That item is not takeable");
                             return false;
                         }
+                        if (player.invWeight() + item.getWeight() > player.getMaxWeight()){
+                            Game.printText("Your inventory is to full.");
+                            return false;
+                        }
                         player.getInventory().add(item);
+                        game.getCurrentRoom().getItems().remove(item);
                         Game.printText("taken");
                         return true;
                     }
@@ -48,18 +54,29 @@ public class CommandParser {
             case "takeall": //takeall [item]
                 String targets = tokens[1];
                 boolean taken = false;
+                ArrayList<Item> toRemove = new ArrayList<Item>();
+
                 for (Item item : game.getCurrentRoom().getItems()) {
                     if (item.getName().equalsIgnoreCase(targets)){
                         if (!item.getTakeable()){
                             Game.printText("That item is not takeable");
                             return false;
                         }
+                        if (player.invWeight() + item.getWeight() > player.getMaxWeight()){
+                            Game.printText("Your inventory is to full.");
+                            return false;
+                        }
+                        System.out.println("adding");
                         player.getInventory().add(item);
+                        toRemove.add(item);
                         taken = true;
                     }
                 }
                 if (taken){
                     Game.printText("taken all");
+                    for (Item item : toRemove) {
+                        game.getCurrentRoom().getItems().remove(item);
+                    }
                     return true;
                 }
                 Game.printText("There are no \"" + targets + "\"s in the room.");
