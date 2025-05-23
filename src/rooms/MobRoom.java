@@ -42,6 +42,8 @@ public class MobRoom extends Room {
             if (!mobs.get(i).isAlive()){
                 mobs.remove(i);
                 continue;
+            }else{
+                System.out.println(mobs.get(i));
             }
             mobs.get(i).performAttack(player);
         }

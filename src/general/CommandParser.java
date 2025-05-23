@@ -3,12 +3,12 @@ import java.util.Map;
 
 import mobs.Mob;
 import player.Player;
-import rooms.Room;
-import rooms.MobRoom;
+import rooms.*;
 import general.Game;
 import item.Item;
 
 public class CommandParser {
+    //returns true/false weather it counts as a turn. Ex: look does not count as a move. failed commands do not count as moves
     public static boolean parse(Game game, String input, Player player, Map<String, Room> rooms, Room[][] roomGrid) {
 
         String[] tokens = input.toLowerCase().trim().split(" ");
@@ -18,7 +18,7 @@ public class CommandParser {
         Room room = game.getCurrentRoom();
 
         switch (cmd) {
-            case "go":
+            case "go": //go [direction]
                 if (tokens.length < 2) {
                     Game.printText("Go where?");
                     return false;
@@ -28,16 +28,75 @@ public class CommandParser {
                     Game.printText("You can't go that way.");
                     return false;
                 }
-                if (room.getBlockedExits().containsKey(dir) && room.getBlockedExits().get(dir)) {
-                    Game.printText("That exit is blocked");
-                    return false;
-                }
+                // if (room.getBlockedExits().containsKey(dir) && room.getBlockedExits().get(dir)) {
+                //     Game.printText("That exit is blocked");
+                //     return false;
+                // }
 
                 game.setCurrentRoom(room.getExits().get(dir));
                 game.getCurrentRoom().onPlayerEnter(player);
                 Game.printText(game.getCurrentRoom().getLongDescription());
                 return true;
-            case "take":
+            case "n": //go north
+                if (!room.getExits().containsKey("north")) {
+                    Game.printText("You can't go that way.");
+                    return false;
+                }
+                // if (room.getBlockedExits().containsKey("north") && room.getBlockedExits().get("north")) {
+                //     Game.printText("That exit is blocked");
+                //     return false;
+                // }
+
+                game.setCurrentRoom(room.getExits().get("north"));
+                game.getCurrentRoom().onPlayerEnter(player);
+                Game.printText(game.getCurrentRoom().getLongDescription());
+                return true;
+            case "e": //go east
+                if (!room.getExits().containsKey("east")) {
+                    Game.printText("You can't go that way.");
+                    return false;
+                }
+                // if (room.getBlockedExits().containsKey("east") && room.getBlockedExits().get("east")) {
+                //     Game.printText("That exit is blocked");
+                //     return false;
+                // }
+
+                game.setCurrentRoom(room.getExits().get("east"));
+                game.getCurrentRoom().onPlayerEnter(player);
+                Game.printText(game.getCurrentRoom().getLongDescription());
+                return true;
+
+            case "s": //go south
+                if (!room.getExits().containsKey("south")) {
+                    Game.printText("You can't go that way.");
+                    return false;
+                }
+                // if (room.getBlockedExits().containsKey("south") && room.getBlockedExits().get("south")) {
+                //     Game.printText("That exit is blocked");
+                //     return false;
+                // }
+
+                game.setCurrentRoom(room.getExits().get("south"));
+                game.getCurrentRoom().onPlayerEnter(player);
+                Game.printText(game.getCurrentRoom().getLongDescription());
+                return true;
+
+            case "w": // go west
+                if (!room.getExits().containsKey("west")) {
+                    Game.printText("You can't go that way.");
+                    return false;
+                }
+                // if (room.getBlockedExits().containsKey("west") && room.getBlockedExits().get("west")) {
+                //     Game.printText("That exit is blocked");
+                //     return false;
+                // }
+
+                game.setCurrentRoom(room.getExits().get("west"));
+                game.getCurrentRoom().onPlayerEnter(player);
+                Game.printText(game.getCurrentRoom().getLongDescription());
+                return true;
+
+            case "take": //take [item]
                 String target = tokens[1];
                 for (Item item : game.getCurrentRoom().getItems()) {
                     if (item.getName().equalsIgnoreCase(target)){
@@ -52,7 +111,26 @@ public class CommandParser {
                 }
                 Game.printText("There is no \"" + target + "\" in the room.");
                 return false;
-            case "use":
+            case "takeall": //takeall [item]
+                String targets = tokens[1];
+                boolean taken = false;
+                for (Item item : game.getCurrentRoom().getItems()) {
+                    if (item.getName().equalsIgnoreCase(targets)){
+                        if (!item.getTakeable()){
+                            Game.printText("That item is not takeable");
+                            return false;
+                        }
+                        player.getInventory().add(item);
+                        taken = true;
+                    }
+                }
+                if (taken){
+                    Game.printText("taken all");
+                    return true;
+                }
+                Game.printText("There are no \"" + targets + "\"s in the room.");
+                return false;
+            case "use": //use [item]
                 String targetItem = tokens[1];
                 for (Item item : player.getInventory()) {
                     if (item.getName().equalsIgnoreCase(targetItem)){
@@ -61,7 +139,14 @@ public class CommandParser {
                 }
                 Game.printText("You do not have a \"" + targetItem + "\".");
                 return false;
-            case "killall":
+            case "summon": //summon
+                if (room instanceof SummonRoom){
+                    return ((SummonRoom)room).summon();
+                }else{
+                    Game.printText("You are not in a summoning room");
+                    return false;
+                }
+            case "killall": //FOR TESTING killall mobs in a room
                 if (room instanceof MobRoom){
                     MobRoom mobRoom = (MobRoom) game.getCurrentRoom();
                     for (Mob mob : mobRoom.getMobs()) {
@@ -69,25 +154,16 @@ public class CommandParser {
                     }
 
                 }
-            case "look":
+            case "look": //display long description
                 Game.printText(room.getLongDescription());
                 return false;
-
-            case "equip":
-                if (tokens.length < 5) {
-                    Game.printText("Equip what from inventory?");
-                    player.showInventory();
-                    return false;
-                }
-                String item = tokens[1];
-                // player.equipItem(item);
-
-            case "inventory":
+            case "inventory": //show the inventory
                 player.showInventory();
+                return false;
             //show inventory
-            case "show":
-                String inventory = tokens[1];
+            case "show": //show the inventory
                 player.showInventory();
+                return false;
             
             
                     

@@ -15,7 +15,7 @@ public class CorruptedKnight extends Mob {
     private String lastAttackName = "";
     private int repeatCount = 0;
 
-    public CorruptedKnight(String id) {
+    public CorruptedKnight() {
         super("Corrupted Knight", 150, 40, 2, new ArrayList<>());
         attacks.add(new ShieldBash());
         attacks.add(new DefensiveStance());

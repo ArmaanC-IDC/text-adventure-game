@@ -66,7 +66,7 @@ public class Player{
             System.out.println("Your inventory contains:");
             for (int i = 0; i < inventory.size(); i++) {
                 Item item = inventory.get(i);
-                System.out.println((i + 1) + ". " + item.getName());
+                Game.printText((i + 1) + ". " + item.getName());
 
             }
         }

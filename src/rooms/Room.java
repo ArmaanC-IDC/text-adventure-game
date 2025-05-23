@@ -6,6 +6,7 @@ import java.util.Map;
 import item.Item;
 import player.Player;
 import item.aggressive.*;
+import item.Passive.*;
 
 import java.util.HashMap;
 
@@ -56,6 +57,9 @@ public class Room {
         if (type.equals("startingRoom")){
             this.id = type;
             this.items.add(Weapon.createWeapon("dagger"));
+            for (int i = 0; i < 8; i++) {
+                this.items.add(new Coins());
+            }
         }else{
             this.id = Integer.toString(roomCount);
         }
