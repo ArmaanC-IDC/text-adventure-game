@@ -20,6 +20,10 @@ public class CommandParser {
 
         switch (cmd) {
             case "go": //go [direction]
+                if (tokens.length < 2) {
+                    Game.printText("Go where?");
+                    return false;
+                }
                 String dir = tokens[1];
                 return go(dir, tokens, game, player, room);
             case "n": //go north
@@ -134,10 +138,6 @@ public class CommandParser {
     }
 
     public static boolean go(String dir, String[] tokens, Game game, Player player, Room room){
-        if (tokens.length < 2) {
-            Game.printText("Go where?");
-            return false;
-        }
         if (!room.getExits().containsKey(dir)) {
             Game.printText("You can't go that way.");
             return false;

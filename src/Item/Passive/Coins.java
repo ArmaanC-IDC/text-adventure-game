@@ -3,6 +3,6 @@ import item.Item;
 
 public class Coins extends Item{
     public Coins(){
-        super("Coin", 10);
+        super("Coin", 1);
     }
 }

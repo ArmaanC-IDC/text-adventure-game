@@ -64,13 +64,13 @@ public class MobRoom extends Room {
             int mob = (int)(Math.random()*3);
             switch (mob){
                 case 0:
-                    mobs.add(new CrumblingSkeleton("" + i));
+                    mobs.add(new CrumblingSkeleton());
                     break;
                 case 1:
-                    mobs.add(new GoblinScavenger("" + i));
+                    mobs.add(new GoblinScavenger());
                     break;
                 case 2:
-                    mobs.add(new SplitSlime("" + i));
+                    mobs.add(new SplitSlime());
                     break;
             }
         }

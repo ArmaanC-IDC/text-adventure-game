@@ -139,6 +139,7 @@ public class Player {
 
     //returns weight of inv currently
     public int invWeight() {
+        weight = 0;
         for (int i = 0; i < inventory.size(); i++) {
                 Item item = inventory.get(i);
                 weight += item.getWeight();  
