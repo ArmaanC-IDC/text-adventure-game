@@ -107,6 +107,7 @@ public class AdventureGUI {
         String input = inputField.getText().trim();
         inputField.setText("");
         if (!input.isEmpty()) {
+            printText("");
             printText("> " + input);
             game.processCommand(input);
             updateRoomDisplay();

@@ -6,7 +6,7 @@ import item.Item;
 public class StrengthPotion extends Item{
     private static final int strengthBoost = 10;
     public StrengthPotion(){ 
-        super("strength potion");
+        super("strength potion", 1);
     }
 
     public boolean useItem(){

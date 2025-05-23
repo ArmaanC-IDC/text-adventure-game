@@ -6,7 +6,7 @@ import item.Item;
 public class HealthPotion extends Item{
     private static final int healthBoost = 10;
     public HealthPotion(){ 
-        super("health potion");
+        super("health potion", 1);
     }
 
     public boolean useItem(){

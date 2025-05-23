@@ -41,6 +41,10 @@ public class CommandParser {
                 String target = tokens[1];
                 for (Item item : game.getCurrentRoom().getItems()) {
                     if (item.getName().equalsIgnoreCase(target)){
+                        if (!item.getTakeable()){
+                            Game.printText("That item is not takeable");
+                            return false;
+                        }
                         player.getInventory().add(item);
                         Game.printText("taken");
                         return true;
@@ -52,8 +56,7 @@ public class CommandParser {
                 String targetItem = tokens[1];
                 for (Item item : player.getInventory()) {
                     if (item.getName().equalsIgnoreCase(targetItem)){
-                        item.useItem();
-                        return true;
+                        return item.useItem();
                     }
                 }
                 Game.printText("You do not have a \"" + targetItem + "\".");
