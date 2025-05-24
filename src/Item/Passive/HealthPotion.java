@@ -9,7 +9,7 @@ public class HealthPotion extends Item{
         super("health potion", 1);
     }
 
-    public boolean useItem(){
+    public boolean useItem(String[] args){
         Player player = Game.getGame().getPlayer();
         if (player.getMaxHp()-player.getHp()<healthBoost){
             Game.printText("You are to healthy to use that potion");

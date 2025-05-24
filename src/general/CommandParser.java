@@ -109,7 +109,7 @@ public class CommandParser {
                 }
                 Game.printText("You do not have a \"" + itemToDrop + "\".");
                 return false;
-            case "use": //use [item]
+            case "use": //use [item] or use [weapon] ___ [first word in mob] [second word in mob]. Ex: use clinic, use trident against split slime
                 if (tokens.length < 2) {
                     Game.printText("Use what?");
                     return false;
@@ -117,7 +117,7 @@ public class CommandParser {
                 String targetItem = tokens[1];
                 for (Item item : player.getInventory()) {
                     if (item.getName().equalsIgnoreCase(targetItem)){
-                        return item.useItem();
+                        return item.useItem(tokens);
                     }
                 }
                 Game.printText("You do not have a \"" + targetItem + "\".");
@@ -144,22 +144,6 @@ public class CommandParser {
             case "inventory": //show the inventory
                 player.showInventory();
                 return false;
-            //show inventory
-            case "show": //show the inventory
-                player.showInventory();
-                return false;
-            
-            case "help": //show list of all commands
-                Game.printText("Game Commands");
-                Game.printText("________________________________________");
-                Game.printText("go north, go south, go east, go west");
-                Game.printText("n, s, e, w");
-                Game.printText("take(print item here)");
-                Game.printText("inventory");
-                Game.printText("use(item from your inventory)");
-                Game.printText("look");
-                Game.printText("________________________________________");
-                return false;
             case "heal":
                 for (Item item : room.getItems()) {
                     if (item.getName().equalsIgnoreCase("clinic")){
@@ -169,6 +153,22 @@ public class CommandParser {
                 }
                 Game.printText("There is no clinic in this room");
                 return false;
+            case "help": //show list of all commands
+                Game.printText("Game Commands");
+                Game.printText("________________________________________");
+                Game.printText("go north, go south, go east, go west");
+                Game.printText("n, s, e, w");
+                Game.printText("take [item]");
+                Game.printText("takeall [item]");
+                Game.printText("drop [item]");
+                Game.printText("use [item]");
+                Game.printText("use [weapon] on [mob]. Ex: \" use trident on hollow-eyed ranger");
+                Game.printText("summon");
+                Game.printText("inventory");
+                Game.printText("look");
+                Game.printText("________________________________________");
+                return false;
+        
             default:
                 Game.printText("Unknown command.");
                 return false;

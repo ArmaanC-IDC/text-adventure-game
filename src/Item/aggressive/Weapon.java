@@ -4,6 +4,7 @@ import item.Item;
 import general.Game;
 import rooms.Room;
 import rooms.MobRoom;
+import mobs.Mob;
 
 public class Weapon extends Item{
     protected int baseDamage;
@@ -52,7 +53,7 @@ public class Weapon extends Item{
         return "weapon";
     }
 
-    public boolean useItem(){
+    public boolean useItem(String[] args){
         Room currentRoom = Game.getGame().getCurrentRoom();
         if (!(currentRoom instanceof MobRoom)){
             Game.printText("You are not in a mob room, you cannot use that. ");
@@ -63,9 +64,14 @@ public class Weapon extends Item{
             Game.printText("There are no mobs in this mob room,");
             return false;
         }
-        Game.printText("You used " + getName());
         int damage = (int)(Math.random()*(maxDamage-baseDamage)) + baseDamage;
-        room.getMobs().get(0).takeDamage(damage);
+        for (Mob mob : ((MobRoom)room).getMobs()) {
+            if (mob.getName().equalsIgnoreCase(args[3] + " " + args[4])){
+                mob.takeDamage(damage);
+                return true;
+            }
+        }
+        Game.printText("There is no " + args[3] + " " + args[4] + " in this room.");
         return true;
     }
 }

@@ -17,7 +17,7 @@ public class Item {
         return true;
     }
 
-    public boolean useItem(){
+    public boolean useItem(String[] args){
         return true;
     }
 

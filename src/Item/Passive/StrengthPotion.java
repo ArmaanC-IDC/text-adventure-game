@@ -9,7 +9,7 @@ public class StrengthPotion extends Item{
         super("strength potion", 1);
     }
 
-    public boolean useItem(){
+    public boolean useItem(String[] args){
         Player player = Game.getGame().getPlayer();
         player.setStrength(player.getStrength() + strengthBoost);
         return true;
