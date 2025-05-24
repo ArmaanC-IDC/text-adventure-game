@@ -7,6 +7,7 @@ import rooms.*;
 import general.Game;
 import item.Item;
 import java.util.ArrayList;
+import item.Passive.*;
 
 public class CommandParser {
     //returns true/false weather it counts as a turn. Ex: look does not count as a move. failed commands do not count as moves
@@ -44,7 +45,7 @@ public class CommandParser {
                 for (Item item : game.getCurrentRoom().getItems()) {
                     if (item.getName().equalsIgnoreCase(target)){
                         if (!item.getTakeable()){
-                            Game.printText("That item is not takeable");
+                            Game.printText(((NonTakeableItem)item).getOnTakeAttempt());
                             return false;
                         }
                         if (player.invWeight() + item.getWeight() > player.getMaxWeight()){
@@ -71,7 +72,7 @@ public class CommandParser {
                 for (Item item : game.getCurrentRoom().getItems()) {
                     if (item.getName().equalsIgnoreCase(targets)){
                         if (!item.getTakeable()){
-                            Game.printText("That item is not takeable");
+                            Game.printText(((NonTakeableItem)item).getOnTakeAttempt());
                             return false;
                         }
                         if (player.invWeight() + item.getWeight() > player.getMaxWeight()){
@@ -158,6 +159,15 @@ public class CommandParser {
                 Game.printText("use(item from your inventory)");
                 Game.printText("look");
                 Game.printText("________________________________________");
+                return false;
+            case "heal":
+                for (Item item : room.getItems()) {
+                    if (item.getName().equalsIgnoreCase("clinic")){
+                        Game.printText("You heal to max health using the clinic");
+                        player.setHp(player.getMaxHp());
+                    }
+                }
+                Game.printText("There is no clinic in this room");
                 return false;
             default:
                 Game.printText("Unknown command.");

@@ -44,8 +44,6 @@ public class MobRoom extends Room {
             if (!mobs.get(i).isAlive()){
                 mobs.remove(i);
                 continue;
-            }else{
-                System.out.println(mobs.get(i));
             }
             mobs.get(i).performAttack(player);
         }
@@ -90,6 +88,6 @@ public class MobRoom extends Room {
         for (Mob mob : mobs) {
             mobsString += "   " + mob + "\n";
         }
-        return super.getLongDescription() + mobsString;
+        return super.getLongDescription() + mobsString.trim();
     }
 }

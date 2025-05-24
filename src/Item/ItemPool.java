@@ -23,6 +23,7 @@ public class ItemPool {
         availableItems.add(() -> Weapon.createWeapon("hammer"));
         availableItems.add(() -> Weapon.createWeapon("sythe"));
         availableItems.add(() -> Weapon.createWeapon("trident"));
+        availableItems.add(() -> new Clinic());
 
         // ADD REST OF ITEMS HERE
     }

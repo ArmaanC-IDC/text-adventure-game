@@ -20,7 +20,7 @@
   "trapRoom": {
     "minDamage": 5,
     "maxDamage": 10,
-    "successChance": 0.9
+    "successChance": 90
   },
   "comments": {
     "only one starting room, and one summon room per boss": true

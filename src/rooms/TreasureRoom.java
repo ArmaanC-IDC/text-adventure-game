@@ -20,15 +20,8 @@ public class TreasureRoom extends Room{
         int minItems = RoomsLoader.getTreasureRoomConfig("minItems");
         int numItems = (int)(Math.random() * (maxItems - minItems)) + minItems;
         for (int i = 0; i < numItems; i++) {
-            Item item = ItemPool.getRandomItem();
-            this.items.add(item);
-            System.out.println(item.getClass().getName());
+            this.items.add(ItemPool.getRandomItem());
         }
         ItemPool.getRandomItem();
-    }
-
-    public void onPlayerEnter(){
-        this.visited = true;
-        // System.out.println("IMPLEMENT TREASURE ROOM");
     }
 }

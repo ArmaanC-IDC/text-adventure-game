@@ -74,6 +74,7 @@ public class Game {
     public void processCommand(String input) {
         if (CommandParser.parse(this, input, player, rooms, roomGrid)){
             onPlayerTurn();
+            Game.printText("Health: " + player.getHp());
         }
     }
 
