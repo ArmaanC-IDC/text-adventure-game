@@ -26,7 +26,7 @@ public class Room {
     public static Room createRoom(String type, int roomCount, int row, int col){
         switch (type){
             case "knightBossRoom", "minotaurBossRoom", "rangerBossRoom":
-            return new SummonRoom(type, roomCount, row, col);
+                return new SummonRoom(type, roomCount, row, col);
             case "trapRoom":
                 return new TrapRoom(roomCount, row, col);
             case "mobRoom":
@@ -57,9 +57,6 @@ public class Room {
         if (type.equals("startingRoom")){
             this.id = type;
             this.items.add(Weapon.createWeapon("dagger"));
-            for (int i = 0; i < 8; i++) {
-                this.items.add(new Coins());
-            }
         }else{
             this.id = Integer.toString(roomCount);
         }

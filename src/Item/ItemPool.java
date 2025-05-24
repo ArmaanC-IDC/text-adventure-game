@@ -6,28 +6,25 @@ import java.util.Random;
 
 import item.aggressive.*;
 import item.Passive.*;
+import java.util.function.Supplier;
 
 // Global item pool that all mobs share
 public class ItemPool {
-    private static List<Item> availableItems = new ArrayList<>();
+    private static List<Supplier<Item>> availableItems = new ArrayList<>();
     private static Random random = new Random();
     
     static {
-        addItem(new HealthPotion());
-        addItem(new StrengthPotion());
-        addItem(Weapon.createWeapon("dagger"));
-        addItem(Weapon.createWeapon("sword"));
-        addItem(Weapon.createWeapon("axe"));
-        addItem(Weapon.createWeapon("hammer"));
-        addItem(Weapon.createWeapon("sythe"));
-        addItem(Weapon.createWeapon("trident"));
+        availableItems.add(() -> new HealthPotion());
+        availableItems.add(() -> new StrengthPotion());
+        availableItems.add(() -> new Coins());
+        availableItems.add(() -> Weapon.createWeapon("dagger"));
+        availableItems.add(() -> Weapon.createWeapon("sword"));
+        availableItems.add(() -> Weapon.createWeapon("axe"));
+        availableItems.add(() -> Weapon.createWeapon("hammer"));
+        availableItems.add(() -> Weapon.createWeapon("sythe"));
+        availableItems.add(() -> Weapon.createWeapon("trident"));
 
         // ADD REST OF ITEMS HERE
-    }
-    
-    // Add an item to the global pool
-    public static void addItem(Item item) {
-        availableItems.add(item);
     }
     
     // Get a random item from the pool
@@ -37,6 +34,10 @@ public class ItemPool {
         }
         Random random = new Random();
         int index = random.nextInt(availableItems.size());
-        return availableItems.get(index).copy();
+        return availableItems.get(index).get();
     }
+
+    // public static Item getRandomItem() {
+    //     return Weapon.createWeapon("trident");
+    // }
 }

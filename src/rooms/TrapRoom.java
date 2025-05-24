@@ -33,7 +33,7 @@ public class TrapRoom extends Room {
         this.visited = true;
         
         //if goes into if statement, damage the player
-        if (Math.random() < TRAP_ROOM_CHANCE / 100.0) {
+        if (Math.random() < TRAP_ROOM_CHANCE) {
             //calculate damage
             int damage = (int)(Math.random() * (TRAP_ROOM_DAMAGE_MAX - TRAP_ROOM_DAMAGE_MIN)) + TRAP_ROOM_DAMAGE_MIN;
             player.takeDamage(damage);

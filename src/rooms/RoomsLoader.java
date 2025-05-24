@@ -55,6 +55,11 @@ public class RoomsLoader {
             trapRoomConfig.put("successChance", trapRoomConfigJson.get("successChance").getAsInt());
 
             //treasure room config
+            JsonObject treasureRoomConfigJson = jsonObject.getAsJsonObject("treasureRoom");
+            treasureRoomConfig = new HashMap<String, Integer>();
+            treasureRoomConfig.put("minItems", treasureRoomConfigJson.get("minItems").getAsInt());
+            treasureRoomConfig.put("maxItems", treasureRoomConfigJson.get("maxItems").getAsInt());
+            
         } catch (Exception e){
             e.printStackTrace();
         }

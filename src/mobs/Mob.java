@@ -44,16 +44,17 @@ public class Mob {
 
         if (Math.random() < dropChance) {
             Item droppedItem = ItemPool.getRandomItem();
-            Game.getGame().getCurrentRoom().getItems().add(new Coins());
             if (droppedItem != null) {
-                Game.getGame().getPlayer().getInventory().add(droppedItem);
+                Game.getGame().getCurrentRoom().getItems().add(droppedItem);
                 Game.printText("The " + name + " dropped: " + droppedItem.getName() + "!");
-                Game.printText("1 Coins has been added your inventory");
+                Game.getGame().getPlayer().getInventory().add(new Coins());
+                Game.printText("1 coin has been added to your inventory");
             }
             } else {
                 Game.printText("The " + name + " didn't drop anything.");
-                Game.getGame().getCurrentRoom().getItems().add(new Coins());
-                Game.printText("2 Coins have been added your inventory");
+                Game.getGame().getPlayer().getInventory().add(new Coins());
+                Game.getGame().getPlayer().getInventory().add(new Coins());
+                Game.printText("2 coins have been added to your inventory");
         }
     }
 

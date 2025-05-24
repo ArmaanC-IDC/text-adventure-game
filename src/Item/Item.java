@@ -26,7 +26,7 @@ public class Item {
     }
 
     public boolean useItem(){
-            return true;
+        return true;
     }
 
     public String getType(){

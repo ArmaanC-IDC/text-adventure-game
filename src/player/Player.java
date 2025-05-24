@@ -68,9 +68,9 @@ public class Player {
     // Method to display all items in inventory
     public void showInventory() {
         if (inventory.isEmpty()) {
-            System.out.println("Your inventory is empty.");
+            Game.printText("Your inventory is empty.");
         } else {
-            System.out.println("Your inventory contains:");
+            Game.printText("Your inventory contains:");
             for (int i = 0; i < inventory.size(); i++) {
                 Item item = inventory.get(i);
                 Game.printText((i + 1) + ". " + item.getName());
@@ -144,7 +144,6 @@ public class Player {
                 Item item = inventory.get(i);
                 weight += item.getWeight();  
         }
-        System.out.println("invWeight: " + weight);
         return weight;
     }
 

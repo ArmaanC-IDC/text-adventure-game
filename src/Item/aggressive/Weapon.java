@@ -12,7 +12,7 @@ public class Weapon extends Item{
     public static Weapon createWeapon(String type){
         switch (type.toLowerCase()) {
             case "dagger":
-                return new Weapon("Dagger", 5, 10);
+                return new Weapon("Dagger", 10, 12);
             case "sword":
                 return new Weapon("Sword", 8, 15);
             case "axe":
@@ -63,7 +63,7 @@ public class Weapon extends Item{
             Game.printText("There are no mobs in this mob room,");
             return false;
         }
-
+        Game.printText("You used " + getName());
         int damage = (int)(Math.random()*(maxDamage-baseDamage)) + baseDamage;
         room.getMobs().get(0).takeDamage(damage);
         return true;
