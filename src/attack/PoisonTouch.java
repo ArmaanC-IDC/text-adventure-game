@@ -2,6 +2,7 @@ package attack;
 
 import mobs.Mob;
 import player.Player;
+import general.Game;
 
 public class PoisonTouch implements Attack {
     public String getName() {
@@ -12,6 +13,6 @@ public class PoisonTouch implements Attack {
         int damage = 2;
         player.takeDamage(damage);
         player.poison();
-        System.out.println(attacker.getName() + " touches and poisons for " + damage + " damage!");
+        Game.printText(attacker.getName() + " touches and poisons for " + damage + " damage!");
     }
 }

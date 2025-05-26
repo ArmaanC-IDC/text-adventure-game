@@ -2,6 +2,7 @@ package attack;
 
 import mobs.Mob;
 import player.Player;
+import general.Game;
 
 public class Roar implements Attack {
     public String getName() {
@@ -10,6 +11,6 @@ public class Roar implements Attack {
 
     public void execute(Mob attacker, Player player) {
         player.weaken();
-        System.out.println(attacker.getName() + " roars fiercely, weakening the player!");
+        Game.printText(attacker.getName() + " roars fiercely, weakening the player!");
     }
 }

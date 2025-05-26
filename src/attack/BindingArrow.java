@@ -1,5 +1,6 @@
 package attack;
 
+import general.Game;
 import mobs.Mob;
 import player.Player;
 
@@ -12,6 +13,6 @@ public class BindingArrow implements Attack {
         int damage = 6 + new java.util.Random().nextInt(3); // 6-8
         player.takeDamage(damage);
         player.stun();
-        System.out.println(attacker.getName() + " shoots a binding arrow for " + damage + " damage and stuns!");
+        Game.printText(attacker.getName() + " shoots a binding arrow for " + damage + " damage and stuns!");
     }
 }

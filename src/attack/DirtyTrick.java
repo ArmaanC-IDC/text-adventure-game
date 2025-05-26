@@ -2,6 +2,7 @@ package attack;
 
 import mobs.Mob;
 import player.Player;
+import general.Game;
 
 public class DirtyTrick implements Attack {
     public String getName() {
@@ -16,6 +17,6 @@ public class DirtyTrick implements Attack {
             player.stun();
             System.out.println("Player is stunned!");
         }
-        System.out.println(attacker.getName() + " uses a dirty trick for " + damage + " damage!");
+        Game.printText(attacker.getName() + " uses a dirty trick for " + damage + " damage!");
     }
 }

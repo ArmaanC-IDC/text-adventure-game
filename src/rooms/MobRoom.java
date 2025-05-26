@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class MobRoom extends Room {
     private ArrayList<Mob> mobs;
-    private final int maxMobs = 4;
-    private final int minMobs = 1;
+    private final int maxMobs;
+    private final int minMobs;
 
     public MobRoom(int roomCount, int row, int col) {
         super("mobRoom", roomCount, row, col);
@@ -34,6 +34,8 @@ public class MobRoom extends Room {
             "The beasts that live here won't be pleased to see you."
         });
         mobs = new ArrayList<Mob>();
+        maxMobs = RoomsLoader.getMobRoomConfig("maxMobs");
+        minMobs = RoomsLoader.getMobRoomConfig("minMobs");
     }
 
     //when the player makes their turn, check for mob death and if all dead unlock exits
@@ -58,8 +60,8 @@ public class MobRoom extends Room {
     public void onPlayerEnter(Player player){
         this.visited = true;
         int numMobs = (int)(Math.random()*(maxMobs - minMobs)) + minMobs;
-        for (int i = 0; i < numMobs; i++) {
-            int mob = (int)Math.random()*3;
+        for (int i = 1; i <= numMobs; i++) {
+            int mob = (int)(Math.random()*3);
             switch (mob){
                 case 0:
                     mobs.add(new CrumblingSkeleton());
@@ -86,6 +88,6 @@ public class MobRoom extends Room {
         for (Mob mob : mobs) {
             mobsString += "   " + mob + "\n";
         }
-        return super.getLongDescription() + mobsString;
+        return super.getLongDescription() + mobsString.trim();
     }
 }

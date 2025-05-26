@@ -2,6 +2,7 @@ package attack;
 
 import mobs.Mob;
 import player.Player;
+import general.Game;
 
 public class CorruptedStrike implements Attack {
     public String getName() {
@@ -12,6 +13,6 @@ public class CorruptedStrike implements Attack {
         int damage = 12 + new java.util.Random().nextInt(4); // 12-15
         player.takeDamage(damage);
         player.poison();
-        System.out.println(attacker.getName() + " uses a corrupted strike for " + damage + " damage and poisons!");
+        Game.printText(attacker.getName() + " uses a corrupted strike for " + damage + " damage and poisons!");
     }
 }

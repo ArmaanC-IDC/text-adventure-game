@@ -1,5 +1,7 @@
 package rooms;
 
+import item.*;
+
 public class TreasureRoom extends Room{
     public TreasureRoom(int roomCount, int row, int col) {
         super("treasureRoom", roomCount, row, col);
@@ -13,10 +15,13 @@ public class TreasureRoom extends Room{
             "Treasure sparkles ahead, but nothing in this place is free.",
             "An ornate box sits atop a pedestal. Riches or ruin may lie within."
         });
-    }
 
-    public void onPlayerEnter(){
-        this.visited = true;
-        System.out.println("IMPLEMENT TREASURE ROOM");
+        int maxItems = RoomsLoader.getTreasureRoomConfig("maxItems");
+        int minItems = RoomsLoader.getTreasureRoomConfig("minItems");
+        int numItems = (int)(Math.random() * (maxItems - minItems)) + minItems;
+        for (int i = 0; i < numItems; i++) {
+            this.items.add(ItemPool.getRandomItem());
+        }
+        ItemPool.getRandomItem();
     }
 }
