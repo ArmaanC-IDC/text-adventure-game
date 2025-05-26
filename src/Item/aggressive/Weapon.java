@@ -65,6 +65,11 @@ public class Weapon extends Item{
             return false;
         }
         int damage = (int)(Math.random()*(maxDamage-baseDamage)) + baseDamage;
+
+        if (args.length<5){
+            Game.printText("use weapon must be in format: use [weapon] on [mob]. Ex: use dagger on split slime");
+            return false;
+        }
         for (Mob mob : ((MobRoom)room).getMobs()) {
             if (mob.getName().equalsIgnoreCase(args[3] + " " + args[4])){
                 mob.takeDamage(damage);

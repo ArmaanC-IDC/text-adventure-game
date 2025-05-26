@@ -149,6 +149,7 @@ public class CommandParser {
                     if (item.getName().equalsIgnoreCase("clinic")){
                         Game.printText("You heal to max health using the clinic");
                         player.setHp(player.getMaxHp());
+                        return true;
                     }
                 }
                 Game.printText("There is no clinic in this room");
