@@ -5,13 +5,17 @@ import player.Player;
 
 public class HealPotion extends Item{
     public HealPotion(){ 
-        super("HealPotion");
+        super("HealPotion",3);
     }
 
-    public boolean useItem(){
+    public boolean useItem(String[] args){
         Player p = Game.getPlayer();
-        p.setHp(p.getMaxHp());
-        return true;
+        if(p.getHp() == p.geMaxHp()){
+            Game.printText("You are to healthy to use that potion");
+        }else{
+            p.setHp(p.getMaxHp());
+            return true;
+        } 
     }
 
 }

@@ -1,4 +1,4 @@
-package item.Passive;
+package item.passive;
 
 public class Clinic extends NonTakeableItem{
     public Clinic(){

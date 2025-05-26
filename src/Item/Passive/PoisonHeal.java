@@ -5,7 +5,7 @@ import player.Player;
 
 public class PoisonHeal extends Item{
     public PoisonHeal(){
-        super("PoisonHeal");
+        super("PoisonHeal",3);
     }   
 
     public boolean useItem(){

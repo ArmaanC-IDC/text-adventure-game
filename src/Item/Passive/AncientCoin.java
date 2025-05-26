@@ -6,7 +6,7 @@ import player.Player;
 
 public class AncientCoin extends Item{
     public AncientCoin(){
-        super("AncientCoin");
+        super("AncientCoin",1);
     }
 
     public boolean useItem(){

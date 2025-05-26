@@ -5,7 +5,7 @@ import player.Player;
 
 public class GoldenApple extends Item{
     public GoldenApple(){
-        super("GoldenApple");
+        super("GoldenApple",2);
     }
 
     public boolean useItem(){
