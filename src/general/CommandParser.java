@@ -6,8 +6,9 @@ import player.Player;
 import rooms.*;
 import general.Game;
 import item.Item;
+import item.passive.*;
+
 import java.util.ArrayList;
-import item.Passive.*;
 
 public class CommandParser {
     //returns true/false weather it counts as a turn. Ex: look does not count as a move. failed commands do not count as moves

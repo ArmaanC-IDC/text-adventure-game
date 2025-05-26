@@ -6,6 +6,7 @@ import java.util.Random;
 
 import item.aggressive.*;
 import item.passive.*;
+
 import java.util.function.Supplier;
 
 // Global item pool that all mobs share
@@ -14,7 +15,7 @@ public class ItemPool {
     private static Random random = new Random();
     
     static {
-        availableItems.add(() -> new HealthPotion());
+        availableItems.add(() -> new HealPotion());
         availableItems.add(() -> new StrengthPotion());
         availableItems.add(() -> new Coins());
         availableItems.add(() -> Weapon.createWeapon("dagger"));
@@ -24,6 +25,7 @@ public class ItemPool {
         availableItems.add(() -> Weapon.createWeapon("sythe"));
         availableItems.add(() -> Weapon.createWeapon("trident"));
         availableItems.add(() -> new Clinic());
+        availableItems.add(() -> new GoldenApple());
 
         // ADD REST OF ITEMS HERE
     }
@@ -37,8 +39,4 @@ public class ItemPool {
         int index = random.nextInt(availableItems.size());
         return availableItems.get(index).get();
     }
-
-    // public static Item getRandomItem() {
-    //     return Weapon.createWeapon("trident");
-    // }
 }

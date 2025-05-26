@@ -22,7 +22,7 @@ public class Player {
 
     // equipment and inventory
     // private Map<EquipmentSlot, Item> equippedItems;
-    private List<Item> inventory;
+    private ArrayList<Item> inventory;
 
     public Player() {
 
@@ -64,10 +64,10 @@ public class Player {
         return stats;
     }
 
-    public Player(String startingRoomId) {
-        this.currentRoomId = startingRoomId;
-        this.inventory = new ArrayList<>();
-    }
+    // public Player(String startingRoomId) {
+    //     this.currentRoomId = startingRoomId;
+    //     this.inventory = new ArrayList<>();
+    // }
 
     // Method to display all items in inventory
     public void showInventory() {
@@ -105,21 +105,21 @@ public class Player {
     // }
 
     // Method to show weapon and armor equiped
-    public void showEquipped() {
-        System.out.print("Equipped Weapon: ");
-        if (equippedWeapon != null) {
-            System.out.println(equippedWeapon.getName());
-        } else {
-            System.out.println("None");
-        }
+    // public void showEquipped() {
+    //     System.out.print("Equipped Weapon: ");
+    //     if (equippedWeapon != null) {
+    //         System.out.println(equippedWeapon.getName());
+    //     } else {
+    //         System.out.println("None");
+    //     }
 
-        System.out.print("Equipped Armor: ");
-        if (equippedArmor != null) {
-            System.out.println(equippedArmor.getName());
-        } else {
-            System.out.println("None");
-        }
-    }
+    //     System.out.print("Equipped Armor: ");
+    //     if (equippedArmor != null) {
+    //         System.out.println(equippedArmor.getName());
+    //     } else {
+    //         System.out.println("None");
+    //     }
+    // }
 
     // Method to use items
     public boolean useItem(Item item) {
@@ -130,6 +130,7 @@ public class Player {
 
         // Use the item
         item.useItem();
+        System.out.println("FIXME: player.java line 132");
 
         // remove the item from inventory if it's consumable
         if (item.getType().equals("consumable")) { // Assumes Item has an isConsumable() method.
@@ -207,5 +208,9 @@ public class Player {
 
     public void weaken(){
         isWeak = true;
+    }
+
+    public void eatApple(){
+        Game.printText("IMPLEMENT PLAYER EAT APPLE");
     }
 }

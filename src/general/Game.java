@@ -79,7 +79,7 @@ public class Game {
     }
 
     public static Player getPlayer() {
-        return player;
+        return Game.getGame().player;
     }
 
     public Room getCurrentRoom() {
