@@ -217,10 +217,7 @@ public class Player {
     public void eatGapple(){
         isApple = true;
     }
-
-    public void gameEnd(){
-        Game.printText("Game Over. You Died.");
-    }
+    
     public boolean appleStatus(){
         return isApple;
     }

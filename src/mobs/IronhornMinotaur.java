@@ -3,8 +3,8 @@ package mobs;
 import attack.HornCharge;
 import attack.GroundSmash;
 import attack.Roar;
-import item.Passive.*;
 import general.Game;
+import item.passive.*;
 
 import java.util.ArrayList;
 

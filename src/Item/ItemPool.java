@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import item.aggressive.*;
-import item.Passive.*;
+import item.passive.*;
 
 import java.util.function.Supplier;
 

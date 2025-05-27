@@ -1,4 +1,4 @@
-package item.Passive;
+package item.passive;
 
 import item.Item;
 
