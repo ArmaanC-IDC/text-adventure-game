@@ -3,7 +3,7 @@ package item.aggressive;
 import item.Item;
 import general.Game;
 import rooms.Room;
-import rooms.MobRoom;
+import rooms.*;
 import mobs.Mob;
 
 public class Weapon extends Item{
@@ -55,26 +55,49 @@ public class Weapon extends Item{
 
     public boolean useItem(String[] args){
         Room currentRoom = Game.getGame().getCurrentRoom();
-        if (!(currentRoom instanceof MobRoom)){
-            Game.printText("You are not in a mob room, you cannot use that. ");
+        if (currentRoom instanceof MobRoom){
+            MobRoom room = (MobRoom)currentRoom;
+            if (room.getMobs().isEmpty()){
+                Game.printText("There are no mobs in this mob room,");
+                return false;
+            }
+            for (Mob mob : ((MobRoom)room).getMobs()) {
+                if (mob.getName().equalsIgnoreCase(args[3] + " " + args[4])){
+                    int damage = (int)(Math.random()*(maxDamage-baseDamage)) + baseDamage;
+                    mob.takeDamage(damage);
+                    return true;
+                }
+            }
+        }
+        
+        else if (currentRoom instanceof SummonRoom){
+            SummonRoom room = (SummonRoom)currentRoom;
+            if (room.getMobs().isEmpty() && room.getBoss()==null){
+                Game.printText("There are no mobs in this mob room,");
+                return false;
+            }
+            for (Mob mob : ((SummonRoom)room).getMobs()) {
+                if (mob.getName().equalsIgnoreCase(args[3] + " " + args[4])){
+                    int damage = (int)(Math.random()*(maxDamage-baseDamage)) + baseDamage;
+                    mob.takeDamage(damage);
+                    return true;
+                }
+            }
+            if (room.getBoss().getName().equalsIgnoreCase(args[3] + " " + args[4])){
+                int damage = (int)(Math.random()*(maxDamage-baseDamage)) + baseDamage;
+                room.getBoss().takeDamage(damage);
+                return true;
+            }
+            Game.printText("That mob does not exist in this room");
+            return false;
+        }else{
+            Game.printText("You can only use weapons in a mob room and a summon room");
             return false;
         }
-        MobRoom room = (MobRoom)currentRoom;
-        if (room.getMobs().isEmpty()){
-            Game.printText("There are no mobs in this mob room,");
-            return false;
-        }
-        int damage = (int)(Math.random()*(maxDamage-baseDamage)) + baseDamage;
 
         if (args.length<5){
             Game.printText("use weapon must be in format: use [weapon] on [mob]. Ex: use dagger on split slime");
             return false;
-        }
-        for (Mob mob : ((MobRoom)room).getMobs()) {
-            if (mob.getName().equalsIgnoreCase(args[3] + " " + args[4])){
-                mob.takeDamage(damage);
-                return true;
-            }
         }
         Game.printText("There is no " + args[3] + " " + args[4] + " in this room.");
         return true;
