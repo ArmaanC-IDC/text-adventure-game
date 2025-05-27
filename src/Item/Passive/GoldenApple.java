@@ -10,7 +10,7 @@ public class GoldenApple extends Item{
 
     public boolean useItem(){
         Player p = Game.getPlayer();
-        p.eatApple();
+        p.eatGapple();
         return true;
     }
 
