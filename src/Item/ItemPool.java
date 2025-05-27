@@ -35,7 +35,7 @@ public class ItemPool {
         treasureRoomItems.add(() -> Weapon.createWeapon("sword"));
         treasureRoomItems.add(() -> Weapon.createWeapon("axe"));
         treasureRoomItems.add(() -> Weapon.createWeapon("hammer"));
-        mobDropItems.add(() -> Weapon.createWeapon("sythe"));
+        treasureRoomItems.add(() -> Weapon.createWeapon("sythe"));
         treasureRoomItems.add(() -> new Clinic());
         treasureRoomItems.add(() -> new GoldenApple());
     }
