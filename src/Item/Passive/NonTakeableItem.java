@@ -1,4 +1,4 @@
-package item.passive;
+package item.Passive;
 import item.Item;
 
 public class NonTakeableItem extends Item{
