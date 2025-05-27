@@ -1,4 +1,4 @@
-package item.passive;
+package item.Passive;
 import general.Game;
 import item.Item;
 import player.Player;

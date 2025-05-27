@@ -18,6 +18,7 @@ public class Player {
     private boolean isStunned;
     private boolean isPoisoned;
     private boolean isWeak;
+    private boolean isApple;
     private int maxWeight = 50;
 
     // equipment and inventory
@@ -34,6 +35,7 @@ public class Player {
         isPoisoned = false;
         isStunned = false;
         isWeak = false;
+        isApple = false;
 
         showStats();
 
@@ -42,6 +44,9 @@ public class Player {
     }
 
     public int getStrength() {
+        if(isApple){
+            return strength + 10;
+        }
         return strength;
     }
 
@@ -209,11 +214,15 @@ public class Player {
         isWeak = true;
     }
 
-    public void eatApple(){
-        Game.printText("IMPLEMENT PLAYER EAT APPLE");
+    public void eatGapple(){
+        isApple = true;
     }
 
     public void gameEnd(){
         Game.printText("Game Over. You Died.");
     }
+    public boolean appleStatus(){
+        return isApple;
+    }
+
 }

@@ -7,7 +7,7 @@ import player.Player;
 import general.Game;
 import item.Item;
 import item.ItemPool;
-import item.passive.Coins;
+import item.Passive.Coins;
 
 public class Mob {
     protected String name;
