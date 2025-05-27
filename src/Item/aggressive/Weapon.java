@@ -63,7 +63,7 @@ public class Weapon extends Item{
             }
             for (Mob mob : ((MobRoom)room).getMobs()) {
                 if (mob.getName().equalsIgnoreCase(args[3] + " " + args[4])){
-                    int damage = (int)(Math.random()*(maxDamage-baseDamage)) + baseDamage;
+                    int damage = (int)(((int)(Math.random()*(maxDamage-baseDamage)) + baseDamage) * (Game.getPlayer().getStrength()/100.0 + 1));
                     mob.takeDamage(damage);
                     return true;
                 }
@@ -84,7 +84,7 @@ public class Weapon extends Item{
                 }
             }
             if (room.getBoss().getName().equalsIgnoreCase(args[3] + " " + args[4])){
-                int damage = (int)(Math.random()*(maxDamage-baseDamage)) + baseDamage;
+                int damage = (int)(((int)(Math.random()*(maxDamage-baseDamage)) + baseDamage) * (Game.getPlayer().getStrength()/100.0 + 1));
                 room.getBoss().takeDamage(damage);
                 return true;
             }
