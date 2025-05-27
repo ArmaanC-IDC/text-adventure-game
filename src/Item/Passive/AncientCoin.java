@@ -1,7 +1,6 @@
 package item.Passive;
 import general.Game;
 import item.Item;
-import player.Player;
 
 
 public class AncientCoin extends Item{
