@@ -4,6 +4,7 @@ import attack.PreciseShot;
 import attack.BindingArrow;
 import attack.Necromancy;
 import general.Game;
+import item.passive.*;
 
 import java.util.ArrayList;
 
@@ -21,5 +22,10 @@ public class HollowEyedRanger extends Mob {
             return;
         }
         super.takeDamage(rawDamage);
+    }
+
+    protected void onDeath() {
+        Game.printText("The ranger dropped it's pendant");
+        Game.getGame().getCurrentRoom().getItems().add(new Pendant());
     }
 }

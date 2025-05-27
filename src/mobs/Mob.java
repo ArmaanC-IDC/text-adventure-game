@@ -43,7 +43,7 @@ public class Mob {
         Game.printText(name + " has been defeated!");
 
         if (Math.random() < dropChance) {
-            Item droppedItem = ItemPool.getRandomItem();
+            Item droppedItem = ItemPool.getRandomMobDrop();
             if (droppedItem != null) {
                 Game.getGame().getCurrentRoom().getItems().add(droppedItem);
                 Game.printText("The " + name + " dropped: " + droppedItem.getName() + "!");

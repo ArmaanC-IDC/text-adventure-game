@@ -8,10 +8,10 @@ public class GoldenApple extends Item{
         super("GoldenApple",2);
     }
 
-    public boolean useItem(){
+    public boolean useItem(String[] args){
+        Game.printText("You used a golden apple");
         Player p = Game.getPlayer();
         p.eatGapple();
         return true;
     }
-
 }

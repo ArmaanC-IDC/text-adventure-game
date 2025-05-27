@@ -3,6 +3,7 @@ package rooms;
 import mobs.CrumblingSkeleton;
 import mobs.GoblinScavenger;
 import mobs.Mob;
+import general.Game;
 import mobs.SplitSlime;
 import player.Player;
 

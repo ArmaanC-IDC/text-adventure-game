@@ -57,6 +57,7 @@ public class Room {
         if (type.equals("startingRoom")){
             this.id = type;
             this.items.add(Weapon.createWeapon("dagger"));
+            this.items.add(new Clinic());
         }else{
             this.id = Integer.toString(roomCount);
         }
