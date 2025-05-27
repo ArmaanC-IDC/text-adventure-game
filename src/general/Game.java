@@ -28,6 +28,7 @@ public class Game {
     private int[] currentRoom = new int[2];
     private AdventureGUI gui;
     private Map<String, Integer> numEachRoom = new HashMap<String, Integer>();
+    private boolean isRunning;
 
     public Game() {
         player = new Player();
@@ -69,6 +70,10 @@ public class Game {
     public void onPlayerTurn(){
         Game.printText("");
         this.getCurrentRoom().onPlayerTurn(player);
+
+        if (player.getHp()==0)
+            isRunning = false;
+            player.gameEnd();
     }
 
     public void processCommand(String input) {
@@ -134,5 +139,9 @@ public class Game {
                 }
             }
         }
+    }
+
+    public boolean getRunning(){
+        return isRunning;
     }
 }

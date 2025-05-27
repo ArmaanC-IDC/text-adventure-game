@@ -1,10 +1,7 @@
 package item.Passive;
 
 import item.Item;
-import general.Game;
-import rooms.Room;
-import rooms.MobRoom;
-import mobs.Mob;
+
 
 public class Armour extends Item{
     protected int resistance;
@@ -27,5 +24,7 @@ public class Armour extends Item{
         this.resistance = resistance;
     }
 
-    
+    public int getResistance(){
+        return resistance;
+    }
 }

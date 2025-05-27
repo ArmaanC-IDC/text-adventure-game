@@ -134,7 +134,6 @@ public class Player {
         }
 
         // Use the item
-        item.useItem();
         System.out.println("FIXME: player.java line 132");
 
         // remove the item from inventory if it's consumable
@@ -219,6 +218,9 @@ public class Player {
         isApple = true;
     }
 
+    public void gameEnd(){
+        Game.printText("Game Over. You Died.");
+    }
     public boolean appleStatus(){
         return isApple;
     }
