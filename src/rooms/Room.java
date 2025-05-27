@@ -6,7 +6,7 @@ import java.util.Map;
 import item.Item;
 import player.Player;
 import item.aggressive.*;
-import item.passive.*;
+import item.Passive.*;
 
 import java.util.HashMap;
 

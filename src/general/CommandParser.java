@@ -6,7 +6,7 @@ import player.Player;
 import rooms.*;
 import general.Game;
 import item.Item;
-import item.passive.*;
+import item.Passive.*;
 
 import java.util.ArrayList;
 
