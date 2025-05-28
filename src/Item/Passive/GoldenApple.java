@@ -12,6 +12,7 @@ public class GoldenApple extends Item{
         Game.printText("You used a golden apple");
         Player p = Game.getPlayer();
         p.eatGapple();
+        p.setHp(p.getMaxHp());
         return true;
     }
 }
