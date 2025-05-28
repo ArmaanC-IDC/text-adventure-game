@@ -11,6 +11,6 @@ public class DefensiveStance implements Attack {
 
     public void execute(Mob attacker, Player player) {
         attacker.setArmor(60);
-        Game.printText(attacker.getName() + " takes a defensive stance! Armor raised to 60% for 2 turns.");
+        Game.printText(attacker.getName() + " takes a defensive stance! Armor raised to 60%.");
     }
 }

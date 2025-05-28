@@ -72,7 +72,16 @@ public class Game {
 
     public void onPlayerTurn(){
         Game.printText("");
-        this.getCurrentRoom().onPlayerTurn(player);
+        
+        // Process status effects at the beginning of the turn
+        player.processStatusEffects();
+        
+        // Only allow the room to process if player is not stunned
+        if (!player.isStunned()) {
+            this.getCurrentRoom().onPlayerTurn(player);
+        } else {
+            Game.printText("You are stunned and cannot act this turn!");
+        }
 
         if (player.getHp()<=0)
             isRunning = false;
