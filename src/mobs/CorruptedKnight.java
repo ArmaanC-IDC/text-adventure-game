@@ -7,6 +7,7 @@ import attack.CorruptedStrike;
 import attack.DesperateSwing;
 import attack.Attack;
 import general.Game;
+import player.Player;
 import item.passive.Horn;
 
 import java.util.*;
@@ -53,6 +54,10 @@ public class CorruptedKnight extends Mob {
     }
 
     protected void onDeath() {
+        // Call parent onDeath for normal drop logic AND to increment counters
+        super.onDeath();
+        
+        // End game logic for final boss
         Game.printText("==================================================");
         Game.printText("VICTORY! The Corrupted Knight crumbles to dust!");
         Game.printText("The ancient curse binding this dungeon is broken...");
@@ -61,8 +66,14 @@ public class CorruptedKnight extends Mob {
         Game.printText("");
         Game.printText("You have conquered the depths and emerged victorious!");
         Game.printText("The treasures of the dungeon are yours to claim.");
+        Game.printText("");
+        Game.printText("FINAL STATISTICS:");
+        Game.printText("Monsters defeated: " + Game.getMobsKilled());
+        Game.printText("Total coins collected: " + Game.getTotalCoinsCollected());
         Game.printText("==================================================");
         Game.printText("Thank you for playing, brave dungeon crawler!");
-        Game.getGame().getCurrentRoom().getItems().add(new Horn());
+        
+        // End the game
+        Game.getGame().setRunning(false);
     }
 }
