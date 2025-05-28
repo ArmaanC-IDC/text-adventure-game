@@ -29,7 +29,7 @@ public class ItemPool {
         mobDropItems.add(() -> new Clinic());
         mobDropItems.add(() -> new GoldenApple());
         mobDropItems.add(() -> Armour.createArmour("chainsuit"));
-        mobDropItems.add(() -> Armour.createArmour("diamondarmour"));
+        mobDropItems.add(() -> Armour.createArmour("diamondsuit"));
 
         // Add all items to treasureRoomItems
         treasureRoomItems.add(() -> new HealPotion());
