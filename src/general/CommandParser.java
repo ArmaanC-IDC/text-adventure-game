@@ -189,7 +189,7 @@ public class CommandParser {
                 Game.printText("takeall [item]");
                 Game.printText("drop [item]");
                 Game.printText("use [item]");
-                Game.printText("use [weapon] on [mob]. Ex: \" use trident on hollow-eyed ranger");
+                Game.printText("use [weapon] on [mob]. Ex: \" use trident on hollow-eyed ranger or split slime");
                 Game.printText("summon");
                 Game.printText("inventory");
                 Game.printText("look");
