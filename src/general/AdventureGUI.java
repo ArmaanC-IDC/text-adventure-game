@@ -104,6 +104,10 @@ public class AdventureGUI {
 
 
     private void handleInput() {
+        if (!game.getRunning()){
+            Game.printText("Game Over. You Died.");
+            return;
+        }
         String input = inputField.getText().trim();
         inputField.setText("");
         if (!input.isEmpty()) {

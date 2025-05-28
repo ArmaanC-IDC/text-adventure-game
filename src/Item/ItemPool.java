@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import item.aggressive.*;
-import item.Passive.*;
+import item.passive.*;
 
 import java.util.function.Supplier;
 
@@ -29,14 +29,13 @@ public class ItemPool {
         mobDropItems.add(() -> new Clinic());
         mobDropItems.add(() -> new GoldenApple());
         mobDropItems.add(() -> Armour.createArmour("chainsuit"));
-        mobDropItems.add(() -> Armour.createArmour("diamondarmour"));
+        mobDropItems.add(() -> Armour.createArmour("diamondsuit"));
 
         // Add all items to treasureRoomItems
         treasureRoomItems.add(() -> new HealPotion());
         treasureRoomItems.add(() -> new StrengthPotion());
         treasureRoomItems.add(() -> Weapon.createWeapon("sword"));
         treasureRoomItems.add(() -> Weapon.createWeapon("axe"));
-        treasureRoomItems.add(() -> Weapon.createWeapon("hammer"));
         treasureRoomItems.add(() -> Weapon.createWeapon("sythe"));
         treasureRoomItems.add(() -> new Clinic());
         treasureRoomItems.add(() -> new GoldenApple());

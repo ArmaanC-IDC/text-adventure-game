@@ -4,7 +4,7 @@ import attack.PreciseShot;
 import attack.BindingArrow;
 import attack.Necromancy;
 import general.Game;
-import item.Passive.*;
+import item.passive.*;
 
 import java.util.ArrayList;
 
