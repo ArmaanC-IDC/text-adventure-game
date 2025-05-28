@@ -1,0 +1,58 @@
+{
+    "dagger": {
+        "minDamage": 10,
+        "maxDamage": 12
+    },
+    "sword": {
+        "minDamage": 8,
+        "maxDamage": 15
+    },
+    "axe": {
+        "minDamage": 12,
+        "maxDamage": 20
+    },
+    "hammer": {
+        "minDamage": 16,
+        "maxDamage": 25
+    },
+    "sythe": {
+        "minDamage": 5,
+        "maxDamage": 50
+    },
+    "trident": {
+        "minDamage": 20,
+        "maxDamage": 25
+    },
+
+    "leathersuit": {
+        "resistance": 5
+    },
+    "chainsuit": {
+        "resistance": 8
+    },
+    "diamondsuit": {
+        "resistance": 12
+    },
+
+    "coin": {
+        "weight": 1
+    },
+    "goldenApple": {
+        "weight": 2
+    },
+    "healPotion": {
+        "weight": 3
+    },
+    "strengthPotion": {
+        "weight": 3
+    },
+    "poisonHeal": {
+        "weight": 3
+    },
+    "horn": {
+        "weight": 1
+    },
+    "pendant": {
+        "weight": 1
+    }
+}

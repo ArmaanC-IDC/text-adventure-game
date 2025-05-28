@@ -2,9 +2,10 @@ package item.aggressive;
 
 import item.Item;
 import general.Game;
-import rooms.Room;
 import rooms.*;
 import mobs.Mob;
+
+import item.ItemLoader;
 
 public class Weapon extends Item{
     protected int baseDamage;
@@ -13,17 +14,35 @@ public class Weapon extends Item{
     public static Weapon createWeapon(String type){
         switch (type.toLowerCase()) {
             case "dagger":
-                return new Weapon("Dagger", 10, 12);
+                return new Weapon("Dagger", 
+                    ItemLoader.getItemConfig("dagger", "minDamage"), 
+                    ItemLoader.getItemConfig("dagger", "maxDamage")
+                );
             case "sword":
-                return new Weapon("Sword", 8, 15);
+                return new Weapon("Sword", 
+                    ItemLoader.getItemConfig("sword", "minDamage"), 
+                    ItemLoader.getItemConfig("sword", "maxDamage")
+                );
             case "axe":
-                return new Weapon("Axe", 12, 20);
+                return new Weapon("Axe", 
+                    ItemLoader.getItemConfig("axe", "minDamage"), 
+                    ItemLoader.getItemConfig("axe", "maxDamage")
+                );
             case "hammer":
-                return new Weapon("Hammer", 16, 25);
+                return new Weapon("Hammer", 
+                    ItemLoader.getItemConfig("hammer", "minDamage"), 
+                    ItemLoader.getItemConfig("hammer", "maxDamage")
+                );
             case "sythe":
-                return new Weapon("Sythe", 5, 50);
+                return new Weapon("Sythe", 
+                    ItemLoader.getItemConfig("sythe", "minDamage"), 
+                    ItemLoader.getItemConfig("sythe", "maxDamage")
+                );
             case "trident":
-                return new Weapon("Trident", 20, 25);
+                return new Weapon("Trident", 
+                    ItemLoader.getItemConfig("trident", "minDamage"), 
+                    ItemLoader.getItemConfig("trident", "maxDamage")
+                );
             default:
                 return new Weapon("UNIMPLEMENTED: " + type, 0, 0);
         }

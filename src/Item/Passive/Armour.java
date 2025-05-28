@@ -1,6 +1,7 @@
 package item.passive;
 
 import item.Item;
+import item.ItemLoader;
 
 
 public class Armour extends Item{
@@ -9,11 +10,11 @@ public class Armour extends Item{
     public static Armour createArmour(String type){
         switch (type.toLowerCase()) {
             case "leathersuit":
-                return new Armour("leathersuit", 5);
+                return new Armour("leathersuit", ItemLoader.getItemConfig("leathersuit", "resistance"));
             case "chainsuit":
-                return new Armour("chainsuit", 8);
+                return new Armour("chainsuit", ItemLoader.getItemConfig("chainsuit", "resistance"));
             case "diamondsuit":
-                return new Armour("diamondsuit", 12);
+                return new Armour("diamondsuit", ItemLoader.getItemConfig("diamondsuit", "resistance"));
             default:
                 return new Armour("UNIMPLEMENTED: " + type, 0);
         }

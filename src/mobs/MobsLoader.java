@@ -20,7 +20,6 @@ public class MobsLoader {
 
             for (HashMap.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
                 String mobName = entry.getKey();
-                System.out.println(mobName);
                 JsonObject mobStats = entry.getValue().getAsJsonObject();
 
                 HashMap<String, Integer> statsMap = new HashMap<>();
