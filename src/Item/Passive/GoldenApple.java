@@ -11,8 +11,10 @@ public class GoldenApple extends Item{
     public boolean useItem(String[] args){
         Game.printText("You used a golden apple");
         Player p = Game.getPlayer();
-        p.eatGapple();
+        Game g = Game.getGame();
+        p.setAppleStatus(true);
         p.setHp(p.getMaxHp());
+        g.setGappleCounter();
         return true;
     }
 }
