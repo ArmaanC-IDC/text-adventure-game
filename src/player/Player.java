@@ -19,7 +19,7 @@ public class Player {
     private boolean isPoisoned;
     private boolean isWeak;
     private boolean isApple;
-    private int maxWeight = 50;
+    private int maxWeight;
 
     // equipment and inventory
     // private Map<EquipmentSlot, Item> equippedItems;
@@ -29,13 +29,14 @@ public class Player {
 
         strength = (int) (Math.random() * 30) + 1;
         speed = (int) (Math.random() * 10) + 1;
-        hp = (int) (Math.random() * 20) + 81;
+        hp = PlayerLoader.getPlayerConfig("startingHP");
         maxHp = hp;
         luck = (int)(Math.random()*10)+1;
         isPoisoned = false;
         isStunned = false;
         isWeak = false;
         isApple = false;
+        maxWeight = PlayerLoader.getPlayerConfig("maxInvWeight");
 
         showStats();
 
