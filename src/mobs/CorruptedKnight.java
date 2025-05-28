@@ -7,6 +7,7 @@ import attack.CorruptedStrike;
 import attack.DesperateSwing;
 import attack.Attack;
 import general.Game;
+import item.passive.Horn;
 
 import java.util.*;
 
@@ -49,5 +50,19 @@ public class CorruptedKnight extends Mob {
 
         System.out.println(name + " uses " + chosen.getName() + "!");
         chosen.execute(this, player);
+    }
+
+    protected void onDeath() {
+        Game.printText("==================================================");
+        Game.printText("VICTORY! The Corrupted Knight crumbles to dust!");
+        Game.printText("The ancient curse binding this dungeon is broken...");
+        Game.printText("Sunlight streams through cracks in the ceiling above.");
+        Game.printText("The dungeon's darkness retreats as you claim victory!");
+        Game.printText("");
+        Game.printText("You have conquered the depths and emerged victorious!");
+        Game.printText("The treasures of the dungeon are yours to claim.");
+        Game.printText("==================================================");
+        Game.printText("Thank you for playing, brave dungeon crawler!");
+        Game.getGame().getCurrentRoom().getItems().add(new Horn());
     }
 }

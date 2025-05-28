@@ -93,6 +93,7 @@ public class Game {
         if (CommandParser.parse(this, input, player, rooms, roomGrid)){
             onPlayerTurn();
             Game.printText("Health: " + player.getHp());
+            Game.printText("Coins: "+ player.get)
         }
     }
 
@@ -156,5 +157,9 @@ public class Game {
 
     public boolean getRunning(){
         return isRunning;
+    }
+
+    public void setRunning(boolean status){
+        isRunning = status;
     }
 }
