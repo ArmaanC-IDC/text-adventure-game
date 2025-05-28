@@ -3,8 +3,8 @@ import general.Game;
 import item.Item;
 import player.Player;
 
-public class HealPotion extends Item{
-    public HealPotion(){ 
+public class healPotion extends Item{
+    public healPotion(){ 
         super("HealPotion",3);
     }
 
