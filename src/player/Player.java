@@ -157,6 +157,16 @@ public class Player {
         return weight;
     }
 
+    public int getCoins(){
+        //iterates through inventory arraylist, counts and returns number of coin objects
+        int coinCount = 0;
+        for (Item item : inventory) {
+            if (item instanceof item.passive.Coins) {
+                coinCount++;
+            }
+        }
+        return coinCount;
+    }
 
     //removes item from inventory
     //need to add dropping it the room your in.

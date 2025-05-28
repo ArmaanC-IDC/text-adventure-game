@@ -41,6 +41,7 @@ public class Mob {
 
     protected void onDeath() {
         Game.printText(name + " has been defeated!");
+        Game.incrementMobsKilled();
 
         if (Math.random() < dropChance) {
             Item droppedItem = ItemPool.getRandomMobDrop();
@@ -49,12 +50,14 @@ public class Mob {
                 Game.printText("The " + name + " dropped: " + droppedItem.getName() + "!");
                 Game.getGame().getPlayer().getInventory().add(new Coins());
                 Game.printText("1 coin has been added to your inventory");
+                Game.incrementCoinsCollected();
             }
             } else {
                 Game.printText("The " + name + " didn't drop anything.");
                 Game.getGame().getPlayer().getInventory().add(new Coins());
                 Game.getGame().getPlayer().getInventory().add(new Coins());
                 Game.printText("2 coins have been added to your inventory");
+                Game.incrementCoinsCollected(2);
         }
     }
 
