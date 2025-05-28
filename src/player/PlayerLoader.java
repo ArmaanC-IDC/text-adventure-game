@@ -9,11 +9,11 @@ import com.google.gson.JsonObject;
 public class PlayerLoader {
     private static HashMap<String, Integer> playerConfig = new HashMap<String, Integer>();
 
-    private static final String filePath = "rooms.json"; 
+    private static final String filePath = "player.json"; 
     static {
         try {
             Gson gson = new Gson();
-            JsonObject playerConfigObj = gson.fromJson(new FileReader(filePath), JsonObject.class).getAsJsonObject("player");
+            JsonObject playerConfigObj = gson.fromJson(new FileReader(filePath), JsonObject.class);
 
             //room config
             playerConfig = new HashMap<String, Integer>();

@@ -1,0 +1,30 @@
+{
+    "knight": {
+        "hp": 150,
+        "armor": 40
+    },
+    "ranger": {
+        "hp": 90,
+        "armor": 15
+    },
+    "minotaur": {
+        "hp": 120,
+        "armor": 30
+    },
+    "slime": {
+        "hp": 15,
+        "armor": 5
+    },
+    "subSlime": {
+        "hp": 10,
+        "armor": 3
+    },
+    "skeleton": {
+        "hp": 30,
+        "armor": 25
+    },
+    "goblin": {
+        "hp": 15,
+        "armor": 10
+    }
+}

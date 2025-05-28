@@ -24,11 +24,6 @@
   },
   "comments": {
     "only one starting room, and one summon room per boss": true
-  },
-
-  "player": {
-    "startingHP": 100,
-    "maxInvWeight": 50
   }
 }
 

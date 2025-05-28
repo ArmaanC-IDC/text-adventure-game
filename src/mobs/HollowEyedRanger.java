@@ -10,7 +10,11 @@ import java.util.ArrayList;
 
 public class HollowEyedRanger extends Mob {
     public HollowEyedRanger() {
-        super("Hollow-Eyed Ranger", 90, 15, 4, new ArrayList<>());
+        super("Hollow-Eyed Ranger", 
+            MobsLoader.getMobConfig("ranger", "hp"),
+            MobsLoader.getMobConfig("ranger", "armor"),
+            4, new ArrayList<>()
+        );
         attacks.add(new PreciseShot());
         attacks.add(new BindingArrow());
         attacks.add(new Necromancy());

@@ -17,7 +17,11 @@ public class CorruptedKnight extends Mob {
     private int repeatCount = 0;
 
     public CorruptedKnight() {
-        super("Corrupted Knight", 150, 40, 2, new ArrayList<>());
+        super("Corrupted Knight", 
+            MobsLoader.getMobConfig("knight", "hp"),
+            MobsLoader.getMobConfig("knight", "armor"),
+            2, new ArrayList<>()
+        );
         attacks.add(new ShieldBash());
         attacks.add(new DefensiveStance());
         attacks.add(new CorruptedStrike());

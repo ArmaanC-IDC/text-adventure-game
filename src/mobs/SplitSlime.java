@@ -11,7 +11,12 @@ import java.util.ArrayList;
 public class SplitSlime extends Mob {
     private boolean hasSplit = false;
     public SplitSlime() {
-        super("Split Slime", 20, 5, 2, new ArrayList<>());
+        // super("Split Slime", 20, 5, 2, new ArrayList<>());
+        super("Split Slime", 
+            MobsLoader.getMobConfig("slime", "hp"),
+            MobsLoader.getMobConfig("slime", "armor"),
+            2, new ArrayList<>()
+        );
         attacks.add(new AcidSplash());
         attacks.add(new PoisonTouch());
     }
