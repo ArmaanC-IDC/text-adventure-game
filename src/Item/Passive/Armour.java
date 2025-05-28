@@ -21,7 +21,7 @@ public class Armour extends Item{
     }
 
     public Armour(String name, int resistance) {
-        super(name, resistance);
+        super(name, 15);
         this.resistance = resistance;
     }
 
