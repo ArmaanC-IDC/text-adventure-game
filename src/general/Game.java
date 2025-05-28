@@ -29,6 +29,7 @@ public class Game {
     private AdventureGUI gui;
     private Map<String, Integer> numEachRoom = new HashMap<String, Integer>();
     private boolean isRunning = true;
+    private int gappleCounter = 0;
 
     public Game() {
         player = new Player();
@@ -73,6 +74,19 @@ public class Game {
 
         if (player.getHp()<=0)
             isRunning = false;
+
+        if(!player.getAppleStatus()){
+            gappleCounter = 0;
+        }else if(gappleCounter == 2){
+            gappleCounter = 0;
+            player.setAppleStatus(false);
+        }else{
+            gappleCounter++;
+        }
+    }
+
+    public void setGappleCounter(){
+        gappleCounter = 0;
     }
 
     public void processCommand(String input) {

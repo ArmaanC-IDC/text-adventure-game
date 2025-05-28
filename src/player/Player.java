@@ -215,11 +215,11 @@ public class Player {
         isWeak = true;
     }
 
-    public void eatGapple(){
-        isApple = true;
+    public void setAppleStatus(boolean n){
+        isApple = n;
     }
     
-    public boolean appleStatus(){
+    public boolean getAppleStatus(){
         return isApple;
     }
 

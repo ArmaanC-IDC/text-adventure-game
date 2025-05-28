@@ -11,7 +11,7 @@ public class HealPotion extends Item{
     public boolean useItem(String[] args){
         Player p = Game.getPlayer();
         if(p.getHp() == p.getMaxHp()){
-            Game.printText("You are to healthy to use that potion");
+            Game.printText("You are too healthy to use that potion");
             return false;
         }else{
             p.setHp(p.getMaxHp());
