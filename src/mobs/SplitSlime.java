@@ -21,7 +21,7 @@ public class SplitSlime extends Mob {
         if (this.isAlive() && this.getHp() <= 5 && !hasSplit) {
             Room currentRoom = Game.getGame().getCurrentRoom();
             if (currentRoom instanceof MobRoom) {
-                ((MobRoom) currentRoom).getMobs().add(new SplitSlime());
+                ((MobRoom) currentRoom).getMobs().add(new SubSlime());
                 Game.printText(name + " splits into two smaller slimes!");
                 hasSplit = true;
             }
