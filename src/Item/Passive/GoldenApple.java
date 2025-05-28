@@ -16,6 +16,7 @@ public class GoldenApple extends Item{
         p.setAppleStatus(true);
         p.setHp(p.getMaxHp());
         g.setGappleCounter();
+        p.getInventory().remove(this);
         return true;
     }
 }

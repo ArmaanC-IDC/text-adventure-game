@@ -74,6 +74,10 @@ public class Weapon extends Item{
 
     public boolean useItem(String[] args){
         Room currentRoom = Game.getGame().getCurrentRoom();
+        if (args.length!=5){
+            Game.printText("Must be exactly 5 words. Use [weapon] on mob mob. Ex: use dagger on split slime");
+            return false;
+        }
         if (currentRoom instanceof MobRoom){
             MobRoom room = (MobRoom)currentRoom;
             if (room.getMobs().isEmpty()){
@@ -119,6 +123,6 @@ public class Weapon extends Item{
             return false;
         }
         Game.printText("There is no " + args[3] + " " + args[4] + " in this room.");
-        return true;
+        return false;
     }
 }

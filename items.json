@@ -41,7 +41,8 @@
         "weight": 2
     },
     "healPotion": {
-        "weight": 3
+        "weight": 3,
+        "strength": 20
     },
     "strengthPotion": {
         "weight": 3
