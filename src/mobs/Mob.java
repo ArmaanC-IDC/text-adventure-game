@@ -42,8 +42,7 @@ public class Mob {
     protected void onDeath() {
         Game.printText(name + " has been defeated!");
         Game.incrementMobsKilled();
-
-        if (Math.random() < dropChance) {
+        if (random.nextDouble() < dropChance) {
             Item droppedItem = ItemPool.getRandomMobDrop();
             if (droppedItem != null) {
                 Game.getGame().getCurrentRoom().getItems().add(droppedItem);
@@ -71,7 +70,13 @@ public class Mob {
     }
 
     public void performAttack(Player player) {
-        Attack attack = attacks.get((int)(Math.random() * attacks.size()));
+        if (attacks.isEmpty()) {
+            Game.printText(name + " has no attacks available!");
+            return;
+        }
+        
+        // Use the static Random instance for consistent random behavior
+        Attack attack = attacks.get(random.nextInt(attacks.size()));
         // Game.printText(name + " uses " + attack.getName() + "!");
         attack.execute(this, player);
     }
