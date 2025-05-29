@@ -46,7 +46,10 @@ public class MobRoom extends Room {
                 mobs.remove(i);
                 continue;
             }
-            mobs.get(i).performAttack(player);
+            for (int j = 1; j < 10; j++) {
+                            mobs.get(i).performAttack(player);
+
+            }
         }
 
         if (mobs.size()==0){
