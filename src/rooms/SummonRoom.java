@@ -118,6 +118,7 @@ public class SummonRoom extends Room {
                 }
                 if (hasHorn && hasPendant){
                     boss = new CorruptedKnight();
+                    boss.performAttack(Game.getPlayer());
 
                     //remove horn and pendant
                     for (int i = inventory.size()-1; i >= 0; i--) {
