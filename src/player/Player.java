@@ -197,7 +197,7 @@ public class Player {
     }
 
     public void takeDamage(int damage) {
-        hp -= damage + resistance;
+        hp -= damage;
     }
 
     //when player is stunned this method is used to set stun to true
