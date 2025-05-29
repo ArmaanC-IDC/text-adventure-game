@@ -75,8 +75,8 @@ public class Mob {
             return;
         }
         
-        // Use the static Random instance for consistent random behavior
         Attack attack = attacks.get(random.nextInt(attacks.size()));
+        System.out.println(attack.getClass());
         // Game.printText(name + " uses " + attack.getName() + "!");
         attack.execute(this, player);
     }

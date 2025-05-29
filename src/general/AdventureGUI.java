@@ -1,6 +1,9 @@
 package general;
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.StrokeBorder;
+import java.awt.event.ActionEvent;
 
 import rooms.Room;
 
@@ -26,6 +29,7 @@ public class AdventureGUI {
     private void buildGUI() {
         frame = new JFrame("Text Adventure Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setBackground(Color.BLACK);
         frame.setSize(1000, 600); // wider to fit map
         frame.setLayout(new BorderLayout());
 
@@ -40,12 +44,19 @@ public class AdventureGUI {
         outputArea.setLineWrap(true);
         outputArea.setWrapStyleWord(true);
         JScrollPane scrollPane = new JScrollPane(outputArea);
+        outputArea.setBackground(Color.BLACK);
+        outputArea.setForeground(Color.WHITE);
+        outputArea.setCaretColor(Color.WHITE);
+        outputArea.setFont(new Font("Monospaced", Font.PLAIN, 20)); // 20 is the font size
+        outputArea.setMargin(new Insets(10, 20, 10, 20));
+
+
         frame.add(scrollPane, BorderLayout.CENTER);
 
         // Map panel
         Room[][] roomGrid = game.getRoomGrid();
         HashMap<String, Color> roomToColor = new HashMap<String, Color>();
-        roomToColor.put("startingRoom", Color.CYAN);              
+        roomToColor.put("startingRoom", Color.CYAN);
         roomToColor.put("knightBossRoom", new Color(106, 13, 173));
         roomToColor.put("rangerBossRoom", Color.GREEN);
         roomToColor.put("minotaurBossRoom", new Color(204, 102, 0));
@@ -54,9 +65,9 @@ public class AdventureGUI {
         roomToColor.put("treasureRoom", Color.YELLOW);
         roomToColor.put("corridor", Color.GRAY);
 
-        int cellSize = 30;
-        mapPanel = new JPanel(){
-            public void paintComponent(Graphics g){
+        int cellSize = 50;
+        mapPanel = new JPanel() {
+            public void paintComponent(Graphics g) {
                 super.paintComponent(g);
 
                 int pRow = game.getPlayerCoords()[0], pCol = game.getPlayerCoords()[1];
@@ -64,23 +75,24 @@ public class AdventureGUI {
                 for (int row = 0; row < roomGrid.length; row++) {
                     for (int col = 0; col < roomGrid[0].length; col++) {
                         g.setColor(Color.DARK_GRAY);
-                        if (roomGrid[row][col].getVisited()){
+                        if (roomGrid[row][col].getVisited()) {
                             g.setColor(roomToColor.get(roomGrid[row][col].getType()));
                         }
 
-                        g.fillRect(col*cellSize, row*cellSize, cellSize, cellSize);
+                        g.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
 
                         g.setColor(Color.black);
-                        ((Graphics2D)g).setStroke(new BasicStroke(3));
-                        g.drawRect(col*cellSize, row*cellSize, cellSize, cellSize);
+                        ((Graphics2D) g).setStroke(new BasicStroke(3));
+                        g.drawRect(col * cellSize, row * cellSize, cellSize, cellSize);
                     }
                 }
                 g.setColor(Color.red);
-                ((Graphics2D)g).setStroke(new BasicStroke(3));
-                g.drawRect(pCol*cellSize, pRow*cellSize, cellSize, cellSize);
+                ((Graphics2D) g).setStroke(new BasicStroke(3));
+                g.drawRect(pCol * cellSize, pRow * cellSize, cellSize, cellSize);
             }
         };
-        mapPanel.setPreferredSize(new Dimension(cellSize*roomGrid.length, cellSize*roomGrid[0].length));
+        mapPanel.setBackground(Color.BLACK);
+        mapPanel.setPreferredSize(new Dimension(cellSize * roomGrid.length, cellSize * roomGrid[0].length));
         frame.add(mapPanel, BorderLayout.WEST);
 
         // mapPanel.setPreferredSize(new Dimension(180, 180));
@@ -90,22 +102,49 @@ public class AdventureGUI {
         inputField = new JTextField();
         JButton submitButton = new JButton("Submit");
 
+        inputPanel.setBackground(Color.BLACK);
+        inputField.setBackground(Color.BLACK);
+        inputField.setForeground(Color.WHITE);
+        inputField.setCaretColor(Color.WHITE);
+        inputField.setPreferredSize(new Dimension(inputField.getPreferredSize().width, 40));
+        inputField.setFont(new Font("SansSerif", Font.PLAIN, 20));
+
+
+        submitButton.setBackground(Color.DARK_GRAY);
+        submitButton.setForeground(Color.WHITE);
+        submitButton.setPreferredSize(new Dimension(100, 40));
+        submitButton.setFont(new Font("SansSerif", Font.BOLD, 18));
+
         submitButton.addActionListener(e -> handleInput());
         inputField.addActionListener(e -> handleInput());
 
         inputPanel.add(inputField, BorderLayout.CENTER);
         inputPanel.add(submitButton, BorderLayout.EAST);
         frame.add(inputPanel, BorderLayout.SOUTH);
+        // Maximize to full screen
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        // Add ESC key binding to exit full screen and restore window
+        frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke("ESCAPE"), "exitFullScreen");
+        frame.getRootPane().getActionMap().put("exitFullScreen", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                frame.setUndecorated(false);
+                frame.setExtendedState(JFrame.NORMAL);
+                frame.setVisible(true);
+            }
+        });
 
         frame.setVisible(true);
         printText(game.getCurrentRoom().getLongDescription());
         updateRoomDisplay();
     }
 
-
     private void handleInput() {
-        if (!game.getRunning()){
-            if (Game.getPlayer().getHp()<=0){
+        if (!game.getRunning()) {
+            if (Game.getPlayer().getHp() <= 0) {
                 printText("Game Over. You Died.");
                 return;
             } else {
