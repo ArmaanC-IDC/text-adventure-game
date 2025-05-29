@@ -28,4 +28,8 @@ public class Armour extends Item{
     public int getResistance(){
         return resistance;
     }
+
+    public String getType(){
+        return "armour";
+    }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import general.Game;
 import item.Item;
+import item.passive.Armour;
 
 public class Player {
 
@@ -196,8 +197,19 @@ public class Player {
         hp = newHp;
     }
 
+    public Item findArmourIndex(){
+        for(int i = 0; i < inventory.size();i++){
+            if((inventory.get(i).getType()).equals("armour")){
+                return inventory.get(i);
+            }
+        }
+        return inventory.get(-1);
+    }
+
     public void takeDamage(int damage) {
-        hp -= damage + resistance;
+        Armour ind = (Armour) findArmourIndex();
+        int damageTaken = damage + ind.getResistance();
+        hp -= damageTaken;
     }
 
     //when player is stunned this method is used to set stun to true
