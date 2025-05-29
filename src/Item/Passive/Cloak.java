@@ -6,7 +6,7 @@ public class Cloak extends Armour{
     protected boolean probDodge;
     public Cloak(){
         super("Cloak",5);
-        probDodge = Math.random()<0.3;
+        boolean probDodge = Math.random()<0.3;
         
     }
 

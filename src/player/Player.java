@@ -200,8 +200,8 @@ public class Player {
 
     public int findArmourResistance(){
         for(int i = 0; i < inventory.size();i++){
-            Armour armour = (Armour) inventory.get(i);
             if((inventory.get(i).getType()).equals("armour")){
+                Armour armour = (Armour) inventory.get(i);
                 return armour.getResistance();
             }
         }
