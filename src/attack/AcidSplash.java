@@ -11,6 +11,7 @@ public class AcidSplash implements Attack {
 
     public void execute(Mob attacker, Player player) {
         int damage = 3 + new java.util.Random().nextInt(3); // 3-5
+        
         player.takeDamage(damage);
         Game.printText(attacker.getName() + " splashes acid for " + damage + " damage!");
     }
