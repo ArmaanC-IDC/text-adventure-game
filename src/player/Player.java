@@ -20,6 +20,7 @@ public class Player {
     private boolean isWeak;
     private boolean isApple;
     private int maxWeight = 50;
+    private int resistance = 0;
 
     // equipment and inventory
     // private Map<EquipmentSlot, Item> equippedItems;
@@ -169,12 +170,14 @@ public class Player {
         }
     }
 
+
+
     public void setHp(int newHp) {
         hp = newHp;
     }
 
     public void takeDamage(int damage) {
-        hp -= damage;
+        hp -= damage + resistance;
     }
 
     //when player is stunned this method is used to set stun to true

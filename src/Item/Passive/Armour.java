@@ -9,11 +9,11 @@ public class Armour extends Item{
     public static Armour createArmour(String type){
         switch (type.toLowerCase()) {
             case "leathersuit":
-                return new Armour("leathersuit", 5);
+                return new Armour("leathersuit", 1);
             case "chainsuit":
-                return new Armour("chainsuit", 8);
+                return new Armour("chainsuit", 2);
             case "diamondsuit":
-                return new Armour("diamondsuit", 12);
+                return new Armour("diamondsuit", 3);
             default:
                 return new Armour("UNIMPLEMENTED: " + type, 0);
         }
