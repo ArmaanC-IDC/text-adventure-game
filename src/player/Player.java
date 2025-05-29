@@ -190,8 +190,6 @@ public class Player {
         }
     }
 
-
-
     public void setHp(int newHp) {
         hp = newHp;
     }
