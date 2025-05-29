@@ -36,7 +36,6 @@ public class ItemPool {
         treasureRoomItems.add(() -> new StrengthPotion());
         treasureRoomItems.add(() -> Weapon.createWeapon("sword"));
         treasureRoomItems.add(() -> Weapon.createWeapon("axe"));
-        treasureRoomItems.add(() -> Weapon.createWeapon("sythe"));
         treasureRoomItems.add(() -> new Clinic());
         treasureRoomItems.add(() -> new GoldenApple());
         treasureRoomItems.add(() -> Armour.createArmour("leathersuit"));

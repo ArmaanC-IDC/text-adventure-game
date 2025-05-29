@@ -28,7 +28,6 @@ public class ItemLoader {
                 }
 
                 itemConfig.put(itemName, statsMap);
-                System.out.println(itemName +":"+ statsMap);
             }
         }catch (Exception e){
             e.printStackTrace();
