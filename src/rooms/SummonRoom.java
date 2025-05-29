@@ -85,9 +85,11 @@ public class SummonRoom extends Room {
                 if (numCoins>=coinsNeeded){
                     //remove coinsNeeded coins
                     int numRemoved = 0;
-                    for (int i = inventory.size()-1; i <= 0; i++) {
-                        if (inventory.get(i).getName().equals("ancient coins") && numRemoved<coinsNeeded){
+                    for (int i = inventory.size()-1; i >= 0; i--) {
+                        Item item = inventory.get(i);
+                        if (item.getName().equalsIgnoreCase("coin") && numRemoved<coinsNeeded){
                             inventory.remove(i);
+                            numRemoved++;
                         }
                     }
 
@@ -118,12 +120,15 @@ public class SummonRoom extends Room {
                     boss = new CorruptedKnight();
 
                     //remove horn and pendant
-                    for (int i = inventory.size()-1; i <= 0; i++) {
-                        if (inventory.get(i).getName().equals("horn") && hasHorn){
+                    for (int i = inventory.size()-1; i >= 0; i--) {
+                        Item item = inventory.get(i);
+                        if (item.getName().equals("horn") && hasHorn){
+                            System.out.println("removed horn");
                             inventory.remove(i);
                             hasHorn = false;
                         }
-                        if (inventory.get(i).getName().equals("pendant") && hasPendant){
+                        if (item.getName().equals("pendant") && hasPendant){
+                            System.out.println("removed pendant");
                             inventory.remove(i);
                             hasPendant = false;
                         }

@@ -2,10 +2,11 @@ package item.passive;
 import general.Game;
 import item.Item;
 import player.Player;
+import item.ItemLoader;
 
 public class GoldenApple extends Item{
     public GoldenApple(){
-        super("GoldenApple",2);
+        super("GoldenApple",ItemLoader.getItemConfig("goldenApple", "weight"));
     }
 
     public boolean useItem(String[] args){
@@ -15,6 +16,7 @@ public class GoldenApple extends Item{
         p.setAppleStatus(true);
         p.setHp(p.getMaxHp());
         g.setGappleCounter();
+        p.getInventory().remove(this);
         return true;
     }
 }

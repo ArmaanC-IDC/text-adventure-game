@@ -19,8 +19,10 @@ public class Player {
     private boolean isPoisoned;
     private boolean isWeak;
     private boolean isApple;
-    private int maxWeight = 50;
-    private int resistance = 0;
+    private int maxWeight;
+    private int stunDuration;
+    private int poisonDuration;
+    private int weakenDuration;
 
     // equipment and inventory
     // private Map<EquipmentSlot, Item> equippedItems;
@@ -30,13 +32,18 @@ public class Player {
 
         strength = (int) (Math.random() * 30) + 1;
         speed = (int) (Math.random() * 10) + 1;
-        hp = (int) (Math.random() * 20) + 81;
+        hp = PlayerLoader.getPlayerConfig("startingHP");
         maxHp = hp;
         luck = (int)(Math.random()*10)+1;
         isPoisoned = false;
         isStunned = false;
         isWeak = false;
         isApple = false;
+        maxWeight = PlayerLoader.getPlayerConfig("maxInvWeight");
+
+        stunDuration = 0;
+        poisonDuration = 0;
+        weakenDuration = 0;
 
         showStats();
 
@@ -45,10 +52,14 @@ public class Player {
     }
 
     public int getStrength() {
+        int currentStrength = strength;
         if(isApple){
-            return strength + 10;
+            currentStrength += 10;
         }
-        return strength;
+        if(isWeak){
+            currentStrength = (int)(currentStrength*0.9);
+        }
+        return currentStrength;
     }
 
     public int getMaxWeight() {
@@ -65,8 +76,7 @@ public class Player {
 
     // method to print out stats
     public String showStats() {
-        String stats = "Strength: " + strength + " Speed: " + speed + " Health: " + hp + " Luck: "
-                + luck;
+        String stats = "Strength: " + strength + " Speed: " + speed + " Health: " + hp + " Luck: " + luck;
         return stats;
     }
 
@@ -157,6 +167,16 @@ public class Player {
         return weight;
     }
 
+    public int getCoins(){
+        //iterates through inventory arraylist, counts and returns number of coin objects
+        int coinCount = 0;
+        for (Item item : inventory) {
+            if (item instanceof item.passive.Coins) {
+                coinCount++;
+            }
+        }
+        return coinCount;
+    }
 
     //removes item from inventory
     //need to add dropping it the room your in.
@@ -181,40 +201,85 @@ public class Player {
     }
 
     //when player is stunned this method is used to set stun to true
-    public void isStun() {
-        isStunned = true;
+    public boolean isStunned() {
+        return isStunned;
     }
 
-    public void isWeaken() {
-        isWeak = false;
+    public boolean isWeakened() {
+        return isWeak;
     }
 
-    public void isPoisoned() {
-        isPoisoned = false;
+    public boolean isPoisoned() {
+        return isPoisoned;
     }
 
+        // Method to process status effects each turn - call this from Game.onPlayerTurn()
+    public void processStatusEffects() {
+        // Process poison
+        if (isPoisoned && poisonDuration > 0) {
+            takeDamage(2);
+            Game.printText("You take 2 damage from poison! (" + poisonDuration + " turns remaining)");
+            poisonDuration--;
+            if (poisonDuration <= 0) {
+                isPoisoned = false;
+                Game.printText("The poison has worn off.");
+            }
+        }
+
+        // Process stun
+        if (isStunned && stunDuration > 0) {
+            stunDuration--;
+            if (stunDuration <= 0) {
+                isStunned = false;
+                Game.printText("You are no longer stunned.");
+            }
+        }
+
+        // Process weaken
+        if (isWeak && weakenDuration > 0) {
+            weakenDuration--;
+            if (weakenDuration <= 0) {
+                isWeak = false;
+                Game.printText("You are no longer weakened.");
+            }
+        }
+    }
+
+    // Healing methods
     public void poisonHeal(){
         isPoisoned = false;
+        poisonDuration = 0;
+        Game.printText("You have been cured of poison!");
     }
 
-    public int getHp(){
-        return hp;
+    public void cureStun() {
+        isStunned = false;
+        stunDuration = 0;
+        Game.printText("You are no longer stunned!");
     }
 
-    public int getMaxHp(){
-        return maxHp;
+    public void cureWeaken() {
+        isWeak = false;
+        weakenDuration = 0;
+        Game.printText("You are no longer weakened!");
     }
 
     public void stun(){
         isStunned = true;
+        stunDuration = 1;
+        Game.printText("You are stunned and cannot attack!");
     }
 
     public void poison(){
         isPoisoned = true;
+        poisonDuration = 3;
+        Game.printText("You have been poisoned!");
     }
 
     public void weaken(){
         isWeak = true;
+        weakenDuration = 2; // Weaken lasts 2 turns
+        Game.printText("You have been weakened! Your damage is reduced by 10%!");
     }
 
     public void setAppleStatus(boolean n){
@@ -225,4 +290,23 @@ public class Player {
         return isApple;
     }
 
+    public int getStunDuration() {
+        return stunDuration;
+    }
+
+    public int getPoisonDuration() {
+        return poisonDuration;
+    }
+
+    public int getWeakenDuration() {
+        return weakenDuration;
+    }
+
+    public int getHp(){
+        return hp;
+    }
+
+    public int getMaxHp(){
+        return maxHp;
+    }
 }

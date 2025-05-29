@@ -30,6 +30,8 @@ public class Game {
     private Map<String, Integer> numEachRoom = new HashMap<String, Integer>();
     private boolean isRunning = true;
     private int gappleCounter = 0;
+    private static int mobsKilled = 0;
+    private static int totalCoinsCollected = 0;
 
     public Game() {
         player = new Player();
@@ -70,7 +72,16 @@ public class Game {
 
     public void onPlayerTurn(){
         Game.printText("");
-        this.getCurrentRoom().onPlayerTurn(player);
+        
+        // Process status effects at the beginning of the turn
+        player.processStatusEffects();
+        
+        // Only allow the room to process if player is not stunned
+        if (!player.isStunned()) {
+            this.getCurrentRoom().onPlayerTurn(player);
+        } else {
+            Game.printText("You are stunned and cannot act this turn!");
+        }
 
         if (player.getHp()<=0)
             isRunning = false;
@@ -93,6 +104,7 @@ public class Game {
         if (CommandParser.parse(this, input, player, rooms, roomGrid)){
             onPlayerTurn();
             Game.printText("Health: " + player.getHp());
+            Game.printText("Coins: "+ player.getCoins());
         }
     }
 
@@ -156,5 +168,29 @@ public class Game {
 
     public boolean getRunning(){
         return isRunning;
+    }
+
+    public void setRunning(boolean status){
+        isRunning = status;
+    }
+
+    public static int getMobsKilled() {
+        return mobsKilled;
+    }
+
+    public static void incrementMobsKilled() {
+        mobsKilled++;
+    }
+
+    public static int getTotalCoinsCollected() {
+        return totalCoinsCollected;
+    }
+
+    public static void incrementCoinsCollected() {
+        totalCoinsCollected++;
+    }
+
+    public static void incrementCoinsCollected(int amount) {
+        totalCoinsCollected += amount;
     }
 }

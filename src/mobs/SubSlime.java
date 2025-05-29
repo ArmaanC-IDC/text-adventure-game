@@ -7,7 +7,12 @@ import attack.PoisonTouch;
 
 public class SubSlime extends Mob {
     public SubSlime() {
-        super("Sub Slime", 10, 3, 1, new ArrayList<>());
+        // super("Sub Slime", 10, 3, 1, new ArrayList<>());
+        super("Sub Slime", 
+            MobsLoader.getMobConfig("subSlime", "hp"),
+            MobsLoader.getMobConfig("subSlime", "armor"),
+            1, new ArrayList<>()
+        );
         attacks.add(new AcidSplash());
         attacks.add(new PoisonTouch());
     }

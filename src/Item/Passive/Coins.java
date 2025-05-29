@@ -1,8 +1,9 @@
 package item.passive;
 import item.Item;
+import item.ItemLoader;
 
 public class Coins extends Item{
     public Coins(){
-        super("Coin", 1);
+        super("Coin", ItemLoader.getItemConfig("coin", "weight"));
     }
 }

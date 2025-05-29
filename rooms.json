@@ -7,8 +7,8 @@
     "numTrapRooms": 10
   },
   "treasureRoom": {
-    "minItems": 3,
-    "maxItems": 5
+    "minItems": 45,
+    "maxItems": 50
   },
   "mobRoom": {
     "minMobs": 1,

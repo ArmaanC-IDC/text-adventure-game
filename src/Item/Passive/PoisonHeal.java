@@ -2,10 +2,11 @@ package item.passive;
 import general.Game;
 import item.Item;
 import player.Player;
+import item.ItemLoader;
 
 public class PoisonHeal extends Item{
     public PoisonHeal(){
-        super("PoisonHeal",3);
+        super("PoisonHeal",ItemLoader.getItemConfig("poisonHeal", "weight"));
     }   
 
     public boolean useItem(){

@@ -110,6 +110,31 @@ public class CommandParser {
                 }
                 Game.printText("You do not have a \"" + itemToDrop + "\".");
                 return false;
+            case "dropall": //dropall [item]
+                if (tokens.length < 2) {
+                    Game.printText("Drop what?");
+                    return false;
+                }
+                String targetsToDrop = tokens[1];
+                boolean dropped = false;
+                ArrayList<Item> toDrop = new ArrayList<Item>();
+
+                for (Item item : Game.getPlayer().getInventory()) {
+                    if (item.getName().equalsIgnoreCase(targetsToDrop)){
+                        toDrop.add(item);
+                        game.getCurrentRoom().getItems().add(item);
+                        dropped = true;
+                    }
+                }
+                if (dropped){
+                    Game.printText("dropped all");
+                    for (Item item : toDrop) {
+                        Game.getPlayer().getInventory().remove(item);
+                    }
+                    return true;
+                }
+                Game.printText("You have no \"" + targetsToDrop + "\"s.");
+                return false;
             case "use": //use [item] or use [weapon] ___ [first word in mob] [second word in mob]. Ex: use clinic, use trident against split slime
                 if (tokens.length < 2) {
                     Game.printText("Use what?");
@@ -164,7 +189,7 @@ public class CommandParser {
                 Game.printText("takeall [item]");
                 Game.printText("drop [item]");
                 Game.printText("use [item]");
-                Game.printText("use [weapon] on [mob]. Ex: \" use trident on hollow-eyed ranger");
+                Game.printText("use [weapon] on [mob]. Ex: \" use trident on hollow-eyed ranger or split slime");
                 Game.printText("summon");
                 Game.printText("inventory");
                 Game.printText("look");
