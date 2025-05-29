@@ -14,4 +14,8 @@ public class Cloak extends Armour{
         return "cloak";
     }
 
+    public boolean getProbDodge(){
+        return probDodge;
+    }
+
 }

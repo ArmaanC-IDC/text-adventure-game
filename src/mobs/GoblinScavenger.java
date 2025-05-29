@@ -2,6 +2,7 @@ package mobs;
 
 import attack.QuickStab;
 import attack.DirtyTrick;
+import mobs.MobsLoader;
 
 import java.util.ArrayList;
 

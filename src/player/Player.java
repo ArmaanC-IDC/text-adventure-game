@@ -6,6 +6,7 @@ import java.util.List;
 import general.Game;
 import item.Item;
 import item.passive.Armour;
+import item.passive.Cloak;
 
 public class Player {
 
@@ -195,19 +196,35 @@ public class Player {
         hp = newHp;
     }
 
-    public Item findArmourIndex(){
+
+
+    public int findArmourResistance(){
         for(int i = 0; i < inventory.size();i++){
+            Armour armour = (Armour) inventory.get(i);
             if((inventory.get(i).getType()).equals("armour")){
+                return armour.getResistance();
+            }
+        }
+        return 0;
+    }
+
+    public Item findCloak(){
+        for(int i = 0; i <inventory.size();i++){
+            if((inventory.get(i).getType()).equals("cloak")){
                 return inventory.get(i);
             }
         }
-        return inventory.get(-1);
+        return null;
     }
 
     public void takeDamage(int damage) {
-        Armour ind = (Armour) findArmourIndex();
-        int damageTaken = damage + ind.getResistance();
-        hp -= damageTaken;
+        Cloak cloak = (Cloak) findCloak();
+        if(findCloak()!=null&&cloak.getProbDodge()){
+            hp-= 0;
+        }else{
+            int damageTaken = damage + findArmourResistance();
+            hp -= damageTaken;
+        }  
     }
 
     //when player is stunned this method is used to set stun to true
