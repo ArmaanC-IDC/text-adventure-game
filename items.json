@@ -24,14 +24,17 @@
         "maxDamage": 25
     },
 
-    "leathersuit": {
-        "resistance": 5
+    "leathersuit": { 
+        "weight": 15,
+        "resistance": 1
     },
     "chainsuit": {
-        "resistance": 8
+        "weight": 15,
+        "resistance": 2
     },
     "diamondsuit": {
-        "resistance": 12
+        "weight": 15,
+        "resistance": 3
     },
 
     "coin": {
@@ -55,5 +58,8 @@
     },
     "pendant": {
         "weight": 1
+    },
+    "cloak":{
+        "weight": 5
     }
 }
