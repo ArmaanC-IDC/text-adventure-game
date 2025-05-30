@@ -15,6 +15,7 @@ public class Cloak extends Armour{
     }
 
     public boolean getProbDodge(){
+        probDodge = (Math.random()<0.3);
         return probDodge;
     }
 
