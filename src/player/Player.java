@@ -222,7 +222,7 @@ public class Player {
         if(findCloak()!=null&&cloak.getProbDodge()){
             hp-= 0;
         }else{
-            int damageTaken = damage + findArmourResistance();
+            int damageTaken = damage - findArmourResistance();
             hp -= damageTaken;
         }  
     }
