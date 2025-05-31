@@ -25,6 +25,7 @@ public class Player {
     private int stunDuration;
     private int poisonDuration;
     private int weakenDuration;
+    private boolean skipDamage;
 
     // equipment and inventory
     // private Map<EquipmentSlot, Item> equippedItems;
@@ -46,6 +47,7 @@ public class Player {
         stunDuration = 0;
         poisonDuration = 0;
         weakenDuration = 0;
+        skipDamage = false;
 
         showStats();
 
@@ -216,11 +218,21 @@ public class Player {
         }
         return null;
     }
+    public void setSkipDamage(boolean edit){
+        skipDamage = edit;
+    }
 
     public void takeDamage(int damage) {
         Cloak cloak = (Cloak) findCloak();
+        if(skipDamage == true){
+            hp -= 0;
+            Game.printText("No damage taken as you used a bow");
+            skipDamage = false;
+            return; // skips the cloak and normal damage check
+        }
         if(findCloak()!=null&&cloak.getProbDodge()){
             hp-= 0;
+            Game.printText("Dodged attack via cloak");
         }else{
             int damageTaken = damage - findArmourResistance();
             hp -= damageTaken;

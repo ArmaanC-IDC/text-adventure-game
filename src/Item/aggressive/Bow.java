@@ -57,6 +57,9 @@ public class Bow extends Weapon {
         if (!attackSucceeded) {
             p.getInventory().add(new Arrow());
         }
+        p.setSkipDamage(true);
         return attackSucceeded;
     }
+
+    
 }
