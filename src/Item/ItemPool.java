@@ -31,6 +31,8 @@ public class ItemPool {
         mobDropItems.add(() -> Armour.createArmour("chainsuit"));
         mobDropItems.add(() -> Armour.createArmour("diamondsuit"));
         mobDropItems.add(() -> new Cloak());
+        mobDropItems.add(() -> new Arrow());
+        mobDropItems.add(() -> new Bow());
 
         // Add all items to treasureRoomItems
         treasureRoomItems.add(() -> new HealPotion());
@@ -41,6 +43,9 @@ public class ItemPool {
         treasureRoomItems.add(() -> new GoldenApple());
         treasureRoomItems.add(() -> Armour.createArmour("leathersuit"));
         treasureRoomItems.add(() -> new Cloak());
+        treasureRoomItems.add(() -> new Arrow());
+        treasureRoomItems.add(() -> new Bow());
+
     }
     
     // Get a random item from the pool

@@ -61,5 +61,13 @@
     },
     "cloak":{
         "weight": 5
+    },
+    "bow": {
+        "minDamage": 5,
+        "maxDamage": 10
+    },
+    "arrow": {
+        "weight": 1
     }
+
 }
