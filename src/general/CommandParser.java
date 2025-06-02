@@ -22,6 +22,7 @@ public class CommandParser {
 
         switch (cmd) {
             case "go": //go [direction]
+                //make sure there are two words
                 if (tokens.length < 2) {
                     Game.printText("Go where?");
                     return false;
@@ -32,36 +33,43 @@ public class CommandParser {
                 return go("north", tokens, game, player, room);
             case "e": //go east
                 return go("east", tokens, game, player, room);
-
             case "s": //go south
                 return go("south", tokens, game, player, room);
             case "w": // go west
                 return go ("west", tokens, game, player, room);
             case "take": //take [item]
+                //make sure there are two words
                 if (tokens.length < 2) {
                     Game.printText("Take what?");
                     return false;
                 }
+                //get target item
                 String target = tokens[1];
+                //for every item in the room, see if it is the target.
                 for (Item item : game.getCurrentRoom().getItems()) {
                     if (item.getName().equalsIgnoreCase(target)){
+                        //if item is not takeable, print onTakeAttempt
                         if (!item.getTakeable()){
                             Game.printText(((NonTakeableItem)item).getOnTakeAttempt());
                             return false;
                         }
+                        //check if the inventory is too full for the item
                         if (player.invWeight() + item.getWeight() > player.getMaxWeight()){
                             Game.printText("Your inventory is to full.");
                             return false;
                         }
+                        //take the item
                         player.getInventory().add(item);
                         game.getCurrentRoom().getItems().remove(item);
                         Game.printText("taken");
                         return true;
                     }
                 }
+                //if item not found, say there is none in the room
                 Game.printText("There is no \"" + target + "\" in the room.");
                 return false;
             case "takeall": //takeall [item]
+                //make sure there are two words
                 if (tokens.length < 2) {
                     Game.printText("Take what?");
                     return false;
@@ -70,6 +78,8 @@ public class CommandParser {
                 boolean taken = false;
                 ArrayList<Item> toRemove = new ArrayList<Item>();
 
+                //for every item, try to take it. same logic as take but for all of them
+                //don't remove items in this loop to avoid errors
                 for (Item item : game.getCurrentRoom().getItems()) {
                     if (item.getName().equalsIgnoreCase(targets)){
                         if (!item.getTakeable()){
@@ -111,10 +121,12 @@ public class CommandParser {
                 Game.printText("You do not have a \"" + itemToDrop + "\".");
                 return false;
             case "dropall": //dropall [item]
+                //make sure there are two words
                 if (tokens.length < 2) {
                     Game.printText("Drop what?");
                     return false;
                 }
+                //same logic as drop but does all of them
                 String targetsToDrop = tokens[1];
                 boolean dropped = false;
                 ArrayList<Item> toDrop = new ArrayList<Item>();
@@ -135,12 +147,15 @@ public class CommandParser {
                 }
                 Game.printText("You have no \"" + targetsToDrop + "\"s.");
                 return false;
-            case "use": //use [item] or use [weapon] ___ [first word in mob] [second word in mob]. Ex: use clinic, use trident against split slime
+            case "use": //use [item] or use [weapon] on [first word in mob] [second word in mob]. Ex: use clinic, use trident on split slime
+                //make sure there are two words
                 if (tokens.length < 2) {
                     Game.printText("Use what?");
                     return false;
                 }
                 String targetItem = tokens[1];
+
+                //loop through all items and call useItem on the target one
                 for (Item item : player.getInventory()) {
                     if (item.getName().equalsIgnoreCase(targetItem)){
                         return item.useItem(tokens);
@@ -149,6 +164,7 @@ public class CommandParser {
                 Game.printText("You do not have a \"" + targetItem + "\".");
                 return false;
             case "summon": //summon
+                //if in a summon room, try to summon
                 if (room instanceof SummonRoom){
                     return ((SummonRoom)room).summon();
                 }else{
@@ -189,7 +205,7 @@ public class CommandParser {
                 Game.printText("takeall [item]");
                 Game.printText("drop [item]");
                 Game.printText("use [item]");
-                Game.printText("use [weapon] on [mob]. Ex: \" use trident on hollow-eyed ranger or split slime");
+                Game.printText("use [weapon] on [mob]. Ex: use trident on hollow-eyed ranger or split slime");
                 Game.printText("summon");
                 Game.printText("inventory");
                 Game.printText("look");
@@ -203,15 +219,18 @@ public class CommandParser {
     }
 
     public static boolean go(String dir, String[] tokens, Game game, Player player, Room room){
+        //see if that exit exists
         if (!room.getExits().containsKey(dir)) {
             Game.printText("You can't go that way.");
             return false;
         }
+        //see if the exit is blocked
         if (room.getBlockedExits().containsKey(dir) && room.getBlockedExits().get(dir)) {
             Game.printText("That exit is blocked");
             return false;
         }
 
+        //go dir direction
         game.setCurrentRoom(room.getExits().get(dir));
         game.getCurrentRoom().onPlayerEnter(player);
         Game.printText(game.getCurrentRoom().getLongDescription());

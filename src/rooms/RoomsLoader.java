@@ -19,9 +19,9 @@ public class RoomsLoader {
 
     private static String filePath = "rooms.json";
     
-    //no config for corridor or starting room. both just empty rooms with nothing in them, except starting room has starting dagger
+    //no config for corridor or starting room. both just empty rooms with nothing in them, except starting room has starting dagger and clinic
     
-    static {
+    static { //static runs when any method from this class is first called. loads the json
         try {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(new FileReader(filePath), JsonObject.class);
