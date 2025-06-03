@@ -9,10 +9,10 @@ import player.Player;
 
 public class Bow extends Weapon {
     public Bow() {
-        super("Bow", 5, 10);
+        super("Bow", 5, 10); //child class of weapon ->item
     }
 
-    private int countArrows() {
+    private int countArrows() { //used to count how many arrows the player has
         int count = 0;
         Player p = Game.getPlayer();
         ArrayList<Item> inventory = p.getInventory();
@@ -24,7 +24,7 @@ public class Bow extends Weapon {
         return count;
     }
 
-    private boolean removeOneArrow() {
+    private boolean removeOneArrow() { //method to remove arrow from inventory
         Player p = Game.getPlayer();
         ArrayList<Item> inventory = p.getInventory();
         for (int i = 0; i < inventory.size(); i++) {
@@ -39,25 +39,25 @@ public class Bow extends Weapon {
 
 
     public boolean useItem(String[] args) {
-        int arrowCount = countArrows();
+        int arrowCount = countArrows(); //num of arrows
         Player p = Game.getPlayer();
 
-        if (arrowCount == 0) {
+        if (arrowCount == 0) {//safety to use if player doesn't have arrows
             Game.printText("You have no arrows.");
             return false;
         }
 
-        boolean removed = removeOneArrow();
+        boolean removed = removeOneArrow(); //true false switch
         if (!removed) {
             Game.printText("Error: could not remove an arrow from your inventory."); // normally this shouldn't happen
             return false;
         }
 
-        boolean attackSucceeded = super.useItem(args);
+        boolean attackSucceeded = super.useItem(args); //if use item works and also attacks the monsters
         if (!attackSucceeded) {
-            p.getInventory().add(new Arrow());
+            p.getInventory().add(new Arrow()); //adds back the arrow if the attack didn't work
         }
-        p.setSkipDamage(true);
+        p.setSkipDamage(true); //skip the damage as arrow is a long ranged weapon
         return attackSucceeded;
     }
 

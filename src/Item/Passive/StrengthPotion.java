@@ -12,7 +12,7 @@ public class StrengthPotion extends Item{
 
     public boolean useItem(String[] args){
         Player player = Game.getPlayer();
-        player.setStrength(player.getStrength() + strengthBoost);
+        player.setStrength(player.getStrength() + strengthBoost); // adds a set amount to the players strength
         return true;
     }
 }

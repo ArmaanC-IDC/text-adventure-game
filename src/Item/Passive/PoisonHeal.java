@@ -11,7 +11,7 @@ public class PoisonHeal extends Item{
 
     public boolean useItem(){
         Player p = Game.getPlayer();
-        p.poisonHeal();
+        p.poisonHeal();// calls on a method to get rid of poison status
         return true;
 
 
