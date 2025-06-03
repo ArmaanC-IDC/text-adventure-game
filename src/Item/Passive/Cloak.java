@@ -1,6 +1,4 @@
 package item.passive;
-import item.Item;
-import item.ItemLoader;
 
 public class Cloak extends Armour{
     protected boolean probDodge;
