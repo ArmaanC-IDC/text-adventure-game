@@ -38,6 +38,7 @@ public class Game {
         game = this;
         int gridSize = RoomsLoader.getRoomConfig("gridSize");
 
+        //add the number of each room in rooms.json to numEachRoom (used by initRooms())
         int totalRooms = 4; //starting and three boss rooms.
         numEachRoom.put("startingRoom", 1);
         numEachRoom.put("knightBossRoom", 1);
@@ -49,6 +50,7 @@ public class Game {
         numEachRoom.put("treasureRoom", RoomsLoader.getRoomConfig("numTreasureRooms"));
         numEachRoom.put("corridor", RoomsLoader.getRoomConfig("numCorridors"));
 
+        //make sure there are the correct number of rooms, otherwise initRooms() may not work
         totalRooms += RoomsLoader.getRoomConfig("numMobRooms");
         totalRooms += RoomsLoader.getRoomConfig("numTrapRooms");
         totalRooms += RoomsLoader.getRoomConfig("numTreasureRooms");
@@ -58,6 +60,7 @@ public class Game {
             System.out.println("Must have exactly gridSize^2 rooms, including the starting room and the three boss rooms");
         }
 
+        //init the roomGrid
         roomGrid = new Room[gridSize][gridSize];
         initRooms();
     }
@@ -70,7 +73,9 @@ public class Game {
         return gui;
     }
 
+    //runs every valid player turn
     public void onPlayerTurn(){
+        //new line
         Game.printText("");
         
         // Process status effects at the beginning of the turn
@@ -83,9 +88,11 @@ public class Game {
             Game.printText("You are stunned and cannot act this turn!");
         }
 
+        //if player is dead, set running to false
         if (player.getHp()<=0)
             isRunning = false;
 
+        //handle golden apple (gapple) logic
         if(!player.getAppleStatus()){
             gappleCounter = 0;
         }else if(gappleCounter == 2){
@@ -101,6 +108,7 @@ public class Game {
     }
 
     public void processCommand(String input) {
+        //if the commandparser returns true, the player's turn "counts" as a turn, and call onPlayerTurn
         if (CommandParser.parse(this, input, player, rooms, roomGrid)){
             onPlayerTurn();
             Game.printText("Health: " + player.getHp());
@@ -124,6 +132,7 @@ public class Game {
         return roomGrid;
     }
 
+    //roomCoords should be "x,y"
     public void setCurrentRoom(String roomCoords) {
         String[] strArray = roomCoords.split(",");
         int[] intArray = new int[strArray.length];
@@ -137,27 +146,33 @@ public class Game {
         int roomCount = 0;
         rooms = new HashMap<String, Room>();        
 
+        //add one of each in numEachRoom to roomTypes. so if there are 2 traps and 1 treasure, it will be [trap, trap, treasure]
+        //roomTypes is used to select a random room for each spot
         List<String> roomTypes = new ArrayList<String>();
         for (Map.Entry<String, Integer> entry : numEachRoom.entrySet()) {
             for (int i = 0; i < entry.getValue(); i++) {
                 roomTypes.add(entry.getKey());
             }
         }
+        //shuffle rooms for randomization
         Collections.shuffle(roomTypes);
 
+        //the index of roomTypes that is being accessed
         int index = 0;
+
+        //loop through roomGrid
         for (int row = 0; row < roomGrid.length; row++) {
             for (int col = 0; col < roomGrid[0].length; col++) {
-                //get random key from numEachRoom that does not map to 0
+                //get the type at index from roomTypes
                 String randomKey = roomTypes.get(index);
                 index++;
 
                 Room room = Room.createRoom(randomKey, roomCount, row, col);
                 roomGrid[row][col] = room;
-                numEachRoom.put(randomKey, numEachRoom.get(randomKey) - 1);
                 rooms.put(room.getId(), room);
                 roomCount++;
 
+                //if the room is the starting room, set current room to the current row, col
                 if (randomKey.equals("startingRoom")){
                     currentRoom = new int[]{row, col};
                     room.onPlayerEnter(player);

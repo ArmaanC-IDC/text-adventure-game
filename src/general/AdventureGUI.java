@@ -27,6 +27,7 @@ public class AdventureGUI {
     }
 
     private void buildGUI() {
+        //create the main jframe
         frame = new JFrame("Text Adventure Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.BLACK);
@@ -55,6 +56,7 @@ public class AdventureGUI {
 
         // Map panel
         Room[][] roomGrid = game.getRoomGrid();
+        //populate a hashmap showing which color each room should be
         HashMap<String, Color> roomToColor = new HashMap<String, Color>();
         roomToColor.put("startingRoom", Color.CYAN);
         roomToColor.put("knightBossRoom", new Color(106, 13, 173));
@@ -66,36 +68,46 @@ public class AdventureGUI {
         roomToColor.put("corridor", Color.GRAY);
 
         int cellSize = 50;
+        //create a new jpannel
         mapPanel = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
 
-                int pRow = game.getPlayerCoords()[0], pCol = game.getPlayerCoords()[1];
+                //get player coords
+                int pRow = game.getPlayerCoords()[0];
+                int pCol = game.getPlayerCoords()[1];
 
+                //loop through each row and col in roomGrid
                 for (int row = 0; row < roomGrid.length; row++) {
                     for (int col = 0; col < roomGrid[0].length; col++) {
+                        //set the color to dark grey
                         g.setColor(Color.DARK_GRAY);
+                        
+                        //if visited, set it to it's color
                         if (roomGrid[row][col].getVisited()) {
                             g.setColor(roomToColor.get(roomGrid[row][col].getType()));
                         }
 
                         g.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
 
+                        //draw black outline around each room
                         g.setColor(Color.black);
                         ((Graphics2D) g).setStroke(new BasicStroke(3));
                         g.drawRect(col * cellSize, row * cellSize, cellSize, cellSize);
                     }
                 }
+
+                //draw red outline around the current room
                 g.setColor(Color.red);
                 ((Graphics2D) g).setStroke(new BasicStroke(3));
                 g.drawRect(pCol * cellSize, pRow * cellSize, cellSize, cellSize);
             }
         };
+
+        //add pannel to main frame
         mapPanel.setBackground(Color.BLACK);
         mapPanel.setPreferredSize(new Dimension(cellSize * roomGrid.length, cellSize * roomGrid[0].length));
         frame.add(mapPanel, BorderLayout.WEST);
-
-        // mapPanel.setPreferredSize(new Dimension(180, 180));
 
         // Input field
         JPanel inputPanel = new JPanel(new BorderLayout());
@@ -109,7 +121,7 @@ public class AdventureGUI {
         inputField.setPreferredSize(new Dimension(inputField.getPreferredSize().width, 40));
         inputField.setFont(new Font("SansSerif", Font.PLAIN, 20));
 
-
+        //submit button
         submitButton.setBackground(Color.DARK_GRAY);
         submitButton.setForeground(Color.WHITE);
         submitButton.setPreferredSize(new Dimension(100, 40));
@@ -143,14 +155,18 @@ public class AdventureGUI {
     }
 
     private void handleInput() {
+        //if game is over, do nothing and print game over
         if (!game.getRunning()) {
             if (Game.getPlayer().getHp() <= 0) {
                 printText("Game Over. You Died.");
                 return;
             } else {
                 printText("Game Over. You Won.");
+                return;
             }
         }
+
+        //get the input than process it
         String input = inputField.getText().trim();
         inputField.setText("");
         if (!input.isEmpty()) {
@@ -164,6 +180,7 @@ public class AdventureGUI {
 
     public void printText(String text) {
         outputArea.append(text + "\n");
+        //scroll to bottom of output text area
         outputArea.setCaretPosition(outputArea.getDocument().getLength());
     }
 

@@ -46,6 +46,7 @@ public class MobRoom extends Room {
                 mobs.remove(i);
                 continue;
             }
+            //call mob preformAttack
             mobs.get(i).performAttack(player);
         }
 
@@ -61,6 +62,8 @@ public class MobRoom extends Room {
     public void onPlayerEnter(Player player){
         this.visited = true;
         int numMobs = (int)(Math.random()*(maxMobs - minMobs)) + minMobs;
+
+        //spawn numMobs mobs
         for (int i = 1; i <= numMobs; i++) {
             int mob = (int)(Math.random()*3);
             switch (mob){
@@ -75,6 +78,7 @@ public class MobRoom extends Room {
                     break;
             }
         }
+        //block exits
         this.blockedExits.put("north", true);
         this.blockedExits.put("east", true);
         this.blockedExits.put("south", true);

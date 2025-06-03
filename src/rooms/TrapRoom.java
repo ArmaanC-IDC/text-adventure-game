@@ -23,6 +23,7 @@ public class TrapRoom extends Room {
             "You spot grooves in the floor; this corridor may be rigged with mechanisms."
         });
 
+        //traproomchance is the chance the trap room has of dealing damage. max/min damage is the amount of damage the room can do
         TRAP_ROOM_CHANCE = RoomsLoader.getTrapRoomConfig("successChance");
         TRAP_ROOM_DAMAGE_MAX = RoomsLoader.getTrapRoomConfig("maxDamage");
         TRAP_ROOM_DAMAGE_MIN = RoomsLoader.getTrapRoomConfig("minDamage");
@@ -37,6 +38,8 @@ public class TrapRoom extends Room {
             //calculate damage
             int damage = (int)(Math.random() * (TRAP_ROOM_DAMAGE_MAX - TRAP_ROOM_DAMAGE_MIN)) + TRAP_ROOM_DAMAGE_MIN;
             player.takeDamage(damage);
+
+            //random damage message
             Game.printText(getRandomFromArray(new String[]{
                 "A blade flies out from the walls and hits you dealing " + damage + " damage.",
                 "A pressure plate clicks. Darts shoot from hidden holes, piercing you for " + damage + " damage.",

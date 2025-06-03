@@ -53,15 +53,15 @@ public class Room {
     //called when creating a room directly (no child classes)
     public Room(String type, int roomCount, int row, int col, String name, String description) {
         this.type = type;
-        this.items = new ArrayList<>();
-        if (type.equals("startingRoom")){
+        this.items = new ArrayList<Item>();
+        if (type.equals("startingRoom")){ //if in starting room, add a dagger and clinic. set id to startingRoom
             this.id = type;
             this.items.add(Weapon.createWeapon("dagger"));
             this.items.add(new Clinic());
-        }else{
+        }else{ //otherwise, set id to roomCount
             this.id = Integer.toString(roomCount);
         }
-        this.exits = new HashMap<>();
+        this.exits = new HashMap<String, String>();
         this.blockedExits = new HashMap<String, Boolean>();
         this.name = name;
         this.description = description;
@@ -69,7 +69,7 @@ public class Room {
         initExits(row, col);
     }
 
-    //child classes call this constructor and set name and desc
+    //child classes call this constructor and set name and description
     public Room(String type, int roomCount, int row, int col) {
         this.type = type;
         this.items = new ArrayList<>();
@@ -81,18 +81,22 @@ public class Room {
     }
 
     private void initExits(int row, int col) {
+        //check if room is not on southernmost row
         if (row > 0) {
             exits.put("north", (row - 1) + "," + col);
             blockedExits.put("north", false);
         }
+        //check if room is not on easternmost row
         if (col < GRID_SIZE - 1) {
             exits.put("east", row + "," + (col + 1));
             blockedExits.put("east", false);
         }
+        //check if is not on northernmost row
         if (row < GRID_SIZE - 1) {
             exits.put("south", (row + 1) + "," + col);
             blockedExits.put("south", false);
         }
+        // is not on westernmost row
         if (col > 0) {
             exits.put("west", row + "," + (col - 1));
             blockedExits.put("west", false);

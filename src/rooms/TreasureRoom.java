@@ -5,6 +5,8 @@ import item.*;
 public class TreasureRoom extends Room{
     public TreasureRoom(int roomCount, int row, int col) {
         super("treasureRoom", roomCount, row, col);
+
+        //random name and description
         this.name = getRandomFromArray(new String[]{
             "Hidden ", "Treasure ", "Glittering "
         }) + getRandomFromArray(new String[]{
@@ -16,9 +18,12 @@ public class TreasureRoom extends Room{
             "An ornate box sits atop a pedestal. Riches or ruin may lie within."
         });
 
+        //get the number of items
         int maxItems = RoomsLoader.getTreasureRoomConfig("maxItems");
         int minItems = RoomsLoader.getTreasureRoomConfig("minItems");
         int numItems = (int)(Math.random() * (maxItems - minItems)) + minItems;
+
+        //spawn random items
         for (int i = 0; i < numItems; i++) {
             this.items.add(ItemPool.getRandomTreasureRoomItem());
         }
