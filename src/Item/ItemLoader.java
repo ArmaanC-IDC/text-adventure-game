@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class ItemLoader {
+    //declare instance variables
     private static HashMap<String, HashMap<String, Integer>> itemConfig;
     private static final String filePath = "items.json";
 
@@ -18,6 +19,16 @@ public class ItemLoader {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(new FileReader(filePath), JsonObject.class);
 
+            //loop through the json file and put all properties into the hashmap
+            // format: {
+            //     item: {
+            //         property: value,
+            //         property2: value
+            //     },
+            //     item2: {
+            //         property: value
+            //     }
+            // }
             for (HashMap.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
                 String itemName = entry.getKey();
                 JsonObject itemStats = entry.getValue().getAsJsonObject();
