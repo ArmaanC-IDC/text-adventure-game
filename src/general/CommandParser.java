@@ -171,15 +171,6 @@ public class CommandParser {
                     Game.printText("You are not in a summoning room");
                     return false;
                 }
-            case "killall": //FOR TESTING killall mobs in a room
-                if (room instanceof MobRoom){
-                    MobRoom mobRoom = (MobRoom) game.getCurrentRoom();
-                    for (Mob mob : mobRoom.getMobs()) {
-                        mob.takeDamage(10000);
-                    }
-                    return true;
-                }
-                return false;
             case "look": //display long description
                 Game.printText(room.getLongDescription());
                 return false;

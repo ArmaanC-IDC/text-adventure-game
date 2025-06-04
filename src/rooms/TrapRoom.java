@@ -35,7 +35,7 @@ public class TrapRoom extends Room {
         
         //if goes into if statement, damage the player
         if (Math.random() < TRAP_ROOM_CHANCE/100.0) {
-            //calculate damage
+            //calculate and apply damage
             int damage = (int)(Math.random() * (TRAP_ROOM_DAMAGE_MAX - TRAP_ROOM_DAMAGE_MIN)) + TRAP_ROOM_DAMAGE_MIN;
             player.takeDamage(damage);
 
@@ -47,6 +47,7 @@ public class TrapRoom extends Room {
                 "A stone above you shifts. A spiked log swings down, slamming into you dealing " + damage + " damage.",
             }));
         } else { //trap misses player
+            //random barely misses message
             Game.printText(getRandomFromArray(new String[]{
                 "A blade flies out from the walls and narrowly misses.",
                 "A pressure plate clicks. Darts shoot from hidden holes and barely miss.",

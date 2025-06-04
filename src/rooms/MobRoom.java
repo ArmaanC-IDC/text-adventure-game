@@ -65,6 +65,7 @@ public class MobRoom extends Room {
 
         //spawn numMobs mobs
         for (int i = 1; i <= numMobs; i++) {
+            //summon a random mob
             int mob = (int)(Math.random()*3);
             switch (mob){
                 case 0:
