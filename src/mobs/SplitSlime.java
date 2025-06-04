@@ -8,6 +8,7 @@ import general.Game;
 
 import java.util.ArrayList;
 
+//Adds usable attacks, calls super constructor
 public class SplitSlime extends Mob {
     private boolean hasSplit = false;
     public SplitSlime() {

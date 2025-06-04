@@ -9,6 +9,7 @@ public class CorruptedStrike implements Attack {
         return "Corrupted Strike";
     }
 
+    //Execute on player, handle affects, display attack msg
     public void execute(Mob attacker, Player player) {
         int damage = 12 + new java.util.Random().nextInt(4); // 12-15
         player.takeDamage(damage);

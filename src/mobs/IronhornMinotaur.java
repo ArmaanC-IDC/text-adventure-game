@@ -8,6 +8,7 @@ import item.passive.*;
 
 import java.util.ArrayList;
 
+//Adds usable attacks, calls super constructor
 public class IronhornMinotaur extends Mob {
     public IronhornMinotaur() {
         // super("Ironhorn Minotaur", 120, 30, 3, new ArrayList<>());
@@ -21,6 +22,7 @@ public class IronhornMinotaur extends Mob {
         attacks.add(new Roar());
     }
 
+    //Drop horn(item used to summon final boss)
     protected void onDeath() {
         Game.printText("The minotaur dropped it's horn");
         Game.getGame().getCurrentRoom().getItems().add(new Horn());

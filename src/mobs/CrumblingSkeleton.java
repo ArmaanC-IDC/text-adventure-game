@@ -5,6 +5,7 @@ import attack.Reassemble;
 
 import java.util.ArrayList;
 
+//Adds usable attacks, calls super constructor
 public class CrumblingSkeleton extends Mob {
     public CrumblingSkeleton() {
         super("Crumbling Skeleton", 

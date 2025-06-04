@@ -9,6 +9,7 @@ public class Reassemble implements Attack {
         return "Reassemble";
     }
 
+    //Heal self, display attack msg
     public void execute(Mob attacker, Player player) {
         if (attacker.getHp() < attacker.getMaxHp() / 2) {
             attacker.heal(10);

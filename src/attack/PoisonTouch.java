@@ -9,6 +9,7 @@ public class PoisonTouch implements Attack {
         return "Poison Touch";
     }
 
+    //Execute on player, handle affects, display attack msg
     public void execute(Mob attacker, Player player) {
         int damage = 2;
         player.takeDamage(damage);

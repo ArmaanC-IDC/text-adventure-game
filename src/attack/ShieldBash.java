@@ -9,6 +9,7 @@ public class ShieldBash implements Attack {
         return "Shield Bash";
     }
     
+    //Execute on player, handle affects, display attack msg
     public void execute(Mob attacker, Player player) {
         int damage = 8 + new java.util.Random().nextInt(3); // 8-10
         player.takeDamage(damage);

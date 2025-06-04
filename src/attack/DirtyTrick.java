@@ -9,9 +9,10 @@ public class DirtyTrick implements Attack {
         return "Dirty Trick";
     }
 
+    //Execute on player, handle affects, display attack msg
     public void execute(Mob attacker, Player player) {
         int damage = 2 + new java.util.Random().nextInt(3); // 2-4
-        if (player.getHp() < player.getMaxHp()) damage += 2; // Bonus to wounded
+        if (player.getHp() < player.getMaxHp()) damage += 2; // Bonus dmg to wounded
         player.takeDamage(damage);
         if (Math.random() < 0.2) {
             player.stun();

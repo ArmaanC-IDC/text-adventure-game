@@ -16,6 +16,7 @@ public class CorruptedKnight extends Mob {
     private String lastAttackName = "";
     private int repeatCount = 0;
 
+    //Adds usable attacks, calls super constructor
     public CorruptedKnight() {
         super("Corrupted Knight", 
             MobsLoader.getMobConfig("knight", "hp"),

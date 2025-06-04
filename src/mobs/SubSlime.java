@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import attack.AcidSplash;
 import attack.PoisonTouch;
 
+//Spawned by slime when at low HP
+
+//Adds usable attacks, calls super constructor
 public class SubSlime extends Mob {
     public SubSlime() {
         // super("Sub Slime", 10, 3, 1, new ArrayList<>());

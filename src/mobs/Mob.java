@@ -19,6 +19,7 @@ public class Mob {
     protected double dropChance;
     protected static Random random = new Random();
 
+    //Sets instance variables
     public Mob(String name, int hp, int armor, int speed, ArrayList<Attack> attacks) {
         this.name = name;
         this.dropChance = 0.3;
@@ -28,6 +29,7 @@ public class Mob {
         this.attacks = attacks;
     }
 
+    //Calculate damage with armor
     public void takeDamage(int rawDamage) {
         int damage = rawDamage * (100 - armor) / 100;
         hp -= damage;
@@ -39,6 +41,7 @@ public class Mob {
         }
     }
 
+    //Handle mob death and item drops
     protected void onDeath() {
         Game.printText(name + " has been defeated!");
         Game.incrementMobsKilled();
@@ -60,6 +63,7 @@ public class Mob {
         }
     }
 
+    //Handles mob healing
     public void heal(int amount) {
         hp = Math.min(maxHp, hp + amount);
         Game.printText(name + " heals " + amount + " HP!");

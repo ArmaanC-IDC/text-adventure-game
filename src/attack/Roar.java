@@ -9,6 +9,7 @@ public class Roar implements Attack {
         return "Roar";
     }
 
+    //Execute on player, handle affects, display attack msg
     public void execute(Mob attacker, Player player) {
         player.weaken();
         Game.printText(attacker.getName() + " roars fiercely, weakening the player!");

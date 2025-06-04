@@ -8,6 +8,7 @@ import item.passive.*;
 
 import java.util.ArrayList;
 
+//Adds usable attacks, calls super constructor
 public class HollowEyedRanger extends Mob {
     public HollowEyedRanger() {
         super("Hollow-Eyed Ranger", 
@@ -20,6 +21,7 @@ public class HollowEyedRanger extends Mob {
         attacks.add(new Necromancy());
     }
 
+    //Logic to handle dodging
     public void takeDamage(int rawDamage) {
         if (Math.random() < 0.25) {
             Game.printText(name + " dodges the attack!");
@@ -28,6 +30,7 @@ public class HollowEyedRanger extends Mob {
         super.takeDamage(rawDamage);
     }
 
+    //Drop pendent(item used to summon final boss)
     protected void onDeath() {
         Game.printText("The ranger dropped it's pendant");
         Game.getGame().getCurrentRoom().getItems().add(new Pendant());
